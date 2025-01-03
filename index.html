@@ -552,23 +552,78 @@
                                                 Below is a table spelling out in more detail when and how you are allowed to share code with people (table style cribbed from <a href = "https://www.cs.princeton.edu/courses/archive/spring19/cos126/syllabus.html">Princeton CS 126</a>).  </p>
                                             
 
-
 												<p>
-													Click on each button below to view the collaboration parameters for individual and budd (group) assignments
+													Click on each button below to view the collaboration parameters for each scenario.  Labs are more permissive than assignments, which are more permissive than individual tasks
 												</p>
 
 												<p>
-													<button type="button" onclick = "viewAssignment()">Assignment Buddy</button><button type="button" onclick="viewIndividual()">Individual</button>
+													<button type="button" onclick="viewLab()">Lab</button><button type="button" onclick = "viewAssignment()">Assignment Buddy</button><button type="button" onclick="viewIndividual()">Individual</button>
 												</p>
 
-												<div id="assignmentTable">
-													<h3>Buddy/Group Assignment</h3>
+
+												<div id="labTable">
+													<h3>Lab Collaboration Grid</h3>
 													<table class="wide-table" id="collaboration-table">
 														<tr>
 															<th></th>
 															<th>YOUR<br>BUDDY</th>
 															<th>COURSE<br>STAFF</th>
-															<th>CS 477<br>GRADS</th>
+															<th>CS 271/371<br>GRADS</th>
+															<th>CLASS-<br>MATES</th>
+															<th>OTHER<br>PEOPLE</th>
+														</tr>
+														<tr>
+															<th>DISCUSS CONCEPTS WITH:</th>
+															<td class="check">&#10004;</td>
+															<td class="check">&#10004;</td>
+															<td class="check">&#10004;</td>
+															<td class="check">&#10004;</td>
+															<td class="check">&#10004;</td>
+														</tr>
+														<tr>
+															<th>ACKNOWLEDGE COLLABORATION WITH:</th>
+															<td class="check">&#10004;</td>
+															<td class="check">&#10004;</td>
+															<td class="check">&#10004;</td>
+															<td class="check">&#10004;</td>
+															<td class="check">&#10004;</td>
+														</tr>
+														<tr>
+															<th>EXPOSE YOUR CODE/SOLUTIONS TO:</th>
+															<td class="check">&#10004;</td>
+															<td class="check">&#10004;</td>
+															<td class="check">&#10004;</td>
+															<td class="check">&#10004;</td>
+															<td class="ex">&#10008;</td>
+														</tr>
+														<tr>
+															<th>VIEW THE CODE/SOLUTIONS OF:</th>
+															<td class="check">&#10004;</td>
+															<td class="ex"><a href = "#instructorcode">*</a></td>
+															<td class="ex">&#10008;</td>
+															<td class="check">&#10004;</td>
+															<td class="ex">&#10008;</td>
+														</tr>
+														<tr>
+															<th>COPY CODE/SOLUTIONS FROM:</th>
+															<td class="ex">&#10008;</td>
+															<td class="ex"><a href = "#instructorcode">*</a></td>
+															<td class="ex">&#10008;</td>
+															<td class="ex">&#10008;</td>
+															<td class="ex">&#10008;</td>
+														</tr>
+													</table>
+												
+												</div>
+
+												<div id="assignmentTable">
+													<h3>Assignment Collaboration Grid</h3>
+													<table class="wide-table" id="collaboration-table">
+														<tr>
+															<th></th>
+															<th>YOUR<br>BUDDY</th>
+															<th>COURSE<br>STAFF</th>
+															<th>CS 271/371<br>GRADS</th>
 															<th>CLASS-<br>MATES</th>
 															<th>OTHER<br>PEOPLE</th>
 														</tr>
@@ -617,13 +672,13 @@
 												</div>
 
 												<div id="individualTable">
-													<h3>Individual Assignments</h3>
+													<h3>Individual Collaboration Grid</h3>
 													<table class="wide-table" id="collaboration-table">
 														<tr>
 															<th></th>
 															<th>YOUR<br>BUDDY</th>
 															<th>COURSE<br>STAFF</th>
-															<th>CS 477<br>GRADS</th>
+															<th>CS 271/371<br>GRADS</th>
 															<th>CLASS-<br>MATES</th>
 															<th>OTHER<br>PEOPLE</th>
 														</tr>
@@ -683,23 +738,33 @@
                                                     <b>NOTE ALSO: </b> "Other people" includes internet sources.
                                                 </p>
 												
-											<script>
-												let assignment = document.getElementById("assignmentTable");
-												let individual = document.getElementById("individualTable");
 
-												function viewAssignment() {
-													assignment.style.display = "block";
-													individual.style.display = "none";
-												}
-
-												function viewIndividual() {
-													assignment.style.display = "none";
-													individual.style.display = "block";
-												}
-
-												viewAssignment();
-
-											</script>
+												<script>
+													let assignment = document.getElementById("assignmentTable");
+													let individual = document.getElementById("individualTable");
+													let lab = document.getElementById("labTable");
+	
+													function viewAssignment() {
+														assignment.style.display = "block";
+														individual.style.display = "none";
+														lab.style.display = "none";
+													}
+	
+													function viewIndividual() {
+														assignment.style.display = "none";
+														individual.style.display = "block";
+														lab.style.display = "none";
+													}
+	
+													function viewLab() {
+														assignment.style.display = "none";
+														individual.style.display = "none";
+														lab.style.display = "block";
+													}
+	
+													viewAssignment();
+	
+												</script>
 
 											<p>
                                                 If the collaboration policy has been violated in any way, regardless of intent, then it may be an academic dishonesty case, and it will be referred to <a href = "https://www.ursinus.edu/live/profiles/184-">the Associate Dean for Academic Affairs</a>.  I am required to make this report in every occurrence, so it is best to speak with me first if there are any questions about the policy or expectations. You should feel free to have these conversations with me anytime prior to making your submission without fear of penalty. 

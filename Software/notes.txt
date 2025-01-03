@@ -1,0 +1,66 @@
+FOR ALL PLATFORMS:
+* x86_64 Assembly Pro
+
+------------------------------
+WINDOWS
+https://docs.microsoft.com/en-us/windows/wsl/install-manual
+
+Open PowerShell as Administrator (Start menu > PowerShell > right-click > Run as Administrator) and enter this command:
+
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+
+Restart your machine
+
+Open Microsoft Store and select Ubuntu 20.04
+Select Get
+
+Wait for installation, then launch from start menu and set your usname and password
+
+
+
+First steps in console
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt install build-essential g++ cmake ffmpeg valgrind lldb  git libboost-all-dev libglew-dev mesa-utils libglfw3-dev openssh-server
+
+echo "export DISPLAY=:0" >> ~/.bashrc
+
+To run graphical applications:
+Download vcXsrv
+https://sourceforge.net/projects/vcxsrv/files/latest/download
+
+If it's not running, then
+X11: Failed to open display :0           
+ERROR: Cannot initialize GLFW 
+
+
+------------------------------
+MAC
+Try to type g++
+If it doesn't work, follow these directions
+https://flaviocopes.com/fix-xcrun-error-invalid-active-developer-path/
+
+install homebrew (this may take a while)
+https://brew.sh
+
+Then execute the following commands
+sudo chown -R $(whoami) /usr/local/lib/pkgconfig
+
+brew install nasm
+brew install ffmpeg  [this one will take a while]
+brew install cmake
+brew install glew
+brew install glfw
+brew tap LouisBrunner/valgrind
+brew install --HEAD LouisBrunner/valgrind/valgrind
+
+
+
+
+------------------------------
+SKIPPED
+Installing gdb
+brew unlink xz
+brew install gdb
+
+Before you go on, make sure that you can type "gdb" in the terminal

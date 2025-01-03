@@ -1,0 +1,420 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<!-- Header !-->
+	<head>
+		<title>Ursinus CS 475: Computer Networks, Spring 2025</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../assets/css/ie8.css" /><![endif]-->
+        <style>
+        .image_off, #home:hover .image_on{
+           display:none
+        }
+        .image_on, #home:hover .image_off{
+           display:block
+        }
+        </style>
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="../index.html" class="logo"><strong>Ursinus CS 475: Computer Networks, Spring 2025</strong></a>
+								</header>
+<!-- End Header !-->
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Software Environment</h1>
+									</header>
+									
+
+									<h2><a name = "vscode">Visual Studio Code</a></h2>
+									<p>
+										The recommended code editor for this class is <b>Microsoft Visual Studio Code</b> (VSCode).  It has nice plugins for syntax highlighting, code completion, and built in documentation for C, C++, and x64 assembly.  Visit <a href = "https://code.visualstudio.com/Download">this link</a> to download VSCode for your appropriate operating system.  Most Windows and Linux users will want the <b>64-bit</b> (x64) download.  Please post on Discord if you are having any issues installing VSCode.
+									</p>
+
+									<p>
+										You may use another IDE if you would like, such as <a href = "https://atom.io/">Atom</a> or even <a href = "https://www.gnu.org/software/emacs/">emacs</a>, but I will be assuming you're using VSCode in this class.
+									</p>
+
+									<h3><a name = "vsplugins">Recommended Plugins</a></h3>
+									<p>
+										You can search for plugins/extensions for VSCode by clicking on the following icon on the left of the VSCode Screen:
+									</p>
+									<img src = "pluginsIcon.png">
+									<p>
+										Below is a list of recommended plugins for this class that you should install
+									</p>
+									<ul>
+										<li>ms-vscode.cpptools</li>
+										<li>ms-vscode.cpptools-extension-pack</li>
+										<li>ms-vscode.cpptools-themes</li>
+										<li>twxs.cmake</li>
+										<li>streetsidesoftware.code-spell-checker</li>
+										<li>ehlkr.x86-64-assembly-pro</li>
+									</ul>
+
+
+									<h3><a name = "vscodefeatures">Quick Features Overview</a></h3>
+
+									<p>
+										Below are a few features I want to highlight that will come in handy as your working.
+									</p>
+
+									<h4><a name = "unused">Unused variable highlighting</a></h4>
+									<p>
+										If you don't use a variable, it will show up in darker text.  This is very useful when debugging.  It means that either you didn't actually need the variable, you forgot to use it (hence you didn't complete your code), or you spelled it wrong somewhere.  This saved many a student last year! (NOTE: The examples below are in Javascript, but the same applies to C/C++/assembly)
+									</p>
+
+									<img src = "HighlightingUnused.gif" width=800>
+
+									<h4><a name = "replace">Replace within Selection</a></h4>
+									<p>
+										If you want to change the name of a variable in one section of your code, you can do a <code>CTRL+F</code>, which will bring up the find/replace menu, then follow these steps:
+									</p>
+									<img src = "ReplaceSelection.gif" width=800>
+
+									<h4><a name = "docsmethod">Method Documentation</a></h4>
+
+									<p>
+										There's a nice feature where if you start typing <code>/**</code> and hit ENTER, it will autocomplete method documentation for you
+									</p>
+
+									<img src = "VSCodeDocs.gif">
+
+
+									<HR>
+										<h2><a name = "windows">Windows Software Environment Instructions</a></h2>
+
+										<p>
+											Below are instructions to setup a linux-like development environment on Windows
+										</p>
+
+										<h3><a name = "wslinstall"></a>Step 1: Install The <a href = "https://docs.microsoft.com/en-us/windows/wsl/">Windows Subsystem for Linux</a></h3>
+
+										<ol>
+											<li>
+												<p>
+												Open PowerShell as Administrator (Start menu > PowerShell > right-click > Run as Administrator)
+												</p>
+												
+												<img src = "powershell.png">
+												
+												<p>
+													and enter this command:
+												</p>
+												<p>
+
+													<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
+														wsl --install]]></script>  
+												</p>
+												<p>
+													Then press <code>ENTER</code>
+												</p>
+											</li>
+											<li>
+												<p>
+													Once the above has finished, restart your machine.  When it reboots, it should launch a terminal where you can configure your username and password:
+												</p>
+												<p>
+													<img src = "wslrestart.png">
+												</p>
+											</li>
+											
+										</ol>
+										
+										<h3><a name = "windowsdev">Step 2: Configure Your Development Environment</a></h3>
+										<p>
+											Now that the Windows Subsystem for Linux (WSL) has finished installing, we'll test it out and setup the software needed for this class
+										</p>
+										<ol>
+											<li>
+												<p>
+													Launch WSL from the start menu
+												</p>
+												<img src = "wslrun.png">
+												<p>
+													<b>NOTE:</b> Since <code>CTRL+C</code> means something special (kill a running process), copy actually happens with <code>CTRL+SHIFT+C</code>.  Likewise, paste happens with <code>CTRL+SHIFT+V</code>.
+												</p>
+											</li>
+											<li>
+												Back in the terminal, type
+												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
+													sudo apt-get update && sudo apt-get upgrade]]></script>  
+												and hit <code>ENTER</code>
+											</li>
+											<li>
+												Next type
+												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
+													sudo apt install build-essential g++ cmake ffmpeg valgrind lldb  git libboost-all-dev libglew-dev mesa-utils libglfw3-dev openssh-server]]></script>  
+												and hit <code>ENTER</code>.  This may take a moment
+											</li>
+										</ol>
+										<p>
+											Now you should have everything you need to compile C/C++/assembly programs on your computer!  There's just one more step needed to get graphical applications to work, which we will need for our pandemic simulation assignment
+										</p>
+
+										
+
+										<p>
+											Congratulations, you are now finished!  You may proceed to <a href = "../Assignments/HW0_Warmup/">homework 0</a> to test everything out.
+										</p>
+
+										<h3><a name = "wslfilepaths">A Note on File Paths under WSL</a></h3>
+										<p>
+											It's possible to go through the entire class in just the terminal, but you may want to navigate through and organize your files and folders using the ordinary Windows explorer.  Everything under your regular windows filesystem is linked to from a special place in WSL.  For instance, if my username is <code>ctralie</code> and I have a folder named <code>CS174</code> on my Desktop, then I would change into the <code>CS174</code> directory by typing 
+										</p>
+										<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
+											cd /mnt/c/Users/ctralie/Desktop/CS174]]></script>
+
+										<HR>
+										<h2><a name = "macos">Mac OS Software Environment Instructions</a></h2>
+
+										<p>
+											Mac OS comes with considerably more support by default for Linux-like apps than Windows does, but there's still some work we'll have to do to get it ready for this class.  Below are the steps:
+										</p>
+										<ol>
+											<li>Open up the terminal, and type 
+												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
+													g++]]></script> 
+												<p>
+													and hit <code>ENTER</code>.  If it says <code>no input files found</code>, then that atually means g++ is working!  g++ is  a program that compiles c++ files, so it needs a file as input.  The fact that it tells you that means that it's running properly.  If, on the other hand, you get <code>Command 'g++' not found</code> or you get something about an "inactive developer path," then follow <a href = "https://flaviocopes.com/fix-xcrun-error-invalid-active-developer-path/">these directions</a> before proceeding.  Be patient...they may take a moment.  You should see something like this happening
+												</p>
+
+
+												<img src = "xcode.png">
+											</li>
+											<li>
+												<p>
+													If you do not already have brew, follow the directions to install it at <a href = "https://brew.sh">https://brew.sh</a>.  You should see something like this during the process:
+												</p>
+
+												<img src = "brew.png">
+											</li>
+											<li>
+												<p>
+													Execute the following command in the terminal
+												</p>
+												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
+													sudo chown -R $(whoami) /usr/local/lib/pkgconfig]]></script>
+												<p>
+													This will make sure you have the permissions for brew to update package information
+												</p>
+											</li>
+											<li>
+												<p>
+													git is a "version control system" we will use to manage code in the class.  Try typing the following command in the terminal to see if you have git already
+												</p>
+												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
+													git]]></script> 
+												<p>
+													If this command is not found, then install git with brew:
+												</p>
+
+												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
+													brew install git]]></script> 
+												<p>
+													and try again
+												</p>
+											</li>
+											<li>
+												<p>
+													Execute the following command in the terminal
+												</p>
+												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
+													brew install ffmpeg]]></script> 
+												(this one may take a while)
+											</li>
+											<li>
+												<p>
+													Execute the following command in the terminal
+												</p>
+												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
+													brew install cmake]]></script> 
+												<p>
+													This is a special script that will help us compile complicated projects across different operating systems.
+												</p>
+											</li>
+											<li>
+												<p>
+													Execute the following command in the terminal
+												</p>
+												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
+													brew install glew]]></script> 
+												<p>
+													This is a graphics library that will help us with real time animations
+												</p>
+											</li>
+											<li>
+												<p>
+													Execute the following command in the terminal
+												</p>
+												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
+													brew install glfw]]></script> 
+												<p>
+													This is another graphics library that will help us with real time animations
+												</p>
+
+												<p>
+													<b>NOTE: </b> If you are on an M1 mac, you will need to follow the directions at <a href = "https://stackoverflow.com/questions/67373307/macos-m1-fatal-error-glfw-glfw3-h-file-not-found">this post</a>
+												</p>
+											</li>
+											<li>
+												After all this, we also have to update our C++ compiler framework to be more recent.  Type
+												
+												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
+													brew install llvm]]></script> 
+												<p>
+													After that's finished, note the type of terminal you're running.  If you're running zsh, then type 
+												</p>
+												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
+													echo "alias g++='/usr/local/opt/llvm/bin/clang++'" >> ~/.zshrc
+													echo "alias gcc='/usr/local/opt/llvm/bin/clang'" >> ~/.zshrc]]></script> 
+												<p>
+													Otherwise, if you're using bash, type 
+												</p>
+												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
+													echo "alias g++='/usr/local/opt/llvm/bin/clang++'" >> ~/.bash_profile
+													echo "alias gcc='/usr/local/opt/llvm/bin/clang'" >> ~/.bash_profile
+													]]></script> 
+												<p>
+													Then, <b>close and restart</b> your terminal, and type 
+												</p>
+												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
+													gcc --version
+													g++ --version]]></script> 
+												
+												If you see <code>Homebrew clang version [...]</code>, then you're good to go.  If you still see <code>Apple clang version</code> or something similar, then the above steps failed, and you should message me or post on Discord.
+											</li>
+											<li>
+												<p>
+													Finally, we'll install a memory leak detector.  Execute the following two commands in the terminal
+												</p>
+												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
+													brew tap LouisBrunner/valgrind
+													brew install --HEAD LouisBrunner/valgrind/valgrind]]></script> 
+
+												<p>
+													<a name = "macmemoryalt">Alternative memory leak option</a>: If this doesn't work (likely on Big Sur), then don't worry...there are alternatives, as long as the last step worked.
+												</p>
+												
+
+											</li>
+										</ol>
+
+										<p>
+											Congratulations, you are now finished!  You may proceed to <a href = "../Assignments/HW0_Warmup/">homework 0</a> to test everything out.
+										</p>
+
+
+	
+
+
+
+						</div>
+					</div>
+				<!--Syntax highlighting in Javascript!-->
+				<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shCore.js"></script>
+				<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+				<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+				<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
+				<script type="text/javascript" src="../../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+				<link type="text/css" rel="stylesheet" href="../../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+				<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+                                        <li>
+											<span class="opener">General</span>
+											<ul>
+												<li><a href = "../index.html#overview">Overview</a></li>
+												<li><a href = "../index.html#logistics">Technology Logistics</a></li>
+												<li><a href = "../index.html#deliverables">Deliverables</a>
+													<ul>
+														<li><a href = "../index.html#debugging">Debugging Principles</a></li>
+													</ul>
+												</li>
+												<li><a href = "../index.html#grading">Grading</a>
+													<ul>
+														<li><a href = "../index.html#deadlines">Deadlines Policy</a></li>
+													</ul>
+												</li>
+												<li><a href = "../index.html#environment">Classroom Environment</a></li>
+												<li><a href = "../index.html#participation">Participation</a></li>
+												<li><a href = "../index.html#collaboration">Collaboration Policy</a></li>
+												<li><a href = "../index.html#other">Other Resources / Policies</a></li>
+											</ul>
+										</li>
+										<li><a href = "../Software/index.html">Software</a></li>
+										<li><a href = "../index.html#schedule">Schedule</a></li>
+										<li>
+											<span class="opener">Assignments</span>
+											<ul>
+												
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Labs</span>
+											<ul>
+												<li>
+													
+												</li>
+											</ul>
+										</li>										
+										<li>
+											<span class="opener">Exercises</span>
+											<ul>
+												<li>
+													
+												</li>
+											</ul>
+										</li>
+										<li><a href = "https://docs.google.com/forms/d/e/1FAIpQLSfwkO_w_Ku-n2Ou6J7pF--i0C2-a20Ov9wf690T6cYx80ASsw/viewform?usp=sf_link">Anonymous Question</a></li>
+									</ul>
+								</nav>
+
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; <a href = "http://www.ctralie.com">Christopher J. Tralie</a>. All rights reserved.  Contact chris.tralie@gmail.com. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+<!-- End Sidebar !-->
+
+<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/skel.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../assets/js/main.js"></script>
+<!-- End Scripts -->
+	</body>
+</html>

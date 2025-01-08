@@ -1,8 +1,36 @@
 SECTION
 The Application Layer
 
-LECTURE
-Course Overview
 
+LECTURE
+Course Overview, Levels of Abstraction
+
+
+LECTURE
+IP Addresses And Ports, Cat/Netcat, and Wireshark intro
+
+
+LECTURE
+Telnet, CURL, HTTP Messages, HTTP Client in Python
+
+
+LECTURE
+File descriptors, structs in C<p><b>Lab 1: Haikus in C</b></p>
+
+
+LECTURE
+Socket programming in C
+
+<ul><li><a href = "https://book.systemsapproach.org/foundation/software.html#socket-api">Peterson/Davie 1.4</a></li><li><a href = "https://beej.us/guide/bgnet/html/split-wide/index.html">Beej's Guide To Network Programming</a></li><li><a href = "https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml">IANA Ports List</a></li></ul>
+LECTURE
+HW2 Work Session, Web Clients in C
+
+
+LECTURE
+SMTP And Email Protocols
+
+
+LECTURE
+The Domain Name Service: DNS
 
 

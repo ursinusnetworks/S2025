@@ -1,0 +1,28 @@
+HW0: Software Setup Out
+
+2025-01-22
+Intro To Networks Module (Kurose 1.1) Due Before Class
+
+2025-01-24
+<HR>HW1: Web Crawling Out
+
+2025-01-24
+HTTP Module (Kurose 2.1, 2.2) Due Before Class
+
+2025-01-27
+<HR>HW0: Software Setup Due
+
+2025-01-27
+C Programming, Pointers Review Module Due Before Class
+
+2025-01-29
+Sockets Module (Kurose 2.7) Due Before Class
+
+2025-01-31
+HW2: Web Proxy in C Out
+
+2025-02-03
+HW1 Due
+
+2025-02-05
+

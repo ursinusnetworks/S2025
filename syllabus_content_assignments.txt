@@ -1,13 +1,13 @@
 HW0: Software Setup Out
 
 2025-01-22
-Intro To Networks Module (Kurose 1.1) Due Before Class
+Intro To Networks Module Part 1 (Kurose 1.2, 1.3, 1.4) Due Before Class
 
 2025-01-24
 <HR>HW1: Web Crawling Out
 
 2025-01-24
-HTTP Module (Kurose 2.1, 2.2) Due Before Class
+Intro To Networks Module Part 2 (Kurose 1.5, 1.6, 1.7) Due Before Class
 
 2025-01-27
 <HR>HW0: Software Setup Due
@@ -19,10 +19,33 @@ C Programming, Pointers Review Module Due Before Class
 Sockets Module (Kurose 2.7) Due Before Class
 
 2025-01-31
-HW2: Web Proxy in C Out
+HTTP Module (Kurose 2.1, 2.2) Due Before Class
 
 2025-02-03
-HW1 Due
+<HR>HW2: Web Client in C Out
 
-2025-02-05
+2025-02-03
+HW2 Due
 
+2025-02-10
+<HR>HW3: Web Proxy in C Out
+
+2025-02-10
+HW3 Submission 1
+
+2025-02-14
+HW3 Submission 2
+
+2025-02-21
+<HR>HW3: TCP Receiver Out
+
+2025-02-21
+HW3 Due
+
+2025-03-03
+Intro To The Network Layer (Kurose 4.1, 4.2 part 1) Due Before Class
+
+2025-03-05
+<HR>HW4: Mapping Networks Out
+
+2025-03-05

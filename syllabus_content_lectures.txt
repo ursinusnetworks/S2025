@@ -3,34 +3,86 @@ The Application Layer
 
 
 LECTURE
-Course Overview, Levels of Abstraction
+Intro To Networks, Layering/Encapsulation
 
-
+<ul><li><a href = "https://www.youtube.com/watch?v=sMHzfigUxz4">ByteByteGo: How The Internet Works in 9 Minutes</a></li></ul>
 LECTURE
-IP Addresses And Ports, Cat/Netcat, and Wireshark intro
+IP Addresses And Ports, Cat/Netcat, and Packets/Wireshark intro
 
-
+<ul><li><a href = "https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml">IANA Ports List</a></li></ul>
 LECTURE
-Telnet, CURL, HTTP Messages, HTTP Client in Python
+More practice with wireshark, nslookup, traceroute
 
-
+<ul><li><a href = "https://www.youtube.com/watch?v=75yKT3OuE44">Richard Clegg Computerphile video on traceroute</a></li><li><a href = "https://theweek.com/articles/624040/how-internet-mapping-glitch-turned-kansas-farm-into-digital-hell">The Week: "How an internet mapping glitch turned this Kansas farm into digital hell"</a></li></ul>
 LECTURE
-File descriptors, structs in C<p><b>Lab 1: Haikus in C</b></p>
+File descriptors, sprintf, structs in C
 
 
 LECTURE
 Socket programming in C
 
-<ul><li><a href = "https://book.systemsapproach.org/foundation/software.html#socket-api">Peterson/Davie 1.4</a></li><li><a href = "https://beej.us/guide/bgnet/html/split-wide/index.html">Beej's Guide To Network Programming</a></li><li><a href = "https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml">IANA Ports List</a></li></ul>
+<ul><li><a href = "https://book.systemsapproach.org/foundation/software.html#socket-api">Peterson/Davie 1.4</a></li><li><a href = "https://beej.us/guide/bgnet/html/split-wide/index.html">Beej's Guide To Network Programming</a></li></ul>
 LECTURE
-HW2 Work Session, Web Clients in C
+Telnet, CURL, HTTP Messages, HTTP Client in Python
+
+<ul><li><a href = "https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages">Mozilla documentation on HTTP messages</a></li><li><a href = "Transport Protocols, UDP">Peterson/Davie 9.1.2</a></li><li><a href = "https://www.youtube.com/watch?v=UMwQjFzTQXw">ByteByteGo: HTTP 1 Vs HTTP 2 Vs HTTP 3!</a></li></ul>
+LECTURE
+Continue Socket Programming in C
+
+<ul><li><a href = "https://www.youtube.com/watch?v=xo5V9g9joFs">TechWorld with Nana: Proxy vs Reverse Proxy</a></li></ul>
+LECTURE
+Multithreaded Socket Programming
+
+
+LECTURE
+Continue Multithreaded Socket Programming
+
+
+LECTURE
+The Domain Name Service (DNS)
 
 
 LECTURE
 SMTP And Email Protocols
 
 
+SECTION
+The Transport Layer
+
+
 LECTURE
-The Domain Name Service: DNS
+Transport Protocols, UDP / Multiplexing
+
+<ul><li><a href = "https://book.systemsapproach.org/e2e/udp.html">Peterson/Davie 5.1</a></li></ul>
+LECTURE
+Reliable Transport Algorithms
 
 
+LECTURE
+Continue Reliable Transport Algorithms
+
+
+LECTURE
+Reliable Transport: TCP
+
+<ul><li><a href = "https://book.systemsapproach.org/e2e/tcp.html">Peterson/Davie 5.2</a></li></ul>
+LECTURE
+Continue TCP
+
+
+LECTURE
+Principles of Congestion Control
+
+<ul><li><a href = "https://www.youtube.com/watch?v=edUN8OabWCQ">Richard Clegg Computerphile: The 1986 Internet Congestion Collapse</a></li><li><a href = "https://dl.acm.org/doi/10.1145/52325.52356">Original Van Jacobson Paper on Congestion Avoidance And Control</a></li></ul>
+LECTURE
+TCP Congestion Control
+
+<ul><li><a href = "https://book.systemsapproach.org/congestion/tcpcc.html">Peterson/Davie 5.3</a></li></ul>
+SECTION
+The Network Layer
+
+
+LECTURE
+Raw Sockets, ICMP
+
+<ul><li><a href = "https://www.opensourceforu.com/2015/03/a-guide-to-using-raw-sockets/">A guide to using raw sockets</a></li><li><a href = "https://book.systemsapproach.org/internetworking/basic-ip.html#error-reporting-icmp">Peterson/Davie 3.3.8</a></li></ul>

@@ -273,7 +273,7 @@
 											<h3><a href = "Assignments/index.html">Assignments</a> </h3>
 
 											<p>
-												The bulk of the grade in the course will be earned by completing roughly 4 small scale individual programming assignments, and a two large scale programming assignments.  Be sure to start them early!  Note that <a href = "#collaboration">collaboration and sharing rules</a> differ slightly between the individual assignments and the large assignments.
+												The bulk of the grade in the course will be earned by completing assignments.  Some of them are larger than others; I'll split the larger ones into smaller components.  Be sure to start them early!  Note that <a href = "#collaboration">collaboration and sharing rules</a> differ slightly between the individual assignments and the large assignments.
 											</p>
 	
 											
@@ -329,23 +329,44 @@
 
 <!-- Begin Schedule -->
 <tr><td colspan = "5"><h2><b>The Application Layer</b></h2><p></p></td></tr>
-<tr><td>1</td><td>Wed 1/22/2025</td><td>Course Overview, Levels of Abstraction</td><td></td><td bgcolor=#f4e6e7>HW0: Software Setup Out
+<tr><td>1</td><td>Wed 1/22/2025</td><td>Intro To Networks, Layering/Encapsulation</td><td><ul><li><a href = "https://www.youtube.com/watch?v=sMHzfigUxz4">ByteByteGo: How The Internet Works in 9 Minutes</a></li></ul></td><td bgcolor=#f4e6e7>HW0: Software Setup Out
 </td></tr>
-<tr><td>2</td><td>Fri 1/24/2025</td><td>IP Addresses And Ports, Cat/Netcat, and Wireshark intro</td><td></td><td bgcolor=#f4e6e7>Intro To Networks Module (Kurose 1.1) Due Before Class
+<tr><td>2</td><td>Fri 1/24/2025</td><td>IP Addresses And Ports, Cat/Netcat, and Packets/Wireshark intro</td><td><ul><li><a href = "https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml">IANA Ports List</a></li></ul></td><td bgcolor=#f4e6e7>Intro To Networks Module Part 1 (Kurose 1.2, 1.3, 1.4) Due Before Class
 <HR>HW1: Web Crawling Out
 </td></tr>
-<tr><td>3</td><td>Mon 1/27/2025</td><td>Telnet, CURL, HTTP Messages, HTTP Client in Python</td><td></td><td bgcolor=#f4e6e7>HTTP Module (Kurose 2.1, 2.2) Due Before Class
+<tr><td>3</td><td>Mon 1/27/2025</td><td>More practice with wireshark, nslookup, traceroute</td><td><ul><li><a href = "https://www.youtube.com/watch?v=75yKT3OuE44">Richard Clegg Computerphile video on traceroute</a></li><li><a href = "https://theweek.com/articles/624040/how-internet-mapping-glitch-turned-kansas-farm-into-digital-hell">The Week: "How an internet mapping glitch turned this Kansas farm into digital hell"</a></li></ul></td><td bgcolor=#f4e6e7>Intro To Networks Module Part 2 (Kurose 1.5, 1.6, 1.7) Due Before Class
 <HR>HW0: Software Setup Due
 </td></tr>
-<tr><td>4</td><td>Wed 1/29/2025</td><td>File descriptors, structs in C<p><b>Lab 1: Haikus in C</b></p></td><td></td><td bgcolor=#f4e6e7>C Programming, Pointers Review Module Due Before Class
+<tr><td>4</td><td>Wed 1/29/2025</td><td>File descriptors, sprintf, structs in C</td><td></td><td bgcolor=#f4e6e7>C Programming, Pointers Review Module Due Before Class
 </td></tr>
-<tr><td>5</td><td>Fri 1/31/2025</td><td>Socket programming in C</td><td><ul><li><a href = "https://book.systemsapproach.org/foundation/software.html#socket-api">Peterson/Davie 1.4</a></li><li><a href = "https://beej.us/guide/bgnet/html/split-wide/index.html">Beej's Guide To Network Programming</a></li><li><a href = "https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml">IANA Ports List</a></li></ul></td><td bgcolor=#f4e6e7>Sockets Module (Kurose 2.7) Due Before Class
+<tr><td>5</td><td>Fri 1/31/2025</td><td>Socket programming in C</td><td><ul><li><a href = "https://book.systemsapproach.org/foundation/software.html#socket-api">Peterson/Davie 1.4</a></li><li><a href = "https://beej.us/guide/bgnet/html/split-wide/index.html">Beej's Guide To Network Programming</a></li></ul></td><td bgcolor=#f4e6e7>Sockets Module (Kurose 2.7) Due Before Class
 </td></tr>
-<tr><td>6</td><td>Mon 2/3/2025</td><td>HW2 Work Session, Web Clients in C</td><td></td><td bgcolor=#f4e6e7>HW2: Web Proxy in C Out
+<tr><td>6</td><td>Mon 2/3/2025</td><td>Telnet, CURL, HTTP Messages, HTTP Client in Python</td><td><ul><li><a href = "https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages">Mozilla documentation on HTTP messages</a></li><li><a href = "Transport Protocols, UDP">Peterson/Davie 9.1.2</a></li><li><a href = "https://www.youtube.com/watch?v=UMwQjFzTQXw">ByteByteGo: HTTP 1 Vs HTTP 2 Vs HTTP 3!</a></li></ul></td><td bgcolor=#f4e6e7>HTTP Module (Kurose 2.1, 2.2) Due Before Class
+<HR>HW2: Web Client in C Out
 </td></tr>
-<tr><td>7</td><td>Wed 2/5/2025</td><td>SMTP And Email Protocols</td><td></td><td bgcolor=#f4e6e7>HW1 Due
+<tr><td>7</td><td>Wed 2/5/2025</td><td>Continue Socket Programming in C</td><td><ul><li><a href = "https://www.youtube.com/watch?v=xo5V9g9joFs">TechWorld with Nana: Proxy vs Reverse Proxy</a></li></ul></td><td></td></tr>
+<tr><td>8</td><td>Fri 2/7/2025</td><td>Multithreaded Socket Programming</td><td></td><td></td></tr>
+<tr><td>9</td><td>Mon 2/10/2025</td><td>Continue Multithreaded Socket Programming</td><td></td><td bgcolor=#f4e6e7>HW2 Due
+<HR>HW3: Web Proxy in C Out
 </td></tr>
-<tr><td>8</td><td>Fri 2/7/2025</td><td>The Domain Name Service: DNS</td><td></td><td></td></tr>
+<tr><td>10</td><td>Wed 2/12/2025</td><td>The Domain Name Service (DNS)</td><td></td><td></td></tr>
+<tr><td>11</td><td>Fri 2/14/2025</td><td>SMTP And Email Protocols</td><td></td><td bgcolor=#f4e6e7>HW3 Submission 1
+</td></tr>
+<tr><td colspan = "5"><h2><b>The Transport Layer</b></h2><p></p></td></tr>
+<tr><td>12</td><td>Mon 2/17/2025</td><td>Transport Protocols, UDP / Multiplexing</td><td><ul><li><a href = "https://book.systemsapproach.org/e2e/udp.html">Peterson/Davie 5.1</a></li></ul></td><td></td></tr>
+<tr><td>13</td><td>Wed 2/19/2025</td><td>Reliable Transport Algorithms</td><td></td><td></td></tr>
+<tr><td>14</td><td>Fri 2/21/2025</td><td>Continue Reliable Transport Algorithms</td><td></td><td bgcolor=#f4e6e7>HW3 Submission 2
+<HR>HW3: TCP Receiver Out
+</td></tr>
+<tr><td>15</td><td>Mon 2/24/2025</td><td>Reliable Transport: TCP</td><td><ul><li><a href = "https://book.systemsapproach.org/e2e/tcp.html">Peterson/Davie 5.2</a></li></ul></td><td></td></tr>
+<tr><td>16</td><td>Wed 2/26/2025</td><td>Continue TCP</td><td></td><td></td></tr>
+<tr><td>17</td><td>Fri 2/28/2025</td><td>Principles of Congestion Control</td><td><ul><li><a href = "https://www.youtube.com/watch?v=edUN8OabWCQ">Richard Clegg Computerphile: The 1986 Internet Congestion Collapse</a></li><li><a href = "https://dl.acm.org/doi/10.1145/52325.52356">Original Van Jacobson Paper on Congestion Avoidance And Control</a></li></ul></td><td></td></tr>
+<tr><td>18</td><td>Mon 3/3/2025</td><td>TCP Congestion Control</td><td><ul><li><a href = "https://book.systemsapproach.org/congestion/tcpcc.html">Peterson/Davie 5.3</a></li></ul></td><td bgcolor=#f4e6e7>HW3 Due
+</td></tr>
+<tr><td colspan = "5"><h2><b>The Network Layer</b></h2><p></p></td></tr>
+<tr><td>19</td><td>Wed 3/5/2025</td><td>Raw Sockets, ICMP</td><td><ul><li><a href = "https://www.opensourceforu.com/2015/03/a-guide-to-using-raw-sockets/">A guide to using raw sockets</a></li><li><a href = "https://book.systemsapproach.org/internetworking/basic-ip.html#error-reporting-icmp">Peterson/Davie 3.3.8</a></li></ul></td><td bgcolor=#f4e6e7>Intro To The Network Layer (Kurose 4.1, 4.2 part 1) Due Before Class
+<HR>HW4: Mapping Networks Out
+</td></tr>
 </td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr><!-- End Schedule -->
 
 
@@ -361,10 +382,10 @@
 											<h3>Breakdown</h3>
 											
 											<table>
-												<tr><td>Class Engagement / Pre-Class Work</td><td>10%</td></tr>
-												<tr><td>Quizzes</td><td>10%</td></tr>
-												<tr><td>Labs</td><td>25%</td></tr>
-												<tr><td>Programming Assignments</td><td>55%</td></tr>
+												<tr><td>Class Engagement / Pre-Class Modules</td><td>25%</td></tr>
+												<tr><td>Programming Assignments</td><td>60%</td></tr>
+												<tr><td>Midterm Exam on Units 1/2</td><td>7%</td></tr>
+												<tr><td>Comprehensive Final Exam</td><td>8%</td></tr>
 											</table>							
 											
 											<h3><a name = "deadlines">Deadlines Policy</a></h3>

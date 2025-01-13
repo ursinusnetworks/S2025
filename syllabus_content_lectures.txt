@@ -29,15 +29,15 @@ Telnet, CURL, HTTP Messages, HTTP Client in Python
 LECTURE
 Continue Socket Programming in C
 
-<ul><li><a href = "https://www.youtube.com/watch?v=xo5V9g9joFs">TechWorld with Nana: Proxy vs Reverse Proxy</a></li></ul>
+
 LECTURE
 Multithreaded Socket Programming
 
 
 LECTURE
-Continue Multithreaded Socket Programming
+Continue Multithreaded Socket Programming, Web Proxy / CDN Concept
 
-
+<ul><li><a href = "https://www.youtube.com/watch?v=xo5V9g9joFs">TechWorld with Nana: Proxy vs Reverse Proxy</a></li></ul>
 LECTURE
 The Domain Name Service (DNS)
 

@@ -86,3 +86,12 @@ LECTURE
 Raw Sockets, ICMP
 
 <ul><li><a href = "https://www.opensourceforu.com/2015/03/a-guide-to-using-raw-sockets/">A guide to using raw sockets</a></li><li><a href = "https://book.systemsapproach.org/internetworking/basic-ip.html#error-reporting-icmp">Peterson/Davie 3.3.8</a></li></ul>
+SECTION
+The Link Layer
+
+
+SECTION
+The Physical Layer
+
+
+

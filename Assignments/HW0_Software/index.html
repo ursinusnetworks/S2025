@@ -1,0 +1,336 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<!-- Header !-->
+	<head>
+		<title>Ursinus CS 475: Computer Networks, Spring 2025</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../assets/css/ie8.css" /><![endif]-->
+        <style>
+        .image_off, #home:hover .image_on{
+           display:none
+        }
+        .image_on, #home:hover .image_off{
+           display:block
+        }
+        </style>
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="../../index.html" class="logo"><strong>Ursinus CS 475: Computer Networks, Spring 2025</strong></a>
+								</header>
+<!-- End Header !-->
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+                                        <h2>Homework 0: Welcome To CS 475 / Software Test (15 Points)</h2>
+										<h3><a href = "https://www.ctralie.com">Chris Tralie</a></h3>
+									</header>
+
+									<div id="page-content">
+
+                                        <p>
+                                            <h3><a name = "objectives">Learning Objectives</a></h3>
+                                            <ul>
+												<li>Practice basic terminal commands and folder navigation</li>
+												<li>Practice compiling and running programs in the terminal</li>
+                                            </ul>
+										</p>
+										
+
+										<h3><a name = "overview">Description / Overview</a></h3>
+										<p>
+											We're doing some serious systems programming in the class, and I also want to have fun assignments that deal with multimedia data (images, music, videos, animations).  Because of this, the process to setup a software environment for this class is more involved than usual.  To make sure everyone is setup properly, I have devised a series of tests to verify that everything we need is working.  <b>If you get stuck or something unexpected happens at any point while following the instructions below, you should immediately post on Discord</b>.  We'll work through it there together (I'm giving students Mac and Windows labels on our channel to help us coordinate that)
+										</p>
+
+										<p>
+											First, follow the software installation instructions for <a href = "../../Software/index.html#windows">Windows</a> or <a href = "../../Software/index.html#macos">Mac OS</a>, depending on your computer.  They may take a while, but you will be rewarded 😅 (with points on this assignment and with the inherent satisfaction of having a slick software setup).  Once you're finished and everything is in place, create a designated directory for everything CS 174 related, open your terminal, and use the <code>cd</code> command to change into this designated directory (alternatively, you can create the directory in the terminal using <code>mkdir</code> command).  Then, to obtain the test software I've created, type
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											git clone --recursive https://github.com/ursinus-cs174-s2022/HW0_Warmup.git</script>   
+										
+										<p>
+											This should create a folder called <code>HW0_Warmup</code> in your current directory.  Change into this folder and type <code>ls</code>
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											cd HW0_Warmup
+											ls</script>   
+										
+										<p>
+											You should see these folders/files 
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											assembly  canvas  leak.cpp  LICENSE  README.md  sound  tinygl-cpp</script>  
+										
+										<p>
+											If that all worked, proceed to the following tests.  Take note of what you see, and submit the results to <a href = "https://ursinus.instructure.com/courses/13764/assignments/138659">this link</a> on Canvas
+										</p>
+										
+										<HR>
+										<h3><a name = "audio">Audio Test (3 Points)</a></h3>
+										<p>
+											Change into the <code>sound</code> directory
+											<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+												cd sound</script> 
+											then type 
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											g++ -std=c++11 -o mysterysound mysterysound.cpp</script> 
+										<p>
+											Now run the generated program
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											./mysterysound</script> 
+										<p>
+											If everything is working properly, this should generate a file called <code>mysterysound.wav</code>.  Open this file, and <b>take note on canvas of what number is spoken</b>
+										</p>
+
+										<HR>
+										<h3><a name = "canvas">Canvas/ffmpeg Test (3 Points)</a></h3>
+										<p>
+											Now go back up a directory and into the directory <code>canvas</code>
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											cd ../canvas</script>  
+
+										<p>
+											then compile the program there by typing 
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											g++ -std=c++11 -o mysteryshape mysteryshape.cpp</script> 
+										<p>
+											Now run the generated program
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											./mysteryshape</script> 
+										<p>
+											If everything is working properly, this should generate an animated gif file called <code>MysteryShape.gif</code>.  Open this file, and <b>take note on canvas of what shape is drawn</b>
+										</p>
+
+										<HR>
+										<h3><a name = "opengl">CMake / OpenGL / Live Animation Test (3 Points)</a></h3>
+										<p>
+											Now go back up a directory and into the directory <code>tinygl-cpp</code> (this library is courtesy of <a href = "https://www.alinenormoyle.com/">Aline Normoyle</a> right down the street at Bryn Mawr College).  The compilation process for the program here is slightly more involved because we'll be using something called <a href = "https://cmake.org/">cmake</a>.  Once you're in the directory <code>tinygl-cpp</code>, create a new directory called <code>build</code>, change into it, and use the <code>cmake</code> command to generate a makefile for your system (we'll talk more about makefiles in class)
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											mkdir build
+											cd build
+											cmake ..</script> 
+
+										<p>
+											Now you can build the program by typing the command <code>make</code>
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											make</script> 
+
+										<p>
+											Now run the generated program <code>mysteryletter</code>
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											./mysteryletter</script> 
+										<p>
+											If everything is working properly, this should pop up with a window with a letter bouncing up and down.  Take note of this letter, and write on Canvas what it is.
+										</p>
+
+										<p>
+											<b>NOTE: </b> Windows users should be sure that they are <a href = "../../Software/index.html#vcxsrvrestart">vcXsrv</a> in the background before executing <code>mysteryletter</code>
+										</p>
+
+										<HR>
+											<h3><a name = "assembly">GCC / x64 Assembly Test (3 Points)</a></h3>
+										<p>
+											Now go back up to the root of <code>HW0_Warmup</code> and into the directory <code>assembly</code>.  If you are under windows, type 
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											gcc -o mysterynumber mysterynumber.s</script> 
+										<p>
+											Or, if your on a mac, execute the following (since assembly on mac uses <a href = "http://www.idryman.org/blog/2014/12/02/writing-64-bit-assembly-on-mac-os-x/">slightly different syntax</a>)
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											gcc -o mysterynumber mysterynumbermac.s</script> 
+										<p>
+											Then, execute the program
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											./mysterynumber</script> 
+										<p>
+											Take note of the number that is output to the console, and indicate it on canvas
+										</p>
+
+										<p>
+											<b>NOTE: If you get an error <code>Symbol `printf' causes overflow in R_X86_64_PC32 relocation</code></b>, then compile by typing
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											gcc -no-pie -o mysterynumber mysterynumber.s</script> 
+
+										<p>
+											as per this <a href = "https://stackoverflow.com/questions/48071280/nasm-symbol-printf-causes-overflow-in-r-x86-64-pc32-relocation">StackOverflow post</a>
+										</p>
+
+										
+
+										<HR>
+											<h3><a name = "valgrind">Valgrind Test (3 Points)</a></h3>
+										<p>
+											One last test to go!  We're going to test something called a <b>memory leak</b>, which is when we don't take care to cleanup dynamic memory that we request during the run of our program.  This takes place automatically in Java using something called a <a href = "https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/gc01/index.html">garbage collector</a>, but we have to handle it manually in C and C++.  It's very common to forget to clean things up, but this can cause us to run out of memory, as well as other strange errors.  Thankfully, there are tools to check for memory leaks, and we'll be using one such powerful tool called <a href = "https://diveintosystems.org/book/C3-C_debug/valgrind.html">valgrind</a> in this course (or, <a href = "../../Software/index.html#macmemoryalt">alternatively</a>, clang's <a href = "https://stackoverflow.com/questions/65931093/valgrind-and-macos-big-sur/69610645#69610645">memory leak sanitizer</a>). 
+										</p>
+
+										<p>
+											Change back to the root of <code>HW0_Warmup</code>.  Then, if valgrind installed properly for you (which it should have on Windows or Mac OS Catalina), do the following:
+										</p>
+
+										<div style="background-color: blanchedalmond; padding:10px;">
+											<h4>Valgrind Directions</h4>
+
+
+											<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+												g++ -o leak leak.cpp</script> 
+											<!--<p>
+												Observant readers will notice that we're using the <code>-g</code> flag for the first time in this command.  This causes the compiler to include something called a <b>symbol table</b> in the executable file, which will help us to understand where we are in the original code when we debug.  We will also use this flag with the <b>lldb</b> debugger program, as well as with valgrind.
+											</p>!-->
+	
+											<p>
+												Now type
+											</p>
+											<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+												valgrind ./leak</script> 
+											
+										</div>
+
+										<p>
+											If you had to do the <a href = "../../Software/index.html#macmemoryalt">alternative installation</a>, then use the following directions
+										</p>
+
+										<div style="background-color: blanchedalmond; padding:10px;">
+											<h4>Clang++ Memory Sanitizer</h4>
+
+
+											<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+												g++ -fsanitize=leak -o leak leak.cpp</script> 
+											<p>
+												Now type
+											</p>
+											<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+												./leak</script> 
+											
+										</div>
+
+										<p>
+											In both cases, take note of how many bytes of memory were "lost" or "leaked," and indicate this number on canvas.  Also, indicate whether you used valgrind or clang++'s memory sanitizer.
+										</p>
+										
+										
+                                    
+                                </div>
+						</div>
+					</div>
+
+					<!--LaTeX in Javascript!-->
+					<script src="../../../../jsMath/easy/load.js"></script>
+					<!--Syntax highlighting in Javascript!-->
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shCore.js"></script>
+					<script type="text/javascript" src="../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+                    <script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushXml.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+					<link type="text/css" rel="stylesheet" href="../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+					<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+                                        <li>
+											<span class="opener">General</span>
+											<ul>
+												<li><a href = "../../index.html#overview">Overview</a></li>
+												<li><a href = "../../index.html#logistics">Technology Logistics</a></li>
+												<li><a href = "../../index.html#deliverables">Deliverables</a>
+													<ul>
+														<li><a href = "../../index.html#debugging">Debugging Principles</a></li>
+													</ul>
+												</li>
+												<li><a href = "../../index.html#grading">Grading</a>
+													<ul>
+														<li><a href = "../../index.html#deadlines">Deadlines Policy</a></li>
+													</ul>
+												</li>
+												<li><a href = "../../index.html#environment">Classroom Environment</a></li>
+												<li><a href = "../../index.html#participation">Participation</a></li>
+												<li><a href = "../../index.html#collaboration">Collaboration Policy</a></li>
+												<li><a href = "../../index.html#other">Other Resources / Policies</a></li>
+											</ul>
+										</li>
+										<li><a href = "../../Software/index.html">Software</a></li>
+										<li><a href = "../../index.html#schedule">Schedule</a></li>
+										<li>
+											<span class="opener">Assignments</span>
+											<ul>
+												
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Labs</span>
+											<ul>
+												<li>
+													
+												</li>
+											</ul>
+										</li>										
+										<li>
+											<span class="opener">Exercises</span>
+											<ul>
+												<li>
+													
+												</li>
+											</ul>
+										</li>
+										<li><a href = "https://docs.google.com/forms/d/e/1FAIpQLSfwkO_w_Ku-n2Ou6J7pF--i0C2-a20Ov9wf690T6cYx80ASsw/viewform?usp=sf_link">Anonymous Question</a></li>
+									</ul>
+								</nav>
+
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; <a href = "http://www.ctralie.com">Christopher J. Tralie</a>. All rights reserved.  Contact chris.tralie@gmail.com. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+<!-- End Sidebar !-->
+
+<!-- Scripts -->
+			<script src="../../assets/js/jquery.min.js"></script>
+			<script src="../../assets/js/skel.min.js"></script>
+			<script src="../../assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../assets/js/main.js"></script>
+<!-- End Scripts -->
+	</

@@ -40,9 +40,12 @@ HW3 Submission 2
 <HR>HW3: TCP Receiver Out
 
 2025-02-21
-HW3 Due
+HW3 Submission 1
 
-2025-03-03
+2025-02-28
+HW3 Submission 2
+
+2025-03-08
 Intro To The Network Layer (Kurose 4.1, 4.2 part 1) Due Before Class
 
 2025-03-05

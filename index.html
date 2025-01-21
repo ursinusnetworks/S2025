@@ -129,16 +129,33 @@
 											<h3><a name = "goals">Learning Goals</a></h3>
 											<p>
 											<ol>
-												
-	
+												<li>
+													Articulate the role and importance of abstraction in designing a complex system, and classify network functionality into the appropriate abstraction layer
+												</li>
+												<li>
+													Identify tradeoffs between robustness and efficiency in a complex system
+												</li>
+												<li>
+													Leverage expert knowledge about the network stack to inform cybersecurity discussions
+												</li>
 											</ol>
 											</p>
 	
 											<h3><a name = "objectives">Learning Objectives</a></h3>
 											<p>
 											<ol>
-	
-												
+												<li>
+													Refine C programming and debugging skills in the context of a complex system
+												</li>
+												<li>
+													Implement parts of some popular network protocols in the application layer (HTTP, SMTP, DNS, etc.).
+												</li>
+												<li>
+													Implement lower levels of the stack; i.e. TCP in the transport layer and some parts of routing in the network layer
+												</li>
+												<li>
+													Develop a working knowledge of some physical layer design strategies (e.g. CDMA)
+												</li>
 											</ol>
 											</p>
 
@@ -265,11 +282,16 @@
 											</p>
 
 											<h4>1. Kurose/Ross</h4>
+											<img src = "https://gaia.cs.umass.edu/kurose_ross/header_graphic_book_8E_3.jpg" width="100%">
 											<p>
-												The first book is <a href = "https://gaia.cs.umass.edu/kurose_ross/index.php">Computer Networking: A Top-Down Approach</a> by Jim Kurose and Keith  Ross.  Students can purchase this as a reference if they want, but we will mainly be going through online videos that Dr. Kurose has generously made available online at <a href = "https://gaia.cs.umass.edu/kurose_ross/lectures.php">this link</a>.  Students will watch a selection of these videos and complete pre-class modules on them.  I love this book because, as the title suggests, it slowly peels back the layers of the network from the outside in, which I believe really helps students to create the proper scaffolding to understand the "why" before getting down to the lower layers.
+												The first book is <a href = "https://gaia.cs.umass.edu/kurose_ross/index.php">Computer Networking: A Top-Down Approach</a> by Jim Kurose and Keith  Ross.  Students can purchase this as a reference if they want, <b>but it is not required to purchase this book</b>.  Instead, we will be going through online videos that Dr. Kurose has <i>incredibly generously</i> made available online at <a href = "https://gaia.cs.umass.edu/kurose_ross/lectures.php">this link</a>.  Students will watch a selection of these videos and complete pre-class modules on them.
+											</p>
+											<p>
+												I love this book because, as the title suggests, it slowly peels back the layers of the network from the outside in, which I believe really helps students to create the proper scaffolding to understand the "why" before getting down to the lower layers
 											</p>
 
 											<h4>2. Peterson/Davie</h4>
+											<img src = "https://book.systemsapproach.org/_images/SystemsApproachLogoURL.png" width="25%">
 											<p>
 												I'll also link to parts of <a href = "https://book.systemsapproach.org/index.html">Computer Networks: A Systems Approach</a> by <a href = "https://www.cs.princeton.edu/~llp/">Larry Peterson</a> and <a href = "http://nms.csail.mit.edu/~bdavie/">Bruce Davie</a>.  This book goes in the reverse order through the network stack, so the readings may seem a bit scattered throughout the schedule, but students who don't want to purchase Kurose/Ross may find this helpful to refer to.
 											</p>
@@ -291,11 +313,17 @@
 											<h3><a href = "Assignments/index.html">Assignments</a> </h3>
 
 											<p>
-												The bulk of the grade in the course will be earned by completing assignments.  Some of them are larger than others; I'll split the larger ones into smaller components.  Be sure to start them early!  Note that <a href = "#collaboration">collaboration and sharing rules</a> differ slightly between the individual assignments and the large assignments.
+												The bulk of the grade in the course will be earned by completing assignments.  Some of them are larger than others, so it may seem like I'm giving out more assignment than in some of my other classes, but the workload will be similar overall.  To help you manage your time, I'll split the larger ones into smaller components.  Be sure to start them early!  Note that <a href = "#collaboration">collaboration and sharing rules</a> differ slightly between the individual assignments and the large assignments.
 											</p>
 	
 											
 											<h4>Programming Languages</h4>
+											<p>
+												Most of the assignments will be completed in C.  This will be a nice followup from CS 174, and it will allow us to interact more directly with system calls than higher level languages.  The input/output is also much more direct/straightforward than it is in other languages (including C++).
+											</p>
+											<p>
+												On some occasions, though, assignments will be in python, particularly when we want to do higher level data analysis, plotting, etc.
+											</p>
 	
 											
 											
@@ -378,13 +406,15 @@
 </td></tr>
 <tr><td>15</td><td>Mon 2/24/2025</td><td>Reliable Transport: TCP</td><td><ul><li><a href = "https://book.systemsapproach.org/e2e/tcp.html">Peterson/Davie 5.2</a></li></ul></td><td></td></tr>
 <tr><td>16</td><td>Wed 2/26/2025</td><td>Continue TCP</td><td></td><td></td></tr>
-<tr><td>17</td><td>Fri 2/28/2025</td><td>Principles of Congestion Control</td><td><ul><li><a href = "https://www.youtube.com/watch?v=edUN8OabWCQ">Richard Clegg Computerphile: The 1986 Internet Congestion Collapse</a></li><li><a href = "https://dl.acm.org/doi/10.1145/52325.52356">Original Van Jacobson Paper on Congestion Avoidance And Control</a></li></ul></td><td></td></tr>
-<tr><td>18</td><td>Mon 3/3/2025</td><td>TCP Congestion Control</td><td><ul><li><a href = "https://book.systemsapproach.org/congestion/tcpcc.html">Peterson/Davie 5.3</a></li></ul></td><td bgcolor=#f4e6e7>HW3 Due
+<tr><td>17</td><td>Fri 2/28/2025</td><td>Principles of Congestion Control</td><td><ul><li><a href = "https://www.youtube.com/watch?v=edUN8OabWCQ">Richard Clegg Computerphile: The 1986 Internet Congestion Collapse</a></li><li><a href = "https://dl.acm.org/doi/10.1145/52325.52356">Original Van Jacobson Paper on Congestion Avoidance And Control</a></li></ul></td><td bgcolor=#f4e6e7>HW3 Submission 1
 </td></tr>
+<tr><td>18</td><td>Mon 3/3/2025</td><td>TCP Congestion Control</td><td><ul><li><a href = "https://book.systemsapproach.org/congestion/tcpcc.html">Peterson/Davie 5.3</a></li></ul></td><td></td></tr>
 <tr><td colspan = "5"><h2><b>The Network Layer</b></h2><p></p></td></tr>
 <tr><td>19</td><td>Wed 3/5/2025</td><td>Raw Sockets, ICMP</td><td><ul><li><a href = "https://www.opensourceforu.com/2015/03/a-guide-to-using-raw-sockets/">A guide to using raw sockets</a></li><li><a href = "https://book.systemsapproach.org/internetworking/basic-ip.html#error-reporting-icmp">Peterson/Davie 3.3.8</a></li></ul></td><td bgcolor=#f4e6e7>Intro To The Network Layer (Kurose 4.1, 4.2 part 1) Due Before Class
 <HR>HW4: Mapping Networks Out
 </td></tr>
+<tr><td colspan = "5"><h2><b>The Link Layer</b></h2><p></p></td></tr>
+<tr><td colspan = "5"><h2><b>The Physical Layer</b></h2><p></p></td></tr>
 </td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr></td></tr><!-- End Schedule -->
 
 
@@ -400,10 +430,9 @@
 											<h3>Breakdown</h3>
 											
 											<table>
-												<tr><td>Class Engagement / Pre-Class Modules</td><td>15%</td></tr>
+												<tr><td>Class Engagement / Pre-Class Modules</td><td>20%</td></tr>
 												<tr><td>Programming Assignments</td><td>70%</td></tr>
-												<tr><td>Midterm Exam on Units 1/2</td><td>7%</td></tr>
-												<tr><td>Comprehensive Final Exam</td><td>8%</td></tr>
+												<tr><td>Comprehensive Final Exam</td><td>10%</td></tr>
 											</table>							
 											
 											<h3><a name = "deadlines">Deadlines Policy</a></h3>

@@ -43,6 +43,21 @@
 									<header class="main">
 										<h1>Software Environment</h1>
 									</header>
+
+									<p>
+										Since this is a systems programming class that uses networks, we're going to need to setup some pretty complicated software to do the cool things we need to do on the assignments.  Students will follow three steps to get setup:
+									</p>
+									<ol>
+										<li>
+											<a href = "#vscode">Setup the VSCode IDE</a> with all of the features we need for the course
+										</li>
+										<li>
+											Setup development tools for C on either <a href = "#windows">Windows</a> or <a href = "#macos">Mac OS</a>
+										</li>
+										<li>
+											Setup <a href = "#virtualbox">VirtualBox</a> to host a tool we'll use to create a software defined network on our own computer!
+										</li>
+									</ol>
 									
 
 									<h2><a name = "vscode">Step 1: Visual Studio Code</a></h2>
@@ -188,23 +203,30 @@
 												and hit <code>ENTER</code>
 											</li>
 											<li>
-												Next type
+												<p>
+													Next type
 												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
 													sudo apt install build-essential gcc g++ cmake valgrind lldb git openssh-server wireshark whois nmap tshark net-tools vim-nox python3 python3-pip firefox flex bison traceroute libnsl-dev mininet]]></script>  
-												and hit <code>ENTER</code>.  This may take a moment
+												and hit <code>ENTER</code>.  This may take a moment.  When you see the following:
+												</p>
+
+												<p>
+													<img src = "wireshark.png" width="60%">
+												</p>
+												<p>
+													Be sure to select <code>Yes</code>
+												</p>
 											</li>
 										</ol>
 										<p>
-											Now you should have everything you need to compile C/C++/assembly programs on your computer!
+											Now you should have everything you need to compile C/C++ programs on your computer, as well as run a whole slew of network tools!
 										</p>
 
 										
 
-										<p>
-											Congratulations, you are now finished!  You may proceed to the <a href = "#virtualbox">virtualbox setup</a>
-										</p>
+										
 
-										<h3><a name = "wslfilepaths">A Note on File Paths under WSL</a></h3>
+										<h4><a name = "wslfilepaths">A Note on File Paths under WSL</a></h4>
 										<p>
 											It's possible to go through the entire class in just the terminal, but you may want to navigate through and organize your files and folders using the ordinary Windows explorer.  Everything under your regular windows filesystem is linked to from a special place in WSL.  For instance, if my username is <code>ctralie</code> and I have a folder named <code>CS174</code> on my Desktop, then I would change into the <code>CS174</code> directory by typing 
 										</p>
@@ -225,12 +247,48 @@
 										</p>
 										<p></p>
 
-
-										<h3><a name = "copypaste">A Note on Copy/Pasting under WSL</a></h3>
+										<h4><a name = "copypaste">A Note on Copy/Pasting under WSL</a></h4>
 
 											<p>
 												Since <code>CTRL+C</code> means something special (kill a running process), copy actually happens with <code>CTRL+SHIFT+C</code>.  Likewise, paste happens with <code>CTRL+SHIFT+V</code>.
 											</p>
+
+										<h3><a name = "x11">Step 3: Setup VcXsrv Windows X11 Server</a></h3>
+										<p>
+											We need to setup an X11 <a href = "https://en.wikipedia.org/wiki/X_Window_System">XWindows</a> client on Windows to receive messages from wireshark running in a virtual host for the more advanced assignments later in the course.  First, <a href = "https://sourceforge.net/projects/vcxsrv/">click here</a> to download VcXsrv.  Then, launch the program <code>XLaunch</code> with the default options:
+										</p>
+
+										<p>
+											<img src = "vcxsrv1.png" width="40%">
+										</p>
+
+										<p>
+											<img src = "vcxsrv2.png" width="40%">
+										</p>
+
+										<h3><a name = "putty">Step 4: Setup PuTTY</a></h3>
+										<p>
+											You'll need to download a special ssh terminal to use wireshark in the virtual image under Windows for more advanced assignments later in the course.  <a href = "https://www.putty.org/">Click here</a> to download PuTTY.  Then, configure PuTTY to connect to your localhost, which we'll use to run wireshark on the <a href = "#virtualbox">virtual image</a>.  First, select <code>127.0.0.1</code> as the host with port <code>3022</code>:
+										</p>
+
+										<img src = "puttyhost.png" width="40%">
+
+										<p>
+											Then, select <code>Enable X11 forwarding</code> after expanding the SSH node in the options tree:
+										</p>
+
+										<img src = "puttyx11.png" width="40%">
+										<p>
+											When you're finished this, you should go back and save your configuration so you don't have to re-enter this information each time.  You'll test to make sure this works after you setup the <a href = "#virtualbox">virtual image</a>
+										</p>
+
+										<HR>
+										
+
+										<p>
+											Congratulations, you are now finished!  You may proceed to the <a href = "#virtualbox">virtualbox setup</a>
+										</p>
+
 
 										<HR>
 										<h2><a name = "macos">Step 2b: Mac OS Software Environment Instructions</a></h2>
@@ -378,6 +436,24 @@
 
 									<HR>
 										<h2><a name = "virtualbox">3. VirtualBox Setup</a></h2>
+
+										<p>
+											Later in the course when we implement parts of the transport layer (TCP) and the network layer (routing), we're going to use a program called <a href = "http://mininet.org/">mininet</a> to create software defined networks with arbitrary topologies on our own machines!  Because setting this up natively in Windows or Mac OS is quite complicated, I'm instead going to have students code on virtual linux images that I setup in the background.  This is the only time students will need to use the <a href = "#remote">remote login tools</a>; otherwise, they can code directly on their own filesystems.
+										</p>
+
+										<p>
+											To get started, download and install VirtualBox at <a href = "https://www.virtualbox.org/">this link</a>, being sure to choose the right platform; for instance, those using M1/M2 macs should choose macOS/Apple Silicon hosts.
+										</p>
+
+										<p>
+											Then, assuming you're on the Ursinus network, visit <a href = "http://nimbus.ursinus.edu/mininet/">http://nimbus.ursinus.edu/mininet/</a> and download and extract the .zip file appropriate for your system; those using M1/M2 macs should download the arm zip file, and those using Windows or intel macs should download the x86 zip file.  <b>You'll need about 10GB free on your machine to use these!</b>
+										</p>
+
+										<p>
+											Once you've downloaded and extracted the file, open VirtualBox and add a new image, navigating to the folder where you extracted the virtual machine:
+										</p>
+
+										<img src = "virtualboxadd.png" width="70%">
 										
 										<p>
 											Now, go to the <code>Network</code> properties of the virtual machine, and make sure the network adapter is attached to <code>NAT</code>:
@@ -404,11 +480,27 @@
 										</p>
 
 										<img src = "sshsave.png" width="60%">
+
+										<p>
+											You can now code on this virtual image using the VSCode IDE!
+										</p>
+
+										<h4>Running Wireshark on The Virtual Image</h4>
+										<p>
+											Now, if you're on Mac, you can launch wireshark by typing
+										</p>
+
+										<p>
+											<code>sudo HOME=~ wireshark &</code>
+										</p>
+
+										<p>
+											If you're on Windows, you'll instead need to launch <a href = "#x11">XLaunch</a> and login using <a href = "#putty">PuTTY</a> and run that command from the PuTTY shell.  But you can still run other non-GUI terminals through VSCode (I was just having trouble getting X11 forwarding working on windows in that context!)
+										</p>
 										
-										https://dev.to/developertharun/easy-way-to-ssh-into-virtualbox-machine-any-os-just-x-steps-5d9i
 
 
-										sudo HOME=~ wireshark
+										
 
 
 

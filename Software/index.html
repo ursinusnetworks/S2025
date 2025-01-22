@@ -47,28 +47,49 @@
 
 									<h2><a name = "vscode">Visual Studio Code</a></h2>
 									<p>
-										The recommended code editor for this class is <b>Microsoft Visual Studio Code</b> (VSCode).  It has nice plugins for syntax highlighting, code completion, and built in documentation for C, C++, and x64 assembly.  Visit <a href = "https://code.visualstudio.com/Download">this link</a> to download VSCode for your appropriate operating system.  Most Windows and Linux users will want the <b>64-bit</b> (x64) download.  Please post on Discord if you are having any issues installing VSCode.
+										In this class, we will be using <b>Microsoft Visual Studio Code(VSCode)</b>  to write code and to interact with a remote computer to code.  VSCode has nice plugins for syntax highlighting, code completion, and built in documentation for C and C++.  Visit <a href = "https://code.visualstudio.com/Download">this link</a> to download VSCode for your appropriate operating system.  Most Windows and Linux users will want the <b>64-bit</b> download.  Please post on Discord if you are having any issues installing VSCode.
 									</p>
 
+									<HR>
+									<h2><a name = "remote">Setting Up Remote Computing with VSCode</a></h2>
+
+									
+
 									<p>
-										You may use another IDE if you would like, such as <a href = "https://atom.io/">Atom</a> or even <a href = "https://www.gnu.org/software/emacs/">emacs</a>, but I will be assuming you're using VSCode in this class.
+										<b>Motivation:</b> Students will be using a tool called <a href = "http://mininet.org/">mininet</a> in some of the later assignments, which is used to simulate various network connections.  Unfortunately, it's a bit difficult to install natively on Mac or Windows, but I've created some virtual images that you can run using <a href = "https://www.virtualbox.org/wiki/Linux_Downloads">VirtualBox</a>.  Luckily, VSCode has a very nice add-on that makes it easy to connect and code on these virtual images.  You can read more information about it at <a href = "https://code.visualstudio.com/docs/remote/ssh">this link</a>, but I will summarize the important information below
 									</p>
 
-									<h3><a name = "vsplugins">Recommended Plugins</a></h3>
+									<h3>Step 1: Install Remote Development Extension Pack</h3>
+
 									<p>
-										You can search for plugins/extensions for VSCode by clicking on the following icon on the left of the VSCode Screen:
-									</p>
-									<img src = "pluginsIcon.png">
-									<p>
-										I'd recommend using the C/C++ IntelliSense plugin by Microsoft.  Once you install this, click on the settings button:
-									</p>
-									<img src = "cppextension.png">
-									<p>
-										Then, search for Cpp standard and C standard, and make sure they're set to gnu++17 and gnu17, respectively.  Otherwise, you won't have the proper documentation for methods, and you'll get lots of erroneous errors in vscode.
+										First, search for Microsoft's <code>Remote Development Extension Pack</code> in the extensions store:
 									</p>
 
+									<img src = "remoteDevel.png" width="40%">
 
-									<h3><a name = "vscodefeatures">Quick Features Overview</a></h3>
+									<h3>Step 2: Install And Configure Microsoft Intellisense C/C++ Extensions</h3>
+									<p>
+										First, install the plugin, then, click on the settings icon next to it and scroll down to "Settings"
+									</p>
+									<img src = "cppextension.png" width="40%">
+									<p>
+										And switch the standard to <code>gnu++17</code> and <code>gnu17</code>
+									</p>
+									<img src = "cppextensionversion.png" width="80%">
+
+									
+
+									<h3><a name = "terminal">VSCode Command Line</a></h3>
+									<p>
+										One nice thing about VSCode is that you can launch a terminal in the IDE below where you're coding.  There are myriad ways to launch the terminal, and it even has its own dedicated menu in VSCode.  Once you've logged in using the directions above, you can launch a terminal at the bottom of your code environment, and you should see something like this:
+									</p>
+
+									<img src = "terminal.png">
+
+
+									<HR>
+
+									<h2><a name = "vscodefeatures">Other Features</a></h2>
 
 									<p>
 										Below are a few features I want to highlight that will come in handy as your working.
@@ -157,7 +178,7 @@
 											<li>
 												Next type
 												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
-													sudo apt install build-essential gcc g++ cmake valgrind lldb  git libboost-all-dev openssh-server wireshark whois nmap tshark net-tools vim-nox python-setuptools python-all-dev flex bison traceroute libnsl-dev mininet]]></script>  
+													sudo apt install build-essential gcc g++ cmake valgrind lldb git openssh-server wireshark whois nmap tshark net-tools vim-nox python3 python3-pip firefox flex bison traceroute libnsl-dev mininet]]></script>  
 												and hit <code>ENTER</code>.  This may take a moment
 											</li>
 										</ol>
@@ -178,6 +199,20 @@
 										<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
 											cd /mnt/c/Users/ctralie/Desktop/CS174]]></script>
 										<p></p>
+
+										<p>
+											Note also that if you have VSCode installed, you can open files anywhere under your WSL file tree in VSCode by typing
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
+											code filename</script>
+										<p></p>
+
+										<p>
+											where <code>filename</code> is the name of the file you want to open
+										</p>
+										<p></p>
+
 
 										<h3><a name = "copypaste">A Note on Copy/Pasting under WSL</a></h3>
 
@@ -208,6 +243,9 @@
 												</p>
 
 												<img src = "brew.png">
+												<p>
+													<b>Be sure to follow the next steps to add brew to your path</b>
+												</p>
 											</li>
 											<li>
 												<p>
@@ -240,14 +278,6 @@
 													Execute the following command in the terminal
 												</p>
 												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
-													brew install ffmpeg]]></script> 
-												(this one may take a while)
-											</li>
-											<li>
-												<p>
-													Execute the following command in the terminal
-												</p>
-												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
 													brew install cmake]]></script> 
 												<p>
 													This is a special script that will help us compile complicated projects across different operating systems.
@@ -258,9 +288,9 @@
 													Execute the following command in the terminal
 												</p>
 												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
-													brew install glew]]></script> 
+													brew install netcat]]></script> 
 												<p>
-													This is a graphics library that will help us with real time animations
+													This is a Unix command line utility that reads/writes data across network connections using the TCP or UDP protocol
 												</p>
 											</li>
 											<li>
@@ -268,61 +298,65 @@
 													Execute the following command in the terminal
 												</p>
 												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
-													brew install glfw]]></script> 
+													brew install nmap]]></script> 
 												<p>
-													This is another graphics library that will help us with real time animations
-												</p>
-
-												<p>
-													<b>NOTE: </b> If you are on an M1 mac, you will need to follow the directions at <a href = "https://stackoverflow.com/questions/67373307/macos-m1-fatal-error-glfw-glfw3-h-file-not-found">this post</a>
+													This is a command line utility used to do things like port scanning and host discovery
 												</p>
 											</li>
 											<li>
-												After all this, we also have to update our C++ compiler framework to be more recent.  Type
-												
-												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
-													brew install llvm]]></script> 
 												<p>
-													After that's finished, note the type of terminal you're running.  If you're running zsh, then type 
+													Execute the following command in the terminal
 												</p>
 												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
-													echo "alias g++='/usr/local/opt/llvm/bin/clang++'" >> ~/.zshrc
-													echo "alias gcc='/usr/local/opt/llvm/bin/clang'" >> ~/.zshrc]]></script> 
+													brew install --cask wireshark]]></script> 
 												<p>
-													Otherwise, if you're using bash, type 
+													This is a program that we will use extensively in the course to analyze network traffic coming into and out of our computers
 												</p>
-												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
-													echo "alias g++='/usr/local/opt/llvm/bin/clang++'" >> ~/.bash_profile
-													echo "alias gcc='/usr/local/opt/llvm/bin/clang'" >> ~/.bash_profile
-													]]></script> 
-												<p>
-													Then, <b>close and restart</b> your terminal, and type 
-												</p>
-												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
-													gcc --version
-													g++ --version]]></script> 
-												
-												If you see <code>Homebrew clang version [...]</code>, then you're good to go.  If you still see <code>Apple clang version</code> or something similar, then the above steps failed, and you should message me or post on Discord.
 											</li>
-											<li>
-												<p>
-													Finally, we'll install a memory leak detector.  Execute the following two commands in the terminal
-												</p>
-												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
-													brew tap LouisBrunner/valgrind
-													brew install --HEAD LouisBrunner/valgrind/valgrind]]></script> 
 
-												<p>
-													<a name = "macmemoryalt">Alternative memory leak option</a>: If this doesn't work (likely on Big Sur), then don't worry...there are alternatives, as long as the last step worked.
-												</p>
-												
 
-											</li>
+											
 										</ol>
 
 										<p>
 											Congratulations, you are now finished!  You may proceed to <a href = "../Assignments/HW0_Warmup/">homework 0</a> to test everything out.
 										</p>
+
+										<h3>Updating C/C++ Compiler</h3>
+										<ul>
+										<li>
+											If you're unable to run the address sanitizer in homework 0, you'll need to update your C++ compiler framework to be more recent.  Type
+											
+											<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
+												brew install llvm]]></script> 
+											<p>
+												After that's finished, note the type of terminal you're running.  If you're running zsh, then type 
+											</p>
+											<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
+												echo "alias g++='/usr/local/opt/llvm/bin/clang++'" >> ~/.zshrc
+												echo "alias gcc='/usr/local/opt/llvm/bin/clang'" >> ~/.zshrc]]></script> 
+											<p>
+												Otherwise, if you're using bash, type 
+											</p>
+											<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
+												echo "alias g++='/usr/local/opt/llvm/bin/clang++'" >> ~/.bash_profile
+												echo "alias gcc='/usr/local/opt/llvm/bin/clang'" >> ~/.bash_profile
+												]]></script> 
+											<p>
+												Then, <b>close and restart</b> your terminal, and type 
+											</p>
+											<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
+												gcc --version
+												g++ --version]]></script> 
+											
+											If you see <code>Homebrew clang version [...]</code>, then you're good to go.  If you still see <code>Apple clang version</code> or something similar, then the above steps failed, and you should message me or post on Discord.
+										</li>
+									</ul>
+
+
+									<HR>
+										<h2>VirtualBox Setup</h2>
+										https://dev.to/developertharun/easy-way-to-ssh-into-virtualbox-machine-any-os-just-x-steps-5d9i
 
 
 	

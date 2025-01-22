@@ -45,13 +45,16 @@
 									</header>
 									
 
-									<h2><a name = "vscode">Visual Studio Code</a></h2>
+									<h2><a name = "vscode">Step 1: Visual Studio Code</a></h2>
 									<p>
-										In this class, we will be using <b>Microsoft Visual Studio Code(VSCode)</b>  to write code and to interact with a remote computer to code.  VSCode has nice plugins for syntax highlighting, code completion, and built in documentation for C and C++.  Visit <a href = "https://code.visualstudio.com/Download">this link</a> to download VSCode for your appropriate operating system.  Most Windows and Linux users will want the <b>64-bit</b> download.  Please post on Discord if you are having any issues installing VSCode.
+										In this class, we will be using <b>Microsoft Visual Studio Code(VSCode)</b>  to write code.  VSCode has nice plugins for syntax highlighting, code completion, and built in documentation for C and C++.  Visit <a href = "https://code.visualstudio.com/download">this link</a> to download VSCode for your appropriate operating system.  Most Windows and Linux users will want the <b>64-bit</b> download.  Please post on Discord if you are having any issues installing VSCode.
+									</p>
+									<p>
+										<b>Even if you already have VSCode installed, continue on to the instructions below to make sure you have the plugins configured properly for this class.</b>
 									</p>
 
 									<HR>
-									<h2><a name = "remote">Setting Up Remote Computing with VSCode</a></h2>
+									<h3><a name = "remote">Setting Up SSH with VSCode</a></h3>
 
 									
 
@@ -59,15 +62,20 @@
 										<b>Motivation:</b> Students will be using a tool called <a href = "http://mininet.org/">mininet</a> in some of the later assignments, which is used to simulate various network connections.  Unfortunately, it's a bit difficult to install natively on Mac or Windows, but I've created some virtual images that you can run using <a href = "https://www.virtualbox.org/wiki/Linux_Downloads">VirtualBox</a>.  Luckily, VSCode has a very nice add-on that makes it easy to connect and code on these virtual images.  You can read more information about it at <a href = "https://code.visualstudio.com/docs/remote/ssh">this link</a>, but I will summarize the important information below
 									</p>
 
-									<h3>Step 1: Install Remote Development Extension Pack</h3>
+									<h3><a name = "remotedevel">1: Install Remote Development Extension Pack</a></h3>
 
 									<p>
-										First, search for Microsoft's <code>Remote Development Extension Pack</code> in the extensions store:
+										First, search for and install Microsoft's <code>Remote Development Extension Pack</code> in the extensions store:
 									</p>
 
 									<img src = "remoteDevel.png" width="40%">
 
-									<h3>Step 2: Install And Configure Microsoft Intellisense C/C++ Extensions</h3>
+									<p>
+										We'll return to this in the <a href = "#virtualbox">virtualbox section</a>
+									</p>
+
+
+									<h3><a name = "intellisesecpp">2: Install And Configure Microsoft Intellisense C/C++ Extensions</a></h3>
 									<p>
 										First, install the plugin, then, click on the settings icon next to it and scroll down to "Settings"
 									</p>
@@ -79,12 +87,16 @@
 
 									
 
-									<h3><a name = "terminal">VSCode Command Line</a></h3>
+									<h3><a name = "terminal">3. VSCode Command Line</a></h3>
 									<p>
 										One nice thing about VSCode is that you can launch a terminal in the IDE below where you're coding.  There are myriad ways to launch the terminal, and it even has its own dedicated menu in VSCode.  Once you've logged in using the directions above, you can launch a terminal at the bottom of your code environment, and you should see something like this:
 									</p>
 
 									<img src = "terminal.png">
+
+									<p>
+										Note that you can open up multiple terminals, which will be useful in this class.
+									</p>
 
 
 									<HR>
@@ -118,7 +130,7 @@
 
 
 									<HR>
-										<h2><a name = "windows">Windows Software Environment Instructions</a></h2>
+										<h2><a name = "windows">Step 2a: Windows Software Environment Instructions</a></h2>
 
 										<p>
 											Below are instructions to setup a linux-like development environment on Windows
@@ -189,7 +201,7 @@
 										
 
 										<p>
-											Congratulations, you are now finished!  You may proceed to <a href = "../Assignments/HW0_Warmup/">homework 0</a> to test everything out.
+											Congratulations, you are now finished!  You may proceed to the <a href = "#virtualbox">virtualbox setup</a>
 										</p>
 
 										<h3><a name = "wslfilepaths">A Note on File Paths under WSL</a></h3>
@@ -221,7 +233,7 @@
 											</p>
 
 										<HR>
-										<h2><a name = "macos">Mac OS Software Environment Instructions</a></h2>
+										<h2><a name = "macos">Step 2b: Mac OS Software Environment Instructions</a></h2>
 
 										<p>
 											Mac OS comes with considerably more support by default for Linux-like apps than Windows does, but there's still some work we'll have to do to get it ready for this class.  Below are the steps:
@@ -313,13 +325,23 @@
 													This is a program that we will use extensively in the course to analyze network traffic coming into and out of our computers
 												</p>
 											</li>
+											<li>
+												<p>
+													Execute the following command in the terminal
+												</p>
+												<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
+													brew install --cask xquartz]]></script> 
+												<p>
+													This is a program that will allow us to use wireshark inside of a virtual machine running <a href = "http://mininet.org">mininet</a> on our computer
+												</p>
+											</li>
 
 
 											
 										</ol>
 
 										<p>
-											Congratulations, you are now finished!  You may proceed to <a href = "../Assignments/HW0_Warmup/">homework 0</a> to test everything out.
+											Congratulations, you are now finished!  You may proceed to <a href = "#virtualbox">virtualbox setup</a>
 										</p>
 
 										<h3>Updating C/C++ Compiler</h3>
@@ -355,11 +377,40 @@
 
 
 									<HR>
-										<h2>VirtualBox Setup</h2>
+										<h2><a name = "virtualbox">3. VirtualBox Setup</a></h2>
+										
+										<p>
+											Now, go to the <code>Network</code> properties of the virtual machine, and make sure the network adapter is attached to <code>NAT</code>:
+										</p>
+										<img src = "virtualbox_network1.png" width="60%">
+										<p>
+											Then, click on <code>Port Forwarding</code>, and setup an entry as follows:
+										</p>
+										<img src = "virtualbox_network2.png" width="60%">
+										<p>
+											Finally, launch the VM and enter <code>mininet</code> for both the username and password.  Once it has booted up, we're going to log into it from VSCode's <a href = "#remotedevel">remote development extension</a>.  Type <code>CTRL+SHIFT+P</code>, and enter the following into 
+										</p>
+
+										<p>
+											<code>
+												ssh -p 3022 -X mininet@127.0.0.1
+											</code>
+										</p>
+
+										<img src = "sshmininet.png" width="60%">
+
+										<p>
+											Save this information to your .ssh configuration for future use:
+										</p>
+
+										<img src = "sshsave.png" width="60%">
+										
 										https://dev.to/developertharun/easy-way-to-ssh-into-virtualbox-machine-any-os-just-x-steps-5d9i
 
 
-	
+										sudo HOME=~ wireshark
+
+
 
 
 

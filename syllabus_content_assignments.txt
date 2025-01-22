@@ -1,13 +1,13 @@
 HW0: Software Setup Out
 
 2025-01-22
-Intro To Networks Module Part 1 (Kurose 1.2, 1.3, 1.4) Due Before Class
+Intro To Networks Module Part 1 (Kurose 1.1, 1.2, 1.5) Due Before Class
 
 2025-01-24
 <HR>HW1: Web Crawling Out
 
 2025-01-24
-Intro To Networks Module Part 2 (Kurose 1.5, 1.6, 1.7) Due Before Class
+Intro To Networks Module Part 2 (Kurose 1.3, 1.4, 1.6) Due Before Class
 
 2025-01-27
 <HR>HW0: Software Setup Due

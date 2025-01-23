@@ -7,6 +7,9 @@ Intro To Networks Module Part 1 (Kurose 1.1, 1.2, 1.5) Due Before Class
 <HR>HW1: Web Crawling Out
 
 2025-01-24
+<HR>Syllabus Quiz Due
+
+2025-01-24
 Intro To Networks Module Part 2 (Kurose 1.3, 1.4, 1.6) Due Before Class
 
 2025-01-27

@@ -1,3 +1,6 @@
 [submodule "Assignments/HW2_CWebClient/HW2_CWebClient"]
 	path = Assignments/HW2_CWebClient/HW2_CWebClient
 	url = https://github.com/ursinusnetworks/HW2_CWebClient.git
+[submodule "Assignments/HW0_Software/HW0_SoftwareTest"]
+	path = Assignments/HW0_Software/HW0_SoftwareTest
+	url = https://github.com/ursinusnetworks/HW0_SoftwareTest.git

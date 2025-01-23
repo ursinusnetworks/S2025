@@ -1,4 +1,4 @@
-HW0: Software Setup Out
+<a href = "Assignments/HW0_Software/index.html">HW0: Software Test / Wireshark / Mininet Intro</a> Out
 
 2025-01-22
 Intro To Networks Module Part 1 (Kurose 1.1, 1.2, 1.5) Due Before Class

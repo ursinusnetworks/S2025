@@ -41,7 +41,7 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-                                        <h2>Homework 0: Welcome To CS 475 / Software Test (15 Points)</h2>
+                                        <h2>Homework 0: Software Test / Wireshark / Mininet Intro (18 Points)</h2>
 										<h3><a href = "https://www.ctralie.com">Chris Tralie</a></h3>
 									</header>
 
@@ -50,152 +50,36 @@
                                         <p>
                                             <h3><a name = "objectives">Learning Objectives</a></h3>
                                             <ul>
-												<li>Practice basic terminal commands and folder navigation</li>
-												<li>Practice compiling and running programs in the terminal</li>
+												<li>Practice some basic terminal commands we'll be using in the class</li>
+												<li>Get some initial exposure to wireshark</li>
+												<li>Make sure mininet is working in <a href = "../../Software/index.html#virtualbox">VirtualBox</a></li>
                                             </ul>
 										</p>
 										
 
 										<h3><a name = "overview">Description / Overview</a></h3>
 										<p>
-											We're doing some serious systems programming in the class, and I also want to have fun assignments that deal with multimedia data (images, music, videos, animations).  Because of this, the process to setup a software environment for this class is more involved than usual.  To make sure everyone is setup properly, I have devised a series of tests to verify that everything we need is working.  <b>If you get stuck or something unexpected happens at any point while following the instructions below, you should immediately post on Discord</b>.  We'll work through it there together (I'm giving students Mac and Windows labels on our channel to help us coordinate that)
+											We're doing some serious systems programming in the class, and I also want to have fun assignments that get you hands on experience with every layer of the network stack.  Because of this, the process to setup a software environment for this class is more involved than usual.  To make sure everyone is setup properly, I have devised a series of tests to verify that everything we need is working.  <b>If you get stuck or something unexpected happens at any point while following the instructions below, you should immediately post on Discord</b>.  We'll work through it there together (I'm giving students role labels for each platform on our channel to help us coordinate that)
 										</p>
 
+										<h3>Getting Started</h3>
 										<p>
-											First, follow the software installation instructions for <a href = "../../Software/index.html#windows">Windows</a> or <a href = "../../Software/index.html#macos">Mac OS</a>, depending on your computer.  They may take a while, but you will be rewarded 😅 (with points on this assignment and with the inherent satisfaction of having a slick software setup).  Once you're finished and everything is in place, create a designated directory for everything CS 174 related, open your terminal, and use the <code>cd</code> command to change into this designated directory (alternatively, you can create the directory in the terminal using <code>mkdir</code> command).  Then, to obtain the test software I've created, type
+											First, follow the <a href = "../../Software/index.html">software installation instructions</a>.  Note that they will differ slightly depending on your platform  They may take a while, but you will be rewarded 😅 (with points on this assignment and with the inherent satisfaction of having a slick software setup).  
 										</p>
+										<h3><a name = "leak">Step 1: Folder Setup / Leak Tester (3 Points)</a></h3>
+										<p>
+											Once you're finished and everything is in place, I'd recommend that you create a designated directory for everything CS 475 related (using <code>mkdir</code> or the GUI file tree browser in VSCode).  Open your terminal in VSCode, and use the <code>cd</code> command to change into this designated directory.  Then, to obtain the test software I've created, type
+										</p>
+
 										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
-											git clone --recursive https://github.com/ursinus-cs174-s2022/HW0_Warmup.git</script>   
+											git clone https://github.com/ursinusnetworks/HW0_SoftwareTest.git</script>   
 										
 										<p>
-											This should create a folder called <code>HW0_Warmup</code> in your current directory.  Change into this folder and type <code>ls</code>
-										</p>
-
-										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
-											cd HW0_Warmup
-											ls</script>   
-										
-										<p>
-											You should see these folders/files 
-										</p>
-										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
-											assembly  canvas  leak.cpp  LICENSE  README.md  sound  tinygl-cpp</script>  
-										
-										<p>
-											If that all worked, proceed to the following tests.  Take note of what you see, and submit the results to <a href = "https://ursinus.instructure.com/courses/13764/assignments/138659">this link</a> on Canvas
-										</p>
-										
-										<HR>
-										<h3><a name = "audio">Audio Test (3 Points)</a></h3>
-										<p>
-											Change into the <code>sound</code> directory
-											<script type="syntaxhighlighter" class="brush: python"><![CDATA[
-												cd sound</script> 
-											then type 
-										</p>
-										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
-											g++ -std=c++11 -o mysterysound mysterysound.cpp</script> 
-										<p>
-											Now run the generated program
-										</p>
-										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
-											./mysterysound</script> 
-										<p>
-											If everything is working properly, this should generate a file called <code>mysterysound.wav</code>.  Open this file, and <b>take note on canvas of what number is spoken</b>
-										</p>
-
-										<HR>
-										<h3><a name = "canvas">Canvas/ffmpeg Test (3 Points)</a></h3>
-										<p>
-											Now go back up a directory and into the directory <code>canvas</code>
-										</p>
-										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
-											cd ../canvas</script>  
-
-										<p>
-											then compile the program there by typing 
-										</p>
-										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
-											g++ -std=c++11 -o mysteryshape mysteryshape.cpp</script> 
-										<p>
-											Now run the generated program
-										</p>
-										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
-											./mysteryshape</script> 
-										<p>
-											If everything is working properly, this should generate an animated gif file called <code>MysteryShape.gif</code>.  Open this file, and <b>take note on canvas of what shape is drawn</b>
-										</p>
-
-										<HR>
-										<h3><a name = "opengl">CMake / OpenGL / Live Animation Test (3 Points)</a></h3>
-										<p>
-											Now go back up a directory and into the directory <code>tinygl-cpp</code> (this library is courtesy of <a href = "https://www.alinenormoyle.com/">Aline Normoyle</a> right down the street at Bryn Mawr College).  The compilation process for the program here is slightly more involved because we'll be using something called <a href = "https://cmake.org/">cmake</a>.  Once you're in the directory <code>tinygl-cpp</code>, create a new directory called <code>build</code>, change into it, and use the <code>cmake</code> command to generate a makefile for your system (we'll talk more about makefiles in class)
-										</p>
-										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
-											mkdir build
-											cd build
-											cmake ..</script> 
-
-										<p>
-											Now you can build the program by typing the command <code>make</code>
-										</p>
-										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
-											make</script> 
-
-										<p>
-											Now run the generated program <code>mysteryletter</code>
-										</p>
-										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
-											./mysteryletter</script> 
-										<p>
-											If everything is working properly, this should pop up with a window with a letter bouncing up and down.  Take note of this letter, and write on Canvas what it is.
+											We're going to do a quick test of <b>memory leaks</b>, which, <a href = "https://diveintosystems.org/book/C2-C_depth/dynamic_memory.html">as you recall</a>, occur when we don't take care to cleanup dynamic memory that we request during the run of our program.  It's very common to forget to clean things up, but this can cause us to run out of memory, as well as other strange errors.  Thankfully, there are tools to check for memory leaks.  Those who are running windows or Intel-based mac can use <a href = "https://diveintosystems.org/book/C3-C_debug/valgrind.html">valgrind</a> or, while others can use clang's memory leak sanitizer.  
 										</p>
 
 										<p>
-											<b>NOTE: </b> Windows users should be sure that they are <a href = "../../Software/index.html#vcxsrvrestart">vcXsrv</a> in the background before executing <code>mysteryletter</code>
-										</p>
-
-										<HR>
-											<h3><a name = "assembly">GCC / x64 Assembly Test (3 Points)</a></h3>
-										<p>
-											Now go back up to the root of <code>HW0_Warmup</code> and into the directory <code>assembly</code>.  If you are under windows, type 
-										</p>
-										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
-											gcc -o mysterynumber mysterynumber.s</script> 
-										<p>
-											Or, if your on a mac, execute the following (since assembly on mac uses <a href = "http://www.idryman.org/blog/2014/12/02/writing-64-bit-assembly-on-mac-os-x/">slightly different syntax</a>)
-										</p>
-										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
-											gcc -o mysterynumber mysterynumbermac.s</script> 
-										<p>
-											Then, execute the program
-										</p>
-										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
-											./mysterynumber</script> 
-										<p>
-											Take note of the number that is output to the console, and indicate it on canvas
-										</p>
-
-										<p>
-											<b>NOTE: If you get an error <code>Symbol `printf' causes overflow in R_X86_64_PC32 relocation</code></b>, then compile by typing
-										</p>
-										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
-											gcc -no-pie -o mysterynumber mysterynumber.s</script> 
-
-										<p>
-											as per this <a href = "https://stackoverflow.com/questions/48071280/nasm-symbol-printf-causes-overflow-in-r-x86-64-pc32-relocation">StackOverflow post</a>
-										</p>
-
-										
-
-										<HR>
-											<h3><a name = "valgrind">Valgrind Test (3 Points)</a></h3>
-										<p>
-											One last test to go!  We're going to test something called a <b>memory leak</b>, which is when we don't take care to cleanup dynamic memory that we request during the run of our program.  This takes place automatically in Java using something called a <a href = "https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/gc01/index.html">garbage collector</a>, but we have to handle it manually in C and C++.  It's very common to forget to clean things up, but this can cause us to run out of memory, as well as other strange errors.  Thankfully, there are tools to check for memory leaks, and we'll be using one such powerful tool called <a href = "https://diveintosystems.org/book/C3-C_debug/valgrind.html">valgrind</a> in this course (or, <a href = "../../Software/index.html#macmemoryalt">alternatively</a>, clang's <a href = "https://stackoverflow.com/questions/65931093/valgrind-and-macos-big-sur/69610645#69610645">memory leak sanitizer</a>). 
-										</p>
-
-										<p>
-											Change back to the root of <code>HW0_Warmup</code>.  Then, if valgrind installed properly for you (which it should have on Windows or Mac OS Catalina), do the following:
+											Change back to the root of <code>HW0_SoftwareTest</code>.  Then, if you're on Windows using valgrind, do the following:
 										</p>
 
 										<div style="background-color: blanchedalmond; padding:10px;">
@@ -203,10 +87,7 @@
 
 
 											<script type="syntaxhighlighter" class="brush: python"><![CDATA[
-												g++ -o leak leak.cpp</script> 
-											<!--<p>
-												Observant readers will notice that we're using the <code>-g</code> flag for the first time in this command.  This causes the compiler to include something called a <b>symbol table</b> in the executable file, which will help us to understand where we are in the original code when we debug.  We will also use this flag with the <b>lldb</b> debugger program, as well as with valgrind.
-											</p>!-->
+												gcc -o leak leak.c</script> 
 	
 											<p>
 												Now type
@@ -217,15 +98,15 @@
 										</div>
 
 										<p>
-											If you had to do the <a href = "../../Software/index.html#macmemoryalt">alternative installation</a>, then use the following directions
+											Alternatively, use the Clag memory sanitizer:
 										</p>
 
 										<div style="background-color: blanchedalmond; padding:10px;">
-											<h4>Clang++ Memory Sanitizer</h4>
+											<h4>Clang Memory Sanitizer</h4>
 
 
 											<script type="syntaxhighlighter" class="brush: python"><![CDATA[
-												g++ -fsanitize=leak -o leak leak.cpp</script> 
+												gcc -fsanitize=leak -o leak leak.c</script> 
 											<p>
 												Now type
 											</p>
@@ -235,9 +116,135 @@
 										</div>
 
 										<p>
-											In both cases, take note of how many bytes of memory were "lost" or "leaked," and indicate this number on canvas.  Also, indicate whether you used valgrind or clang++'s memory sanitizer.
+											In both cases, take note of how many bytes of memory were "lost" or "leaked," and indicate this number on canvas, <i>with a brief explanation as to why this number of bytes has been lost, based on the code in <a href = "https://github.com/ursinusnetworks/HW0_SoftwareTest/blob/main/leak.c"><code>leak.c</code></a></i>.  Also, indicate whether you used valgrind or clang's memory sanitizer.
 										</p>
+
+										<HR>
+										<h3><a name = "ifconfig">Step 2: <code>ifconfig</code> (2 Points)</a></h3>
+										<p>
+											Next, type the command <code>ifconfig</code> in your terminal, and take note of the network devices you have on your computer.  On canvas, let me know what your devices are (no need to tell me your IP addresses or MAC addresses).  For instance, on my computer I have two devices: <code>lo</code> (local loopback) and <code>wlp0s20f3</code> (wireless):
+										</p>
+
+										<img src = "ifconfig.png" width="80%">
+
+										<HR>
+										<h3><a name = "http">Step 3: HTTP Request / <code>netcat</code> (3 Points)</a></h3>
+										<p>
+											First, launch your web browser.  If you're on mac, you can use your ordinary web browser.  If you're on windows using WSL, launch firefox from your terminal in the background and hit <code>ENTER</code> a few times if you need to to get past verbose output
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											firefox&</script> 
+										<p>
+										<p>
+											Then, type the following into your terminal:
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											netcat -l 49200</script> 
+										<p>
+
+										<p>
+											Next, navigate to the address <code>http://127.0.0.1:49200/</code>.  Then, close the browser and copy and paste the message from your terminal into a text file called <code>http.txt</code>.  Alternatively, you can repeat this whole process and pipe the output of netcat directly to the text file by typing 
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											netcat -l 49200 > http.txt</script> 
 										
+
+										<HR>
+											<h3><a name = "wireshark">Step 4: Wireshark Test (5 Points)</a></h3>
+											<p>
+												Now, we're going to test a "packet sniffer" known as wireshark following an exercise at <a href = "https://www-net.cs.umass.edu/wireshark-labs/Wireshark_Intro_v8.0.pdf">this link</a>, courtesy of Jim Kurose.  Read through and follow the directions on pages 1-9 of the document, except for three modifications:
+												<ol>
+													<li>
+														<b>Skip the "Getting Wireshark" section</b>, since we've already installed wireshark another way
+													</li>
+													<li>
+														If you're on windows, <b>be sure to launch firefox from your terminal</b>, rather than the browser that you normally use
+													</li>
+													<li>
+														<b>Ignore the part on disabling QUIC</b>, unless you can't see the text in the decoded HEX on the HTTP receive packet, which should look like this:
+														<p>
+															<img src = "httprecv.png" width="80%">
+														</p>
+													</li>
+												</ol>
+											</p>
+
+											<p>
+												Then, to prove that it worked and to practice manipulating specific packets in a sea of packets, I want you to do the following (a slight modification of what that lab asks on the last page):
+											</p>
+											<ol>
+												<li>
+													Take note of how long it took between when the HTTP GET message was sent until the HTTP OK response was received.
+												</li>
+												<li>
+													What is the Internet address of the gaia.cs.umass.edu (also known as www-net.cs.umass.edu)? What is the Internet address of your computer?
+												</li>
+												<li>
+													<p>
+														Select just the the HTTP packets that you've captured:
+													</p>
+													<img src = "selectpackets.png" width="80%">
+													
+													
+													<p>
+														then go to <code>File->Export Specified Packets</code>.  Check "selected packets only", then save as <code>httppackets.pcapnb</code>
+													</p>
+
+													<img src = "savepackets.png" width="80%">
+
+													<p>
+														Finally, change the permissions of this file by typing the following in the folder where you saved it:
+													</p>
+													<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+														sudo chmod 775 httppackets.pcapnb </script> 
+												</li>
+											</ol>
+
+										<HR>
+										<h3><a name = "wireshark">Step 5: mininet Test (5 Points)</a></h3>
+										<p>
+											We're now going to test <a href = "http://mininet.org">mininet</a>.  
+										</p>
+										<p>
+											First, launch Wireshark <b>in the Ubuntu image with VirtualBox</b> following the directions at <a href = "../../Software/index.html#virtualbox">this link</a>.  Note that this is different from launching Wireshark directly on your machine as we did in the above task!  In fact, whenever we use mininet and we need to use wireshark, we'll have to be careful to launch it this way.
+										</p>
+										<p>
+											Now, in a separate terminal connected to that image (or in the same terminal if you're comfortable running processes in the background!), type
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											sudo mn </script> 
+										<p>
+											to startup mininet.  You should see the following pop up in the terminal:
+										</p>
+
+										<img src = "mnstart.png" width="30%">
+										<p>
+											And you should see two new devices, <code>s1-eth1</code> and <code>s1-eth2</code> pop up in wireshark:
+										</p>
+
+										<img src = "mneth.png" width="60%">
+
+										<p>
+											Double click on <code>s1-eth1</code>.  Then, back in the terminal where you launched mininet, type 
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											h1 ping -c 1 h2 </script> 
+
+										<p>
+											Back in wireshark, if you filter by <code>icmp</code>, you should see something like this:
+										</p>
+
+										<img src = "mnping.png" width="100%">
+
+										<p>
+											Select and save these packets to a file called <code>pingpackets.pcapnb</code>.  Change the permissions of this file to 775, and upload it as part of your canvas submission.
+										</p>
+
+										<p>
+											That's it!  <b>Thank you for your patience working through this intricate setup! 🙏🙏🙏</b>
+										</p>
 										
                                     
                                 </div>
@@ -291,7 +298,7 @@
 										<li>
 											<span class="opener">Assignments</span>
 											<ul>
-												
+												<li><a href = "../../Assignments/HW0_Software/index.html">HW0: Software Test / Wireshark / Mininet Intro</a></li>
 											</ul>
 										</li>
 										<li>

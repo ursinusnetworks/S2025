@@ -41,7 +41,7 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-                                        <h2>Homework 2: HTTP WebGet</h2>
+                                        <h2>Homework 1: "Bear Crawl" Web Crawler</h2>
 										<h3><a href = "https://www.ctralie.com">Chris Tralie</a></h3>
 									</header>
 
@@ -50,7 +50,9 @@
                                         <p>
                                             <h3><a name = "objectives">Learning Objectives</a></h3>
                                             <ul>
-												
+												<li>Conceptualize a system of links as a graph data structure</li>
+												<li>Implement breadth first search in a fun application</li>
+												<li>Carefully read documentation about web scraping libraries</li>
                                             </ul>
 										</p>
 										
@@ -59,10 +61,123 @@
 										
 										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
 											./mysteryshape</script> 
-										
-										
+
+
+										<HR>
+										<h2><a name = "viewer">Graph Viewer</a></h2>
+
+										<p>
+											Below is a live applet that you can use to view graphs that result from crawling.  I have four default graphs that you can play with, but you should be sure to test the graphs you're creating as you're going along by uploading your generated JSON files.
+										</p>
 										
                                     
+
+
+										<div id="ForceContainer">
+
+
+											<table>
+												<tr>
+													<td><p>Choose File<input type = "file" id = "graphInput"></p>
+
+														<div class = "select-wrapper">
+															<select id="examples" name = "examples">
+																<option disabled selected value> -- select an option -- </option>
+																<option value = "ctralie2.json">https://www.ctralie.com, depth 2</option>
+																<option value = "ctralie3.json">https://www.ctralie.com, depth 3</option>
+																<option value = "ursinus2.json" selected="selected">https://www.ursinus.edu, depth 2</option>
+																<option value = "ursinus3.json">https://www.ursinus.edu, depth 3</option>
+															</select>
+														</div>
+
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<table>
+															<tr>
+																<td>
+																	<input type="button" value="Search" onclick="search()"/>
+																</td>
+																<td>
+																	<input type="text" id="searchInput" size="30"/>
+																</td>
+															</tr>
+														</table>
+														
+
+														
+													</td>
+												</tr>
+												<tr>
+													<td><p><h3>URL</h3></p>
+														<p id="url">URL Will show here when you mouse over a node</p>
+													</td>
+												</tr>
+									
+											</table>
+											
+											<svg id="ForceCanvas"></svg>
+									
+											
+											<h3>Force Directed Graph GUI Directions</h3>
+											<ul>
+												<li> CTRL+Click to pan the view</li>
+												<li> CTRL+Scroll to zoom in and out</li>
+												<li> Left click and drag a node to move it around, and double click on a node to visit the corresponding page</li>
+											</ul>
+									
+										</div>
+										<script src="d3.min.js"></script>
+										<script src="jquery-3.5.1.min.js"></script>
+										<script src = "canvas.js"></script>
+									
+										<script>
+											let canvas = new ForceCanvas();
+											const width = window.innerWidth*0.7;
+											const height = window.innerHeight*0.7;
+
+										
+										
+										graphInput.addEventListener('change', function(e) {
+											let reader = new FileReader();
+											reader.onload = function(e) {
+												canvas.updateParams(
+													{
+														"width":width, 
+														"height":height,
+														"graph":JSON.parse(e.target.result)
+													}
+												);
+											}
+											reader.readAsText(graphInput.files[0]);
+										});
+
+										function loadPrecomputedExample(path) {
+											$.get(path, function(src) {
+												canvas.updateParams(
+													{
+														"width":width, 
+														"height":height,
+														"graph":src
+													}
+												);
+											});
+										}
+
+										let exampleMenu = document.getElementById("examples");
+										exampleMenu.addEventListener('change', function(e){
+											loadPrecomputedExample(e.target.value);
+										});
+
+									
+										function search() {
+											canvas.search(document.getElementById("searchInput").value);
+										}
+
+										loadPrecomputedExample("ursinus2.json");
+										</script>
+
                                 </div>
 						</div>
 					</div>

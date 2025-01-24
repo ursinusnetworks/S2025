@@ -58,10 +58,152 @@
 										
 
 										<h3><a name = "overview">Description / Overview</a></h3>
-										
-										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
-											./mysteryshape</script> 
+										<p>
+											In this assignment, you will create a <a href = "https://ursinusdatastructures.github.io/Modules/BFSDFSTSP/Video1">breadth-first</a> web crawler in python to discover all of the HTML pages on a web site, starting at some base url.  For instance, the <a href = "#viewer">viewer below</a> shows all HTML pages that are within two clicks of <a href = "https://www.ursinus.edu">https://www.ursinus.edu</a>.  Since we're the Ursinus bears, we may as well call this the "bear crawler" in that case 🐻.  
+										</p>
+										<p>
+											This assignment starts us up at the very top of the application level at the top of the network stack.  In subsequent assignments, we'll pull ourselves down to lower parts of the application layer and implement parts of the HTTP protocol directly in C, but for now, students will use a higher level implementation of this protocol in python's <a href = "https://docs.python.org/3/library/urllib.html">urllib</a> library so they can focus on how to use the result of HTTP communication in a cool application.
+										</p>
 
+										<h3><a name = "gettingstarted">Getting Started / What To Submit</a></h3>
+										<p>
+											Take a moment now to make sure that python is setup on your computer (you may want to look back at the <a href = "https://ursinusdatastructures.github.io/F2024/Software/index.html">data structures page about this</a>).
+										</p>
+										<p>
+											There is no starter code for this assignment.  Instead, students should create a Jupyter notebook called <code>crawler.ipynb</code> or a python file called <code>crawler.py</code>, which they'll hand in on Canvas at the end of the assignment.  In addition to using the standard python library <a href = "https://docs.python.org/3/library/urllib.html">urllib</a> to help with parsing URLs and loading HTML, I'd recommend that you use the <a href = "https://pypi.org/project/beautifulsoup4/">Beautiful Soup</a> library to find all of the links on a page.  If you're having trouble installing this library on your computer, you can use a Jupyter notebook in <a href = "https://colab.research.google.com/">Google colab</a>.
+										</p>
+										
+										
+
+
+										<HR>
+										<h2><a name = "programming">Programming Tasks</a></h2>
+
+										<p>
+											If we consider a web page as a node in a graph, and we put an edge between two pages if there exists a link from one to the other, then a web crawler is just a glorified graph search algorithm.  But the devil is in the details.  First, in <a href = "#urlparse">part 1</a>, we have to do a fair bit of work to clean up the URLs so we don't accidentally mistake two versions of the same URL as two different pages.  There is no perfect method of doing this, but we'll make some informed choices make a reasonably clean web crawler.
+										<p>
+											Then, before creating the crawler in earnest in <a href = "#crawl">part 2</a>, you should review the <a href = "https://ursinusdatastructures.github.io/Modules/BFSDFSTSP/Video1">breadth first search notes from data structures</a>.  You may also want to review my video on <a href = "https://www.youtube.com/watch?v=DDdYFmSXrm0">solving 8-puzzle with breadth-first search</a>.  You can borrow some of the code from these examples if you'd like, though you shouldn't necessarily a graph class, since all I want you to do is return a list of edges, each of which is a pair of URLs that are connected by a link.  Also, you can python's built-in <a href = "https://docs.python.org/3/library/collections.html#collections.deque">deque</a> instead of our custom doubly-linked list implementation from that class.
+											</p>
+										</p>
+
+										<h3><a name = "urlparse">Part 1: Neighbor URL Parsing</a></h3>
+										<p>
+											Suppose we're at a web page <a href = "https://www.ursinus.edu/offices/registrar/meet-the-staff">https://www.ursinus.edu/offices/registrar/meet-the-staff</a> and we see a link tag that looks like this:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+
+											<a href = "../academic-calendar">Link to academic calendar</a>
+											</script> 
+
+										<p>
+											The <code>href</code> part of the tag gives the link we want to follow to a neighboring page, but it is a <i>relative path</i>, not an absolute path.  This is the norm with web sites to make them more portable.  But we need to convert it into an absolute URL before we can visit it.  Thankfully, the <code>urljoin</code> method of the <a href = "https://docs.python.org/3/library/urllib.parse.html">urllib.parse</a> library gets us most of the way there.  For instance:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											from urllib.parse import urljoin
+											urljoin("https://www.ursinus.edu/offices/registrar/meet-the-staff", "../academic-calendar")
+											</script> 
+										<p>
+											Will give us the link <a href = "https://www.ursinus.edu/offices/academic-calendar">https://www.ursinus.edu/offices/academic-calendar</a>.  However, there is some more work we need to do to prepare our links for a good web crawler.
+										</p>
+
+										<h4>Your Task</h4>
+										<p>
+											Create a method <code>next_path(base, href)</code> that takes two parameters:
+											<ul>
+												<li><code>base</code>: The URL of the current page</li>
+												<li><code>href</code>: The value of the <code>href</code> property of an <code>a</code> tag in the current page that links to another page page</li>
+											</ul>
+										</p>
+										<p>
+											Your method should return a cleaned up string corresponding to the absolute URL of the neighboring page.  First, do the following to <code>base</code> and <code>url</code>:
+
+											<ul>
+												<li>
+													If <code>base</code> doesn't end in a file, add a "/" to it
+												</li>
+												<li>
+													If <code>href</code> starts with <code>www.</code>, add <code>http://</code> to the beginning of it
+												</li>
+											</ul>
+										</p>
+										<p>
+											Then, join <code>base</code> and <code>href</code> using <a href = "https://docs.python.org/3/library/urllib.parse.html">urllib.parse.urljoin</a>, and do the following modifications:
+										</p>
+										<ul>
+											<li>
+												If the URL ends in <code>index.*</code>, remove the end of it.  For example, this will let us realize that the page <a href = "https://www.ursinus.edu">https://www.ursinus.edu</a> is the same as <a href = "https://www.ursinus.edu/index.php">https://www.ursinus.edu/index.php</a>
+											</li>
+											<li>
+												If there is at least one <code>#</code> character, remove everything after the first <code>#</code>.  This is so that a page with an "anchor" isn't counted as a unique page (this is a subjective choice for a web crawler, but we'll stick with it in this assignment to cut down on the number of unique pages)
+											</li>
+											<li>
+												Finally, if the URL ends in a <code>/</code>, remove the <code>/</code>.  For instance, we want to recognize that <a href = "https://www.ursinus.edu">https://www.ursinus.edu</a> and <a href = "https://www.ursinus.edu/">https://www.ursinus.edu/</a> are the same page.
+											</li>
+										</ul>
+
+										<h4>Tests</h4>
+										<p>
+											If this is working properly, you should get the following outputs from your <code>next_path</code> method:
+										</p>
+										<table>
+											<tr>
+												<td>
+													<h4>Input</h4>
+												</td>
+												<td>
+													<h4>Output</h4>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<code>next_path("https://www.ursinus.edu", "/")</code>
+												</td>
+												<td>
+													<a href = "https://www.ursinus.edu">https://www.ursinus.edu</a>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<code>next_path("https://www.ursinus.edu/offices/registrar", "../")</code>
+												</td>
+												<td>
+													<a href = "https://www.ursinus.edu/offices">https://www.ursinus.edu/offices</a>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<code>next_path("https://www.ursinus.edu/offices", "registrar/meet-the-staff/")</code>
+												</td>
+												<td>
+													<a href = "https://www.ursinus.edu/registrar/meet-the-staff">https://www.ursinus.edu/registrar/meet-the-staff</a>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<code>next_path("https://www.ursinus.edu/academics", "www.yahoo.com/CoolStuff/index.php")</code>
+												</td>
+												<td>
+													<a href = "http://www.yahoo.com/CoolStuff">http://www.yahoo.com/CoolStuff</a>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<code>next_path("https://www.ursinus.edu/offices/marketing-and-communications/web-accessibility-statement", "#main-content")</code>
+												</td>
+												<td>
+													<a href = "https://www.ursinus.edu/offices/marketing-and-communications/web-accessibility-statement">https://www.ursinus.edu/offices/marketing-and-communications/web-accessibility-statement</a>
+												</td>
+											</tr>
+										</table>
+
+
+										<h3><a name = "craw">Part 2: BFS Crawler</a></h3>
+										<p>
+
+										</p>
+										
 
 										<HR>
 										<h2><a name = "viewer">Graph Viewer</a></h2>

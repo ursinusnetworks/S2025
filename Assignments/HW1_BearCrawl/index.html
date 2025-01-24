@@ -41,11 +41,16 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-                                        <h2>Homework 1: "Bear Crawl" Web Crawler</h2>
+                                        <h2>Homework 1: "Bear Crawl" Web Crawler (25 Points)</h2>
 										<h3><a href = "https://www.ctralie.com">Chris Tralie</a></h3>
 									</header>
 
 									<div id="page-content">
+
+										<img src = "bearcrawl.png" width="80%">
+										<p>
+											Bear image CC0 creative commons image courtesy of <a href = "https://www.rawpixel.com/image/4031542/cub-scavenging">rawpixel.com</a>
+										</p>
 
                                         <p>
                                             <h3><a name = "objectives">Learning Objectives</a></h3>
@@ -59,7 +64,7 @@
 
 										<h3><a name = "overview">Description / Overview</a></h3>
 										<p>
-											In this assignment, you will create a <a href = "https://ursinusdatastructures.github.io/Modules/BFSDFSTSP/Video1">breadth-first</a> web crawler in python to discover all of the HTML pages on a web site, starting at some base url.  For instance, the <a href = "#viewer">viewer below</a> shows all HTML pages that are within two clicks of <a href = "https://www.ursinus.edu">https://www.ursinus.edu</a>.  Since we're the Ursinus bears, we may as well call this the "bear crawler" in that case 🐻.  
+											In this assignment, you will create a <a href = "https://ursinusdatastructures.github.io/Modules/BFSDFSTSP/Video1">breadth-first</a> web crawler in python to discover all of the HTML pages on a web site, starting at some base url, up to some number of clicks.  For instance, the <a href = "#viewer">viewer below</a> shows all HTML pages that are within two clicks of <a href = "https://www.ursinus.edu">https://www.ursinus.edu</a>.  Since we're the Ursinus bears, we may as well call this the "bear crawler" in that case 🐻.  But the code will be general to work on any site, and students are encouraged to try this on other web sites and share results on the class discord!
 										</p>
 										<p>
 											This assignment starts us up at the very top of the application level at the top of the network stack.  In subsequent assignments, we'll pull ourselves down to lower parts of the application layer and implement parts of the HTTP protocol directly in C, but for now, students will use a higher level implementation of this protocol in python's <a href = "https://docs.python.org/3/library/urllib.html">urllib</a> library so they can focus on how to use the result of HTTP communication in a cool application.
@@ -86,7 +91,7 @@
 											</p>
 										</p>
 
-										<h3><a name = "urlparse">Part 1: Neighbor URL Parsing</a></h3>
+										<h3><a name = "urlparse">Part 1: Neighbor URL Parsing (7 Points)</a></h3>
 										<p>
 											Suppose we're at a web page <a href = "https://www.ursinus.edu/offices/registrar/meet-the-staff">https://www.ursinus.edu/offices/registrar/meet-the-staff</a> and we see a link tag that looks like this:
 										</p>
@@ -199,10 +204,54 @@
 										</table>
 
 
-										<h3><a name = "craw">Part 2: BFS Crawler</a></h3>
+										<h3><a name = "craw">Part 2: BFS Crawler (18 Points)</a></h3>
 										<p>
-
+											Now we're ready to make the actual web crawler
 										</p>
+
+										<h4>Your Task</h4>
+										<p>
+											Create a method <code>crawl_page(base_url, max_clicks, filename)</code>.  The crawling should start at <code>base_url</code> and visit every page that can be accessed <b>on that domain</b> from <code>base_url</code> <b>within <code>max_clicks</code> clicks</b> by following a sequence of <code>href</code> values in <code>&lt;a&gt;</code> tags.  You can use <code><a href = "https://docs.python.org/3/library/urllib.request.html">urllib.request.urlopen</a></code> to open each URL and check its <code>Content-Type</code>, and then <code>read()</code>its data if its's the correct type.  You can then use <a href = "https://pypi.org/project/beautifulsoup4/">BeautifulSoup</a> to find all of the <code>&lt;a&gt;</code> with <code>href</code> fields in this document.
+										</p>
+										<p>
+											Crucially, you should <b>not</b> visit pages that are on a different domain from <code>base_url</code></b>.  So, for example, if my <code>base_url</code> is <a href = "https://www.ursinus.edu">https://www.ursinus.edu</a> and I see a link to <a href = "https://www.ctralie.com/Teaching">https://www.ctralie.com/Teaching</a>, you should <b>not</b> visit that link.
+										</p>
+										<p>
+											As you're crawling the website, create a list of <code>edges</code>, each of which is a list of two pages that are connected to each other by a link.  Then, every time you discover a new link, save this info to a JSON file:
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											json.dump({"base_url":base_url, "edges":list(edges)}, open(filename, "w"))
+										</script> 
+										<p>
+											You can open this file up in <a href = "#viewer">graph viewer below</a> to check your progress.
+										</p>
+										
+
+										<p>
+											Additionally, you should adhere to the following requirements as you're going along:
+										</p>
+										<ol>
+											<li>
+												You should gracefully handle any errors without crashing.  For example, if you can't load a particular URL, simply don't load and expand it.  Have a look at <a href = "https://docs.python.org/3/tutorial/errors.html">python error handling</a> to see how to do this using <code>try/catch</code>
+											</li>
+											<li>
+												You should not visit a URL more than once.  This is baked into the BFS algorithm, but be sure you're keeping proper track of the links you've visited somehow
+											</li>
+											<li>
+												We're sticking to HTML pages in this assignment, so you should only read the data from a URL if the <code>Content-Type</code> in the header contains <code>"text/html"</code>.  This will prevent you from downloading things like videos or pdf files that will crash your code (not to mention wasting bandwidth)
+											</li>
+											<li>
+												<p>
+													To be kind to the web site that you're crawling, particularly while you're debugging, be sure to sleep for at least one second between subsequent web page requests
+												</p>
+												<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+													from time import sleep
+													#...
+													sleep(1)
+												</script> 
+											</li>
+										</ol>
+										
 										
 
 										<HR>
@@ -372,6 +421,7 @@
 											<span class="opener">Assignments</span>
 											<ul>
 												<li><a href = "../../Assignments/HW0_Software/index.html">HW0: Software Test / Wireshark / Mininet Intro</a></li>
+												<li><a href = "../../Assignments/HW1_BearCrawl/index.html">HW1: "Bear Crawl" Web Crawler</a></li>
 											</ul>
 										</li>
 										<li>

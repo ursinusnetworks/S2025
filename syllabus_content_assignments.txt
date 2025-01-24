@@ -4,7 +4,7 @@
 Intro To Networks Module Part 1 (Kurose 1.1, 1.2, 1.5) Due Before Class
 
 2025-01-24
-<HR>HW1: Web Crawling Out
+<HR><a href = "Assignments/HW1_BearCrawl">HW1: "Bear Crawl" Web Crawler Out</a>
 
 2025-01-24
 <HR>Syllabus Quiz Due

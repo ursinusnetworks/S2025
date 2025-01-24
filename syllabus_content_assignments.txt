@@ -28,21 +28,24 @@ HTTP Module (Kurose 2.1, 2.2) Due Before Class
 <HR>HW2: Web Client in C Out
 
 2025-02-03
+HW1 Due
+
+2025-02-05
 HW2 Due
 
-2025-02-10
+2025-02-12
 <HR>HW3: Web Proxy in C Out
 
-2025-02-10
+2025-02-12
 HW3 Submission 1
 
-2025-02-14
+2025-02-17
 HW3 Submission 2
 
-2025-02-21
+2025-02-24
 <HR>HW4: TCP Receiver Out
 
-2025-02-21
+2025-02-24
 HW4 Submission 1
 
 2025-02-28

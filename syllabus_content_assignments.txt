@@ -1,16 +1,16 @@
 <a href = "Assignments/HW0_Software/index.html">HW0: Software Test / Wireshark / Mininet Intro</a> Out
 
 2025-01-22
-Intro To Networks Module Part 1 (Kurose 1.1, 1.2, 1.5) Due Before Class
+Intro To Networks Module Part 1 (Kurose/Ross 1.1, 1.2, 1.5) Due Before Class
 
 2025-01-24
-<HR><a href = "Assignments/HW1_BearCrawl">HW1: "Bear Crawl" Web Crawler Out</a>
+<HR><a href = "Assignments/HW1_BearCrawl">HW1: "Bear Crawl" Web Crawler (Python) Out</a>
 
 2025-01-24
 <HR>Syllabus Quiz Due
 
 2025-01-24
-Intro To Networks Module Part 2 (Kurose 1.3, 1.4, 1.6) Due Before Class
+Intro To Networks Module Part 2 (Kurose/Ross 1.3, 1.4, 1.6) Due Before Class
 
 2025-01-27
 <HR>HW0: Software Setup Due
@@ -19,10 +19,10 @@ Intro To Networks Module Part 2 (Kurose 1.3, 1.4, 1.6) Due Before Class
 C Programming, Pointers Review Module Due Before Class
 
 2025-01-29
-Sockets Module (Kurose 2.7) Due Before Class
+Sockets Module (Kurose/Ross 2.7) Due Before Class
 
 2025-01-31
-HTTP Module (Kurose 2.1, 2.2) Due Before Class
+HTTP Module (Kurose/Ross 2.1, 2.2) Due Before Class
 
 2025-02-03
 <HR>HW2: Web Client in C Out
@@ -46,15 +46,45 @@ HW3 Submission 2
 <HR>HW4: TCP Receiver Out
 
 2025-02-24
-HW4 Submission 1
-
-2025-02-28
-HW4 Submission 2
-
-2025-03-08
-Intro To The Network Layer (Kurose 4.1, 4.2 part 1) Due Before Class
+Intro To The Network Layer (Kurose/Ross 4.1, 4.2 part 1) Due Before Class
 
 2025-03-05
-<HR>HW5: Mapping Networks Out
+HW4 Part 1 Due
 
-2025-03-05
+2025-03-03
+Kurose/Ross 4.2 part 2, 4.3 part 1 Due Before Class
+
+2025-03-07
+Kurose/Ross 4.3 part 2 Due Before Class
+
+2025-03-17
+Kurose/Ross 5.6 (ICMP) Due Before Class
+
+2025-03-19
+<HR>HW4 Part 2 Due
+
+2025-03-19
+<HR>HW5: Mapping Networks (Python) Out
+
+2025-03-19
+HW5 Due
+
+2025-03-26
+<HR>HW6: Mini Router Out
+
+2025-03-26
+HW6 Part 1 Due
+
+2025-04-04
+HW6 Part 2 Due
+
+2025-04-16
+<HR>HW7: Beeps And Boops: The Audio Physical Layer (Python) Out
+
+2025-04-16
+HW7 Due
+
+2025-04-25
+<HR>HW8: Student Cybersecurity Presentations (NO DROP) Out
+
+2025-04-25

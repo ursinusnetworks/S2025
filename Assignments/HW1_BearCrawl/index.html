@@ -70,6 +70,11 @@
 											This assignment starts us up at the very top of the application level at the top of the network stack.  In subsequent assignments, we'll pull ourselves down to lower parts of the application layer and implement parts of the HTTP protocol directly in C, but for now, students will use a higher level implementation of this protocol in python's <a href = "https://docs.python.org/3/library/urllib.html">urllib</a> library so they can focus on how to use the result of HTTP communication in a cool application.
 										</p>
 
+										<h3><a name = "ethics">Ethics of Web Crawling</a></h3>
+										<p>
+											One theme throughout the course is that with great power comes great responsibility.  On the very day that I released this assignment (1/23/2025), there was an <a href = "https://www.404media.co/email/6558718f-dbe9-47a0-a57f-5e80e0ed44ce/">article on 404 media</a> about how some AI companies are abusing grossly inefficient web crawlers to create their training data, and some creative solutions to combat this by creating infinite links on web sites (so-called "spider traps").  Any web crawler that is minimally compliant to a web host's wishes will read and respect the <a href = "https://developers.google.com/search/docs/crawling-indexing/robots/intro">robots.txt</a> file that specifies constraints on what a crawler should do.  We won't do this since we're sticking to ursinus.edu, whose <a href = "https://www.ursinus.edu/robots.txt">robots.txt file</a> simply says that crawlers shouldn't follow any "reply to" links to avoid going into infinitely deep traversals.  But we're doing a breadth-first search only up to a certain amount, and we're also being reasonably courteous by <a href = "#sleep">sleeping in between requests</a>.  But be mindful of this if you use your code on this assignment in other contexts, and <b>be a good internet citizen!</b>
+										</p>
+
 										<h3><a name = "gettingstarted">Getting Started / What To Submit</a></h3>
 										<p>
 											Take a moment now to make sure that python is setup on your computer (you may want to look back at the <a href = "https://ursinusdatastructures.github.io/F2024/Software/index.html">data structures page about this</a>).
@@ -241,6 +246,7 @@
 												We're sticking to HTML pages in this assignment, so you should only read the data from a URL if the <code>Content-Type</code> in the header contains <code>"text/html"</code>.  This will prevent you from downloading things like videos or pdf files that will crash your code (not to mention wasting bandwidth)
 											</li>
 											<li>
+												<a name = "sleep">Sleeping</a>
 												<p>
 													To be kind to the web site that you're crawling, particularly while you're debugging, be sure to sleep for at least one second between subsequent web page requests
 												</p>

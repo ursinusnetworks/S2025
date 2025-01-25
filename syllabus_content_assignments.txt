@@ -1,7 +1,7 @@
 <a href = "Assignments/HW0_Software/index.html">HW0: Software Test / Wireshark / Mininet Intro</a> Out
 
 2025-01-22
-Intro To Networks Module Part 1 (Kurose/Ross 1.1, 1.2, 1.5) Due Before Class
+Module 1 - Intro To Networks And The Network Stack (Kurose/Ross 1.1, 1.2, 1.5) Due Before Class
 
 2025-01-24
 <HR><a href = "Assignments/HW1_BearCrawl">HW1: "Bear Crawl" Web Crawler (Python) Out</a>
@@ -10,7 +10,7 @@ Intro To Networks Module Part 1 (Kurose/Ross 1.1, 1.2, 1.5) Due Before Class
 <HR>Syllabus Quiz Due
 
 2025-01-24
-Intro To Networks Module Part 2 (Kurose/Ross 1.3, 1.4, 1.6) Due Before Class
+Module 2 - Network Core And Performance (Kurose/Ross 1.3, 1.4) Due
 
 2025-01-27
 <HR>HW0: Software Setup Due

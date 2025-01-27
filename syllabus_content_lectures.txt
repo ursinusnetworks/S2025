@@ -7,19 +7,19 @@ Intro To Networks, Layering/Encapsulation
 
 <ul><li><a href = "https://www.youtube.com/watch?v=sMHzfigUxz4">ByteByteGo: How The Internet Works in 9 Minutes</a></li></ul>
 LECTURE
-IP Addresses And Ports, Cat/Netcat, and Packets/Wireshark intro
+IP Addresses And Ports, Cat/Netcat
 
 <ul><li><a href = "https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml">IANA Ports List</a></li><li><a href = "https://wiki.wireshark.org/DisplayFilters">Wireshark display filters</a></li></ul>
 LECTURE
-<p>More practice with wireshark, nslookup, traceroute</p><p>Begin reviewing pointers / pointer arithmetic</p>
+The packet concept, wireshark intro, firewalls, traceroute
 
 <ul><li><a href = "https://www.youtube.com/watch?v=75yKT3OuE44">Richard Clegg Computerphile video on traceroute</a></li><li><a href = "https://theweek.com/articles/624040/how-internet-mapping-glitch-turned-kansas-farm-into-digital-hell">The Week: "How an internet mapping glitch turned this Kansas farm into digital hell"</a></li></ul>
 LECTURE
-File descriptors, sprintf, structs in C
+File descriptors, sprintf, sscanf
 
 
 LECTURE
-Socket programming in C
+structs in C, Socket programming in C
 
 <ul><li><a href = "https://book.systemsapproach.org/foundation/software.html#socket-api">Peterson/Davie 1.4</a></li><li><a href = "https://beej.us/guide/bgnet/html/split-wide/index.html">Beej's Guide To Network Programming</a></li></ul>
 LECTURE

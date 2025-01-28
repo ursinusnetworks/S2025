@@ -13,10 +13,10 @@ Module 1 - Intro To Networks And The Network Stack (Kurose/Ross 1.1, 1.2, 1.5) D
 Module 2 - Network Core And Performance (Kurose/Ross 1.3, 1.4) Due
 
 2025-01-27
-<HR>HW0: Software Setup Due
+<a href = "../Modules/CReview/Video0">C Programming, Pointers Review Module</a> Due Before Class
 
-2025-01-27
-C Programming, Pointers Review Module Due Before Class
+2025-01-29
+<HR>HW0: Software Setup Due
 
 2025-01-29
 Sockets Module (Kurose/Ross 2.7) Due Before Class

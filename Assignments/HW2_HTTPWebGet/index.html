@@ -41,7 +41,7 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-                                        <h2>Homework 2: HTTP WebGet</h2>
+                                        <h2>Homework 2: HTTP WebGet (25 Points)</h2>
 										<h3><a href = "https://www.ctralie.com">Chris Tralie</a></h3>
 									</header>
 
@@ -50,17 +50,127 @@
                                         <p>
                                             <h3><a name = "objectives">Learning Objectives</a></h3>
                                             <ul>
-												
+												<li>
+													Implement internet communication using sockets in C
+												</li>
+												<li>
+													Practice reading documentation and man pages for Unix system calls
+												</li>
+												<li>
+													Handle command line arguments and file descriptors in C
+												</li>
+												<li>
+													Implement the HTTP GET protocol
+												</li>
                                             </ul>
 										</p>
 										
 
 										<h3><a name = "overview">Description / Overview</a></h3>
-										
+										<p>
+											The <code>wget</code> command can be used to download information from URLs using HTTP protocols over TCP connections.  In this assignment, students will implement a program called <code>mywget</code> to replicate a subset of <code>wget</code> functionality.  In particular, <code>mywget</code> will be capable of downloading arbitrary file types from arbitrary urls using the unencryped <code><a href = "https://datatracker.ietf.org/doc/html/rfc1945">HTTP 1.0</a></code> protocol.  For example, with a working implementation of this homework, running 
+										</p>
+
+
 										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
-											./mysteryshape</script> 
+											./mywget --url http://www.ctralie.com/ctralie_cv.pdf --target out.pdf
+											#
+										</script> 
+
+										<p>will download a (probably outdated!) version of my cv to a file called <code>out.pdf</code> in the same directory as <code>mywget</code>.  We'll be using the HTTP 1.0 protocol as opposed to <a href = "https://www.youtube.com/watch?v=UMwQjFzTQXw">newer versions of the HTTP protocol</a> because HTTP 1.0 terminates connections after each individual file request, which makes it easier to tell programmatically when the file has finished transmitting.  This does come at the cost of additional overhead having to re-establish a connection for each new file, but this is fine for a proof of concept in this assignment. </p>
+
+										<h4><a name = "gettingstarted">Getting Started / What To Submit</a></h4>
+										<p>
+											You can obtain the starter code for this assignment by using git:
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											git clone https://github.com/ursinusnetworks/HW2_HTTPWGet.git
+											#
+										</script> 
+
+										<p>
+											You can build this program by typing <code>make</code>.  You will be editing the file <code>client.c</code>.  This is the only file you need to submit to canvas when you're finished.
+										</p>
+
+										<HR>
+										<h2>Programming Tasks:</h2>
+										<p>
+											In this assignment, you'll walk through the sequence of
+											<ol>
+												<li>
+													<a href = "#establish">Establishing a connection</a>
+												</li>
+												<li>
+													<a href = "#getrequest">Setup And Send An HTTP GET Request</a>
+												</li>
+												<li>
+													<a href = "#recv">Receive And Parse Response</a>
+												</li>
+											</ol>
+										</p>
+
+										<p>
+											I have setup a command line argument parser following <a href = "https://www.youtube.com/watch?v=UENi8000J_k">this scheme</a>.  The sets up required parameters <code>--url</code> for specifying the url and <code>--target</code> for specifying the filename to which to save the result.  You can also specify the <code>--port</code>, but the default value of 80 will work for most examples on the web.  Regardless, you can access all of the values in <code>struct myargs ret</code>
+										</p>
+										<p>
+											I have also implemented a method <code>parseURL</code> that separates a URL into a <code>domain</code> (ignoring the <code>http://</code>) and a <code>path</code>, which will make it easier for you to setup your GET request.  For instance, the URL <code>http://www.ctralie.com/ctralie_cv.pdf</code> will split into URL <code>www.ctralie.com</code> and path <code>ctralie_cv.pdf</code>.  The <code>domain</code> and <code>path</code> fields are also available to you in <code>struct myargs ret</code>.
+										</p>
+
+										<h3><a name = "establish">Part 1: Establishing A Connection (5 Points)</a></h3>
 										
-										
+										<p>
+											This part will get you practice with the fundamentals of establishing socket connections in C.
+										</p>
+
+										<h4>Your Task</h4>
+										<p>
+											 To begin, initiate a TCP connection with the specified domain on the specified port using the <code><a href = "https://man7.org/linux/man-pages/man2/socket.2.html">socket</a></code> and <code><a href = "https://man7.org/linux/man-pages/man2/connect.2.html">connect</a></code> system calls.  You will need to look up the IP address of the domain using DNS via <code><a href = "https://www.man7.org/linux/man-pages/man3/getaddrinfo.3.html">getaddrinfo</a></code>, traversing the resulting linked list until you find a connection that works, or terminating gracefully if no connections can be established.  <b>Your program should not continue if any of these steps fail</b>; instead, <b>print informative error</b> messages to <code>stderr</code> explaining where it failed.
+										</p>
+
+										<h3>
+											<a name = "getrequest">Part 2: Setup And Send An HTTP GET Request (8 points)</a>
+										</h3>
+
+
+										<p>
+											If the above steps succeeded, then you can setup an HTTP get request to the domain
+										</p>
+										<h4>Your Task</h4>
+										<p>
+											Implement an appropriate HTTP 1.0 GET request, following <a href = "https://datatracker.ietf.org/doc/html/rfc1945">RFC 1945</a> for the HTTP 1.0 specification.  We've gone through examples in class, but this is actually fairly simple (if you need examples, you can use netcat and your browser like we did on <a href = "../HW0_Software/index.html#http">homework 0</a>).  In addition to the other minimum requirements, you should include a <code>Connection: close</code> line in the header, as this will make the next step easier.
+											
+										</p>
+										<p>
+											Be sure to setup the string first and print it to the command line first to make sure it's what you intended, and then <code><a href = "https://www.man7.org/linux/man-pages/man2/send.2.html">send</a></code> the string over the socket stream you established in the first task.
+										</p>
+										<p>
+											<b>NOTE: </b> As per the documentation, there is no guarantee that a single call to <code>send</code> will send all of the data you intended to.  So for full credit on this task, you should examine the return value from <code>send</code> to see how many bytes actually went out, and continue sending in a loop until all bytes went out.
+										</p>
+
+										<h3>
+											<a name = "recv">Part 3: Receive And Parse Response (12 Points)</a>
+										</h3>
+										<p>
+											If the send was successful, you can receive the response back from the http server and find the file that you requested.
+										</p>
+										<h4>Your Task</h4>
+										<p>
+											Read back the response from the server using <a href = "https://www.man7.org/linux/man-pages/man2/recv.2.html">recv</a> in a loop, and react as follows:  
+											<ul>
+												<li>
+													If the server reported a 200 OK status code, then find the body and write the data to the specified target file as binary data using <code><a href = "https://www.man7.org/linux/man-pages/man3/fwrite.3p.html">fwrite</a></code>.  <b>Be sure not to write anything in the header by accident</b> (including the final line break), as this will cause binary files (e.g. pdfs) to be corrupt.
+												</li>
+												<li>
+													If the server reported any other status code, print this status code to the terminal and terminate the connection
+												</li>
+											</ul>
+											Regardless of the outcome, <b>be sure to close all file descriptors and free all dynamic memory before the program closes</b>.
+										</p>
+
+										<p>
+											<b>HINT: </b> Since we asked the server to close the connection in the last step, there is a special return code that comes back from <code>recv</code> that you can check to know that you're finished.  Check the man pages to see how this works.
+										</p>
+
 										
                                     
                                 </div>
@@ -116,6 +226,7 @@
 											<ul>
 												<li><a href = "../../Assignments/HW0_Software/index.html">HW0: Software Test / Wireshark / Mininet Intro</a></li>
 												<li><a href = "../../Assignments/HW1_BearCrawl/index.html">HW1: "Bear Crawl" Web Crawler</a></li>
+												<li><a href = "../../Assignments/HW2_HTTPWebGet/index.html">HW2: HTTP WebGet</a></li>
 											</ul>
 										</li>
 										<li><a href = "https://docs.google.com/forms/d/e/1FAIpQLSfwkO_w_Ku-n2Ou6J7pF--i0C2-a20Ov9wf690T6cYx80ASsw/viewform?usp=sf_link">Anonymous Question</a></li>

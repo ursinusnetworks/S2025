@@ -4,3 +4,6 @@
 [submodule "Assignments/HW0_Software/HW0_SoftwareTest"]
 	path = Assignments/HW0_Software/HW0_SoftwareTest
 	url = https://github.com/ursinusnetworks/HW0_SoftwareTest.git
+[submodule "Assignments/HW2_HTTPWebGet/HW2_HTTPWGet"]
+	path = Assignments/HW2_HTTPWebGet/HW2_HTTPWGet
+	url = https://github.com/ursinusnetworks/HW2_HTTPWGet.git

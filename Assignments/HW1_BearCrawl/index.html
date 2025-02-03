@@ -146,7 +146,7 @@
 												If the URL ends in <code>index.*</code>, remove the end of it.  For example, this will let us realize that the page <a href = "https://www.ursinus.edu">https://www.ursinus.edu</a> is the same as <a href = "https://www.ursinus.edu/index.php">https://www.ursinus.edu/index.php</a>
 											</li>
 											<li>
-												If there is at least one <code>#</code> character, remove everything after the first <code>#</code>.  This is so that a page with an "anchor" isn't counted as a unique page (this is a subjective choice for a web crawler, but we'll stick with it in this assignment to cut down on the number of unique pages)
+												If there is at least one <code>#</code> character, remove the first <code>#</code> and everything following it.  This is so that a page with an "anchor" isn't counted as a unique page (this is a subjective choice for a web crawler, but we'll stick with it in this assignment to cut down on the number of unique pages)
 											</li>
 											<li>
 												Finally, if the URL ends in a <code>/</code>, remove the <code>/</code>.  For instance, we want to recognize that <a href = "https://www.ursinus.edu">https://www.ursinus.edu</a> and <a href = "https://www.ursinus.edu/">https://www.ursinus.edu/</a> are the same page.

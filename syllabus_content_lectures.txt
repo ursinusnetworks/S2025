@@ -23,9 +23,9 @@ structs in C, Socket programming in C
 
 <ul><li><a href = "https://book.systemsapproach.org/foundation/software.html#socket-api">Peterson/Davie 1.4</a></li><li><a href = "https://beej.us/guide/bgnet/html/split-wide/index.html">Beej's Guide To Network Programming</a></li></ul>
 LECTURE
-Telnet, CURL, HTTP Messages, HTTP Client in Python
+The HTTP Protocol
 
-<ul><li><a href = "https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages">Mozilla documentation on HTTP messages</a></li><li><a href = "https://book.systemsapproach.org/applications/traditional.html#world-wide-web-http">Peterson/Davie 9.1.2</a></li><li><a href = "https://www.youtube.com/watch?v=UMwQjFzTQXw">ByteByteGo: HTTP 1 Vs HTTP 2 Vs HTTP 3!</a></li></ul>
+<ul><li><a href = "https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages">Mozilla documentation on HTTP messages</a></li><li><a href = "https://gaia.cs.umass.edu/kurose_ross/videos/2/">Kurose/Ross Section 2.2</a></li><li><a href = "https://book.systemsapproach.org/applications/traditional.html#world-wide-web-http">Peterson/Davie 9.1.2</a></li><li><a href = "https://www.youtube.com/watch?v=UMwQjFzTQXw">ByteByteGo: HTTP 1 Vs HTTP 2 Vs HTTP 3!</a></li></ul>
 LECTURE
 Continue Socket Programming in C
 

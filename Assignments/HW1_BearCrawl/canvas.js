@@ -161,6 +161,7 @@ class ForceCanvas {
 	}
 
 	search(pattern) {
+		pattern = pattern.toLowerCase();
 		this.nodes.attr("fill", (d) => {
 			let ret = d3.rgb(0, 0, 0);
 			let s = d.url.toLowerCase();

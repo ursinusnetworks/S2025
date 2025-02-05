@@ -39,13 +39,13 @@ Multiprocess Socket Programming, Web Proxy / CDN Concept
 
 <ul><li><a href = "https://www.youtube.com/watch?v=xo5V9g9joFs">TechWorld with Nana: Proxy vs Reverse Proxy</a></li></ul>
 LECTURE
-The Domain Name Service (DNS)
-
-
-LECTURE
 SMTP And Email Protocols
 
 
+LECTURE
+The Domain Name Service (DNS)
+
+<ul><li><a href = "https://www.cloudns.net/blog/dns-cache-explained/">Cloudns Blog: DNS Caches Explained</a></li></ul>
 SECTION
 The Transport Layer
 

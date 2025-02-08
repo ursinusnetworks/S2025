@@ -30,22 +30,22 @@ Module 2 - Network Core And Performance (Kurose/Ross 1.3, 1.4) Due
 2025-02-03
 HW1 Due
 
-2025-02-05
+2025-02-07
 HW2 Due
 
 2025-02-12
 <HR>HW3: Web Proxy in C Out
 
-2025-02-12
+2025-02-14
 HW3 Submission 1
 
-2025-02-17
+2025-02-19
 HW3 Submission 2
 
-2025-02-24
+2025-02-26
 <HR>HW4: TCP Receiver Out
 
-2025-02-24
+2025-02-26
 Intro To The Network Layer (Kurose/Ross 4.1, 4.2 part 1) Due Before Class
 
 2025-03-05

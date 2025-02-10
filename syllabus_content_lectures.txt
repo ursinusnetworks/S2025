@@ -31,15 +31,15 @@ Continue Socket Programming in C
 
 <ul><li><a href = "https://www.youtube.com/watch?v=AVjOMp9P5Ts">My video on getaddrinfo in C</a></li></ul>
 LECTURE
-Designing Application Layer Protocols<ul><li>Begin Instant Message Program</li></ul>
+Designing Application Layer Protocols<ul><li>Begin <a href = "ClassExercises/ApplicationLayer/chatter.html">Instant Message Program</a></li></ul>
 
 
 LECTURE
-Multithreaded Socket Programming<ul><li>Continue Instant Message Program</li></ul>
+Multithreaded Socket Programming<ul><li>Continue <a href = "ClassExercises/ApplicationLayer/chatter.html">Instant Message Program</a></li></li></ul>
 
 <ul><li><a href = "https://hpc-tutorials.llnl.gov/posix/">LLNL Notes on POSIX Threads in C</a></li></ul>
 LECTURE
-Multiprocess Socket Programming, Web Proxy / CDN Concept<ul><li>Finish Instant Message Program</li></ul>
+Multiprocess Socket Programming, Web Proxy / CDN Concept<ul><li>Finish <a href = "ClassExercises/ApplicationLayer/chatter.html">Instant Message Program</a></li></li></ul>
 
 <ul><li><a href = "https://www.youtube.com/watch?v=xo5V9g9joFs">TechWorld with Nana: Proxy vs Reverse Proxy</a></li></ul>
 LECTURE
@@ -47,7 +47,7 @@ SMTP And Email Protocols
 
 
 LECTURE
-The Domain Name Service (DNS)
+The Domain Name System (DNS)
 
 <ul><li><a href = "https://www.cloudns.net/blog/dns-cache-explained/">Cloudns Blog: DNS Caches Explained</a></li></ul>
 SECTION

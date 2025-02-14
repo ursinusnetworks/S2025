@@ -39,19 +39,19 @@ HW2 Due
 2025-02-14
 HW3 Submission 1
 
-2025-02-19
+2025-02-24
 HW3 Submission 2
 
-2025-02-26
+2025-03-03
 <HR>HW4: TCP Receiver Out
 
-2025-02-26
+2025-03-03
 Intro To The Network Layer (Kurose/Ross 4.1, 4.2 part 1) Due Before Class
 
 2025-03-05
 HW4 Part 1 Due
 
-2025-03-03
+2025-03-07
 Kurose/Ross 4.2 part 2, 4.3 part 1 Due Before Class
 
 2025-03-07
@@ -61,18 +61,18 @@ Kurose/Ross 4.3 part 2 Due Before Class
 Kurose/Ross 5.6 (ICMP) Due Before Class
 
 2025-03-19
-<HR>HW4 Part 2 Due
+HW4 Part 2 Due
 
-2025-03-19
+2025-03-21
 <HR>HW5: Mapping Networks (Python) Out
 
-2025-03-19
+2025-03-21
 HW5 Due
 
-2025-03-26
+2025-03-28
 <HR>HW6: Mini Router Out
 
-2025-03-26
+2025-03-28
 HW6 Part 1 Due
 
 2025-04-04

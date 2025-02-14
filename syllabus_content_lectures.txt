@@ -57,7 +57,7 @@ The Transport Layer
 LECTURE
 Transport Protocols, UDP / Multiplexing
 
-<ul><li><a href = "https://book.systemsapproach.org/e2e/udp.html">Peterson/Davie 5.1</a></li></ul>
+<ul><li><a href = "https://book.systemsapproach.org/e2e/udp.html">Peterson/Davie 5.1</a></li><li><a href = "https://datatracker.ietf.org/doc/html/rfc768">RFC 768 for UDP</a></li></ul>
 LECTURE
 Reliable Transport Algorithms
 
@@ -95,13 +95,13 @@ IP with wireshark
 
 
 LECTURE
-Intermezzo: Raw Sockets, ICMP
-
-<ul><li><a href = "https://www.opensourceforu.com/2015/03/a-guide-to-using-raw-sockets/">A guide to using raw sockets</a></li><li><a href = "https://book.systemsapproach.org/internetworking/basic-ip.html#error-reporting-icmp">Peterson/Davie 3.3.8</a></li></ul>
-LECTURE
 IP Multiplexing with Network Address Translation (NAT)
 
 
+LECTURE
+Intermezzo: Raw Sockets, ICMP
+
+<ul><li><a href = "https://www.opensourceforu.com/2015/03/a-guide-to-using-raw-sockets/">A guide to using raw sockets</a></li><li><a href = "https://book.systemsapproach.org/internetworking/basic-ip.html#error-reporting-icmp">Peterson/Davie 3.3.8</a></li></ul>
 LECTURE
 IPv6
 

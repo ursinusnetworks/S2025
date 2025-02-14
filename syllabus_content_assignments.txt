@@ -33,10 +33,13 @@ HW1 Due
 2025-02-07
 HW2 Due
 
-2025-02-14
+2025-02-17
+Module 8 Due
+
+2025-02-16
 <HR>HW3: Web Proxy in C Out
 
-2025-02-14
+2025-02-17
 HW3 Submission 1
 
 2025-02-24

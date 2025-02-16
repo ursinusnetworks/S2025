@@ -190,10 +190,23 @@
 										</p>
 
 										<p>
-											<b>HINT 2:</b> It will be much easier if you use <a href = "https://github.com/ursinusnetworks/HW2_HTTPWGet/blob/main/arraylist.h">my provided <code>ArrayList</code> </a> to accumulate the entire HTTP response before you try to parse it and find the body.  This will make it much easier to find the body and write it all to a file in one chunk.
-										</p>
-
+											<b>HINT 2:</b> It will be much easier if you use <a href = "https://github.com/ursinusnetworks/HW2_HTTPWGet/blob/main/arraylist.h">my provided <code>ArrayList</code> </a> to accumulate the entire HTTP response before you try to parse it and find the body.  This will make it much easier to find the body and write it all to a file in one chunk.  Basic usage is as follows:
 										
+
+										<script type="syntaxhighlighter" class="brush: cpp"><![CDATA[
+											struct ArrayListBuf mybuf;
+											ArrayListBuf_init(&mybuf);
+											
+											...
+											
+											ArrayListBuf_push(&mybuf, chunk, chunksize); // Supposing chunk is a char* and chunksize is its length
+
+											...
+											
+											ArrayListBuf_free(&mybuf);
+										</script> 
+
+										</p>
                                     
                                 </div>
 						</div>

@@ -1,7 +1,7 @@
 <a href = "Assignments/HW0_Software/index.html">HW0: Software Test / Wireshark / Mininet Intro</a> Out
 
 2025-01-22
-Module 1 - Intro To Networks And The Network Stack (Kurose/Ross 1.1, 1.2, 1.5) Due Before Class
+<HR>Module 1 - Intro To Networks And The Network Stack (Kurose/Ross 1.1, 1.2, 1.5) Due Before Class
 
 2025-01-24
 <HR><a href = "Assignments/HW1_BearCrawl">HW1: "Bear Crawl" Web Crawler (Python) Out</a>
@@ -37,24 +37,24 @@ HW2 Due
 Module 8 Due
 
 2025-02-16
-<HR>HW3: Web Proxy in C Out
+Module 6: SMTP and and Module 7: DNS Due Before Class
 
-2025-02-17
+2025-01-19
+HW3: Web Proxy in C Out
+
+2025-02-19
 HW3 Submission 1
 
-2025-02-24
+2025-02-26
 HW3 Submission 2
 
-2025-03-03
+2025-03-05
 <HR>HW4: TCP Receiver Out
 
-2025-03-03
+2025-03-05
 Intro To The Network Layer (Kurose/Ross 4.1, 4.2 part 1) Due Before Class
 
 2025-03-05
-HW4 Part 1 Due
-
-2025-03-07
 Kurose/Ross 4.2 part 2, 4.3 part 1 Due Before Class
 
 2025-03-07
@@ -64,30 +64,27 @@ Kurose/Ross 4.3 part 2 Due Before Class
 Kurose/Ross 5.6 (ICMP) Due Before Class
 
 2025-03-19
+HW4 Part 1 Due
+
+2025-03-21
 HW4 Part 2 Due
 
-2025-03-21
-<HR>HW5: Mapping Networks (Python) Out
-
-2025-03-21
-HW5 Due
+2025-03-28
+<HR>HW5: Mini Router Out
 
 2025-03-28
-<HR>HW6: Mini Router Out
-
-2025-03-28
-HW6 Part 1 Due
+HW5 Part 1 Due
 
 2025-04-04
-HW6 Part 2 Due
+HW5 Part 2 Due
 
 2025-04-16
-<HR>HW7: Beeps And Boops: The Audio Physical Layer (Python) Out
+<HR>HW6: Beeps And Boops: The Audio Physical Layer (Python) Out
 
 2025-04-16
-HW7 Due
+HW6 Due
 
 2025-04-25
-<HR>HW8: Student Cybersecurity Presentations (NO DROP) Out
+<HR>HW7: Student Cybersecurity Presentations (NO DROP) Out
 
 2025-04-25

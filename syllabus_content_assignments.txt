@@ -39,8 +39,8 @@ Module 8 Due
 2025-02-16
 Module 6: SMTP and and Module 7: DNS Due Before Class
 
-2025-01-19
-HW3: Web Proxy in C Out
+2025-02-19
+<HR>HW3: Web Proxy in C Out
 
 2025-02-19
 HW3 Submission 1

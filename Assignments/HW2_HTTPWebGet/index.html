@@ -176,10 +176,13 @@
 											Read back the response from the server using <a href = "https://www.man7.org/linux/man-pages/man2/recv.2.html">recv</a> in a loop, and react as follows:  
 											<ul>
 												<li>
-													If the server reported a 200 OK status code, then find the body and write the data to the specified target file as binary data using <code><a href = "https://www.man7.org/linux/man-pages/man3/fwrite.3p.html">fwrite</a></code>.  <b>Be sure not to write anything in the header by accident</b> (including the final line break), as this will cause binary files (e.g. pdfs) to be corrupt.
+													If the server reported a 200 OK status code, then find the body and write the data to the specified target file as binary data using <code><a href = "https://www.man7.org/linux/man-pages/man3/fwrite.3p.html">fwrite</a></code>.  <b>Be sure not to write anything in the header by accident</b> (including the final line break), as this will cause binary files (e.g. pdfs) to be corrupt.  
 												</li>
 												<li>
 													If the server reported any other status code, print this status code to the terminal and terminate the connection
+												</li>
+												<li>
+													When you go to write the body to a file, <b>do not use strlen to figure out the length of the body!</b>  This will not work for bodies that are binary, like pdf files, as the NULL terminator could randomly show up anywhere in the body!  Instead, you should be able to figure out how long the body is by keeping track of the number of bytes received.
 												</li>
 											</ul>
 											Regardless of the outcome, <b>be sure to close all file descriptors and free all dynamic memory before the program closes</b>.

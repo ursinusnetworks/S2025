@@ -41,7 +41,7 @@ Multithreaded Socket Programming<ul><li>Continue <a href = "ClassExercises/Appli
 LECTURE
 Multiprocess Socket Programming, Web Proxy / CDN Concept<ul><li>Finish <a href = "ClassExercises/ApplicationLayer/chatter.html">Instant Message Program</a></li></li></ul>
 
-<ul><li><a href = "https://www.youtube.com/watch?v=xo5V9g9joFs">TechWorld with Nana: Proxy vs Reverse Proxy</a></li></ul>
+<ul><li><a href = "https://www.youtube.com/watch?v=xo5V9g9joFs">TechWorld with Nana: Proxy vs Reverse Proxy</a></li><li><a href = "https://brooker.co.za/blog/2024/05/09/nagle.html">The pitfalls of Nagle's algorithm</a></li></ul>
 LECTURE
 SMTP And Email Protocols
 
@@ -49,7 +49,7 @@ SMTP And Email Protocols
 LECTURE
 The Domain Name System (DNS)
 
-<ul><li><a href = "https://www.cloudns.net/blog/dns-cache-explained/">Cloudns Blog: DNS Caches Explained</a></li></ul>
+<ul><li><a href = "https://phoenixnap.com/kb/how-to-flush-dns-cache">How to flush DNS caches on different sytems</a></li></ul>
 SECTION
 The Transport Layer
 

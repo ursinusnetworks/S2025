@@ -229,6 +229,26 @@
 											<b>Your Task:</b> Before sending out a response, check to see if the <code>Content-Type</code> is <code>text/html</code>.  If so, scan the body for any matches of the regular expression contained in the <code>blockpattern</code> string in the command line arguments.  If there is a match, then send back a 401 "Unauthorized" response.
 										</p>
 										<p>
+											For example, if you run the server with 
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											./server --blockpattern military
+										</script> 
+
+										<p>
+											and then you run the tester with 
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											./tester --pathget tests/ctralie.txt --pathout out.html
+										</script> 
+
+										<p>
+											Then it should block this page.
+										</p>
+
+										<p>
 											<b>Hint: </b> Have a look at the documentation at <a href = "https://www.gnu.org/software/libc/manual/html_node/Regular-Expressions.html">this link</a> to see how to evaluation regular expressions in C.
 										</p>
 
@@ -241,7 +261,7 @@
 											For each <code>&lt;host&gt;:&lt;path&gt;</code> request, create an <a href = "https://www.md5hashgenerator.com/">md5 hash</a> of a string of the form <code>"&lt;host&gt;:&lt;path&gt;"</code> (An md5 hash is a function from an arbitrary-length string to a 16-byte (32 hex digit) string).  Before you make an HTTP request, check to see if a file of the form <code>"cache/&lt;md5 hash code&gt;"</code> exists.  For example, the response for the page <code>/index.html</code> at host <code>www.ctralie.com</code> would be cached to the file <code>cache/976c6e21dd0e8d89c6236ac9d6771a1b</code>.  If this cache file exists, bypass the HTTP request/response from the host and instead send back the contents of this cache file to the client.  Otherwise, make the HTTP request/response as normal, but <b>be sure to save the response to the cache file for future requests</b>.
 										</p>
 										<p>
-											<b>NOTE:</b> Some hashes may collide, but you can neglect that for this assignment.
+											<b>NOTE:</b> Some hashes may collide, but you can neglect that for this assignment, unless you do the <a href = "#extracredit">extra credit</a>.
 										</p>
 										<h4>Hints</h4>
 										<ul>
@@ -261,6 +281,7 @@
 											There are a few things you can do to spice this up even more:
 										</p>
 										<ul>
+											<li>(+1 points) Though they are rare, md5 hash collisions happen.  Devise a way to deal with this in your cache.</li>
 											<li>(+2 points) Check to see if the cached copy is stale before using the cache.  You can do this by sending a lightweight <a href = "https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/HEAD">HTTP HEAD</a> request and checking the <code>Last-Modified</code> field and comparing it to the date that the copy in the cache was last modified.  If the <code>Last-Modified</code> is more recent than that in the cache, then you will have to make an HTTP GET request after all and update the cache.  
 											
 											<p>

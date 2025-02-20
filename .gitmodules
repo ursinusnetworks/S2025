@@ -7,3 +7,6 @@
 [submodule "Assignments/HW2_HTTPWebGet/HW2_HTTPWGet"]
 	path = Assignments/HW2_HTTPWebGet/HW2_HTTPWGet
 	url = https://github.com/ursinusnetworks/HW2_HTTPWGet.git
+[submodule "Assignments/HW3_ProxyServer/HW3_ProxyServer"]
+	path = Assignments/HW3_ProxyServer/HW3_ProxyServer
+	url = https://github.com/ursinusnetworks/HW3_ProxyServer.git

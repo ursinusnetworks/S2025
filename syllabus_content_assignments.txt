@@ -40,24 +40,24 @@ Module 8 Due
 Module 6: SMTP and and Module 7: DNS Due Before Class
 
 2025-02-19
-<HR>HW3: Web Proxy in C Out
+<HR><a href = "Assignments/HW3_ProxyServer/index.html">HW3: Web Proxy / Web Cache</a> Out
 
 2025-02-19
 HW3 Submission 1
 
-2025-02-26
-HW3 Submission 2
-
-2025-03-05
-<HR>HW4: TCP Receiver Out
-
-2025-03-05
-Intro To The Network Layer (Kurose/Ross 4.1, 4.2 part 1) Due Before Class
-
-2025-03-05
+2025-02-28
 Kurose/Ross 4.2 part 2, 4.3 part 1 Due Before Class
 
 2025-03-07
+<HR>HW3 Submission 2
+
+2025-03-07
+<HR>HW4: TCP Receiver Out
+
+2025-03-07
+Intro To The Network Layer (Kurose/Ross 4.1, 4.2 part 1) Due Before Class
+
+2025-03-05
 Kurose/Ross 4.3 part 2 Due Before Class
 
 2025-03-17

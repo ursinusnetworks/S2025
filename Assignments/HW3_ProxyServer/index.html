@@ -1,0 +1,361 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<!-- Header !-->
+	<head>
+		<title>Ursinus CS 475: Computer Networks, Spring 2025</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../assets/css/ie8.css" /><![endif]-->
+        <style>
+        .image_off, #home:hover .image_on{
+           display:none
+        }
+        .image_on, #home:hover .image_off{
+           display:block
+        }
+        </style>
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="../../index.html" class="logo"><strong>Ursinus CS 475: Computer Networks, Spring 2025</strong></a>
+								</header>
+<!-- End Header !-->
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+                                        <h2>Homework 3: Proxy Server / Web Cache (50 Points)</h2>
+										<h3><a href = "https://www.ctralie.com">Chris Tralie</a></h3>
+									</header>
+
+									<div id="page-content">
+
+										<ul>
+											<li><a href = "#overview">Description / Overview</a></li>
+											<li><a href = "#gettingstarted">Getting Started / What To Submit</a></li>
+											<li><a href = "#basicproxy">Part 1: Create A Basic Proxy Server (25 Points)</a>
+											<ul>
+												<li><a href = "#firefox">For Fun: Connecting Firefox To Your Server</a></li>
+											</ul>
+											</li>
+											<li><a href = "#part2">Part 2: Filtering/Caching (25 Points)</a>
+											<ul>
+												<li><a href = "#error">Part 2a: Error Messages (5 Points)</a></li>
+												<li><a href = "#regex">Part 2b: Enforcing RegEx Block Patterns (5 Points)</a></li>
+												<li><a href = "#cache">Part 2c: Basic Web Cache (15 Points)</a></li>
+											</ul>
+											</li>
+											<li><a href = "#extracredit">Extra Credit</a></li>
+											</ul>
+
+                                        <p>
+                                            <h3><a name = "objectives">Learning Objectives</a></h3>
+                                            <ul>
+												<li>
+													Implement internet communication using sockets in C
+												</li>
+												<li>
+													Manage multiple clients using multithreaded programming paradigms (e.g. threads, mutexes)
+												</li>
+												<li>
+													Implement basic filtering of web content
+												</li>
+												<li>
+													Implement a basic web cache
+												</li>
+                                            </ul>
+										</p>
+										
+
+										<h3><a name = "overview">Description / Overview</a></h3>
+										<p>
+											We saw in <a href = "../HW2_HTTPWebGet/">homework 2</a> how to craft HTTP requests and receive HTTP responses as a web client, as shown in the block diagram below:
+										</p>
+										<img src = "OrdinaryRequest.svg" width="60%">
+										<p>
+											We're now going to create something called a <b>proxy server</b>, which acts as a middleman between an HTTP client request and an HTTP server; that is, instead of sending a request directly to a server, a client sends a request to the proxy server, which makes the request to the server on behalf of the client, as show in the block diagram below:
+										</p>
+
+										<img src = "ProxyRequest.svg" width="80%">
+
+										<p>
+											This enables the following important applications:
+										</p>
+										<ul>
+											<li><b>Privacy / bypassing blocked content</b>: If a client would be blocked from accessing content from a particular server, but it can connect to a proxy that is able to make the request, then the client can suddenly get service to the blocked content.  The proxy can also mask the client's identity.</li>
+											<li><b>Blocking content</b>: On the other side of the spectrum, a proxy server can modify HTTP responses from the server or block them entirely, acting itself as a web filter.</li>
+											<li><b>Web caching</b>: A proxy server can maintain a cache of requests and their associated responses, which can cut down on lag time in getting a response to a client, particularly if the proxy server is geographically closer to the client than the website server is to the client.</li>
+										</ul>
+										<p>
+											Once students have implemented a basic proxy server, they will explore simplified version of latter two applications in the final part of this assignment.
+										</p>
+
+										<h4><a name = "gettingstarted">Getting Started / What To Submit</a></h4>
+										<p>
+											You can obtain the starter code for this assignment by using git:
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											git clone https://github.com/ursinusnetworks/HW3_ProxyServer.git
+											#
+										</script> 
+
+										<p>
+											You will be editing the file <code>server.c</code>, which is the only file you will submit to canvas.  You can build with <code>make</code> and run as <code>/server</code>.  
+										</p>
+										<p>
+											You should also have a look at <code>http.h</code>, <code>util.h</code>, and <code>arraylist.h</code> to see what provided methods are available to you.  This will save you time and prevent you from having to reinvent the wheel.
+										</p>
+
+
+										<HR>
+										<h2>Programming Tasks</h2>
+
+										<p>
+											Below I'll walk you through an implementation of the proxy server.  <b>Be sure to test small chunks of code very often!</b>  You may also want to use the file <code>test.c</code> to test small C code snippet ideas in a simpler setting than the server/client threads.
+										</p>
+
+										<h3><a name = "basicproxy">Part 1: Create A Basic Proxy Server (25 Points)</a></h3>
+										<p>
+											In this section, you will create a <b>multithreaded</b> proxy server that is fully functional, to the point where it can make <a href = "../HW2_HTTPWebGet/">homework 2</a>-style command line HTTP GET requests through the server, and it can even display HTTP web pages <a href = "firefox">in a web browser</a> if the web browser's proxy points to it.
+										</p>
+
+										<h4>Your Task</h4>
+										<p>
+											Fill in code in <code>server.c</code> to establish a multithreaded proxy server.  For each incoming client, perform the following sequence of steps:
+											
+											<ol>
+												<li>
+													Read the HTTP request into a buffer, as you would have in <a href = "../HW2_HTTPWebGet/">homework 2</a>
+												</li>
+												<li>
+													With the help of <a href = "#httpheader">the HTTPHeader class</a>, modify the request to use HTTP 1.0, and ensure that there is a <code>Connection: close</code> field
+												</li>
+												<li>
+													Send the modified request off to the server and receive the response into a buffer
+												</li>
+												<li>
+													Send the response back to the client and close the connection
+												</li>
+											</ol>
+										</p>
+
+										<h4>Testing</h4>
+										<p>
+											I've setup a client in the file <code>tester.c</code> for you to make it easy to test your proxy server (though you should also try it out for fun <a href = "#firefox">with firefox</a> once you get past the basics).  This client will send out HTTP requests that are stored in files that you can modify.  I've already provided a number of test cases in the <code>tests/</code> folder in the repository.  For instance, if you run
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											./tester --pathget tests/ctralie.txt --pathout out.txt
+										</script> 
+
+										<p>
+											This will make a request to your proxy server to retrieve <code>index.html</code> on <code>http://www.ctralie.com</code>, and it will save the entire HTTP response (including the HTTP header!) that your server sends back to a file called <code>out.html</code>.
+										</p>
+
+										<h4>Hints/Tips</h4>
+										<ul>
+											<li>
+												Have a look at this <a href = "https://github.com/ursinusnetworks/Chatter/blob/main/simpleserver.c">simple but fully functional example</a> of how to create a multithreaded socket server in C.  Feel free to use some of this code as a template for your proxy server (though you will have to modify it quite a bit).
+											</li>
+											<li>
+												Good encapsulation is key here to keep your code organized and easy to debug, so split your code up into small methods that do specific tasks, and test the heck out of each one individually.  For instance, you can reuse a good chunk of your code from <a href = "../HW2_HTTPWebGet/">homework 2</a> to do the <code>GET</code> requests, but you should probably put that in its own method.
+											</li>
+											<li>
+												<a name = "httpheader">HTTP Header</a>: Take advantage of the <code>HTTPHeader</code> class (see <code><a href = "https://github.com/ursinusnetworks/HW3_ProxyServer/blob/main/http.h">HTTPHeader.h</a></code>) to parse and modify HTTP requests, in conjunction with <code>ArrayList</code> buffers.  This will make your life a lot easier.  Have a look at example usage in <code>httpheadertest.c</code>.
+											</li>
+										</ul>
+
+
+										<h3><a name = "firefox">For Fun: Connecting Firefox To Your Server</a></h3>
+										<p>
+											You can tell firefox on your computer to route HTTP traffic through your server.  First, search for the word "proxy" in settings:
+										</p>
+										<img src = "proxy1.png" width="60%">
+										<p>
+											Then, check off "manual proxy configuration" and under "HTTP proxy" put in <code>127.0.0.1</code> for your IP address, as well as the appropriate port:
+										</p>
+										<img src = "proxy2.png" width="75%">
+
+										<p>
+											When you visit a page, <b>be sure to put in <code>http://</code> explicitly instead of https://</b>; otherwise, most pages these days will default to encrypted https.  For example, you need to explicitly type in <a href = "http://www.ctralie.com">http://www.ctralie.com</a> for HTTP traffic from my web site to hit your proxy server.
+										</p>
+
+										<p>
+											Of course, you can also expose your proxy server to the web and route traffic through it remotely if port forwarding, etc is configured on your router.
+										</p>
+
+										
+										<HR>
+										<h3><a name = "part2">Part 2: Filtering/Caching (25 Points)</a></h3>
+										<p>
+											In this section, you will expand the robustness and specific options of the proxy server in several ways
+										</p>
+
+										<h3><a name = "error">Part 2a: Error Messages (5 Points)</a></h3>
+										<p>
+											<b>Your Task:</b> To make your proxy server more user friendly, handle the following errors:
+										</p>
+										<ul>
+											<li>
+												If there are any errors opening sockets or receiving information, send back an Error 500 "Server Error" response
+											</li>
+											<li>
+												If the request includes some action other than <code>GET</code>, send back a 501 "Not Implemented" response
+											</li>
+											<li>
+												If there is an error parsing the HTTP request, send back an error 400 "Bad Request" response
+											</li>
+										</ul>
+
+										<h3><a name = "regex">Part 2b: Enforcing RegEx Block Patterns (5 Points)</a></h3>
+										<p>
+											<b>Your Task:</b> Before sending out a response, check to see if the <code>Content-Type</code> is <code>text/html</code>.  If so, scan the body for any matches of the regular expression contained in the <code>blockpattern</code> string in the command line arguments.  If there is a match, then send back a 401 "Unauthorized" response.
+										</p>
+										<p>
+											<b>Hint: </b> Have a look at the documentation at <a href = "https://www.gnu.org/software/libc/manual/html_node/Regular-Expressions.html">this link</a> to see how to evaluation regular expressions in C.
+										</p>
+
+										<h3><a name = "cache">Part 2c: Basic Web Cache (15 Points)</a></h3>
+										<p>
+											In this part of the assignment, we will maintain copies of files that the proxy server has already retrieved so that it doesn't have to make the same <code>GET</code> requests more than once, which can significantly reduce internet traffic.  We'll ignore timestamps and time to live, though you can tackle this in <a href = "#extracredit">extra credit</a> if you'd like.
+										</p>
+										<h4>Your Task:</h4>
+										<p>
+											For each <code>&lt;host&gt;:&lt;path&gt;</code> request, create an <a href = "https://www.md5hashgenerator.com/">md5 hash</a> of a string of the form <code>"&lt;host&gt;:&lt;path&gt;"</code> (An md5 hash is a function from an arbitrary-length string to a 16-byte (32 hex digit) string).  Before you make an HTTP request, check to see if a file of the form <code>"cache/&lt;md5 hash code&gt;"</code> exists.  For example, the response for the page <code>/index.html</code> at host <code>www.ctralie.com</code> would be cached to the file <code>cache/976c6e21dd0e8d89c6236ac9d6771a1b</code>.  If this cache file exists, bypass the HTTP request/response from the host and instead send back the contents of this cache file to the client.  Otherwise, make the HTTP request/response as normal, but <b>be sure to save the response to the cache file for future requests</b>.
+										</p>
+										<p>
+											<b>NOTE:</b> Some hashes may collide, but you can neglect that for this assignment.
+										</p>
+										<h4>Hints</h4>
+										<ul>
+											<li>Have a look at <code>test.c</code> to see an example of how to compute md5 hashes of strings</li>
+											<li>
+												If you query the same file more than once while your server is running, be sure that it hits the cache every time after the first request.  This can even work across different runs of the server since they're stored in files external to the server's virtual memory session.
+											</li>
+											<li>
+												For fun, if you use the server <a href = "#firefox">with firefox</a>, try visiting several pages that are linked to each other, each with hard refresh (<code>CTRL+SHIFT+R</code>).  This should load all of the files on that page from scratch and cache them on your server.  Then, go into airplane mode and clear your web browser's cache.  You should still be able to visit all of the pages you just visited!
+											</li>
+										</ul>
+
+
+										<HR>
+										<h3><a name = "extracredit">Extra Credit</a></h3>
+										<p>
+											There are a few things you can do to spice this up even more:
+										</p>
+										<ul>
+											<li>(+2 points) Check to see if the cached copy is stale before using the cache.  You can do this by sending a lightweight <a href = "https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/HEAD">HTTP HEAD</a> request and checking the <code>Last-Modified</code> field and comparing it to the date that the copy in the cache was last modified.  If the <code>Last-Modified</code> is more recent than that in the cache, then you will have to make an HTTP GET request after all and update the cache.  
+											
+											<p>
+												<b>Hints: </b> The <code>parseDate</code> method in <code>util.h</code> should help you.  I'd also recommend using the <code>HashMap</code> class to quickly look up host:path/date pairs (alternatively, you can parse parts of the cached files to find this info).
+											</p>
+											</li>
+											<li>
+												<p>
+													(+2 points) Sometimes a plaintext HTTP response comes back in a compressed format like gzip, which will cause the block filtering step to fail.  To address this, figure out how to ungzip the text/html data before running the blocked regular expression
+												</p>
+											</li>
+										</ul>
+
+
+
+
+                                    
+                                </div>
+						</div>
+					</div>
+
+					<!--LaTeX in Javascript!-->
+					<script src="../../../../jsMath/easy/load.js"></script>
+					<!--Syntax highlighting in Javascript!-->
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shCore.js"></script>
+					<script type="text/javascript" src="../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+                    <script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushXml.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+					<link type="text/css" rel="stylesheet" href="../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+					<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+                                        <li>
+											<span class="opener">General</span>
+											<ul>
+												<li><a href = "../../index.html#overview">Overview</a></li>
+												<li><a href = "../../index.html#logistics">Technology Logistics</a></li>
+												<li><a href = "../../index.html#deliverables">Deliverables</a>
+													<ul>
+														<li><a href = "../../index.html#debugging">Debugging Principles</a></li>
+													</ul>
+												</li>
+												<li><a href = "../../index.html#grading">Grading</a>
+													<ul>
+														<li><a href = "../../index.html#deadlines">Deadlines Policy</a></li>
+													</ul>
+												</li>
+												<li><a href = "../../index.html#environment">Classroom Environment</a></li>
+												<li><a href = "../../index.html#participation">Participation</a></li>
+												<li><a href = "../../index.html#collaboration">Collaboration Policy</a></li>
+												<li><a href = "../../index.html#other">Other Resources / Policies</a></li>
+											</ul>
+										</li>
+										<li><a href = "../../Software/index.html">Software</a></li>
+										<li><a href = "../../index.html#schedule">Schedule</a></li>
+										<li>
+											<span class="opener">Assignments</span>
+											<ul>
+												<li><a href = "../../Assignments/HW0_Software/index.html">HW0: Software Test / Wireshark / Mininet Intro</a></li>
+												<li><a href = "../../Assignments/HW1_BearCrawl/index.html">HW1: "Bear Crawl" Web Crawler</a></li>
+												<li><a href = "../../Assignments/HW2_HTTPWebGet/index.html">HW2: HTTP WebGet</a></li>
+												<li><a href = "../../Assignments/HW3_ProxyServer/index.html">HW3: Proxy Server / Web Cache</a></li>
+											</ul>
+										</li>
+										<li><a href = "https://docs.google.com/forms/d/e/1FAIpQLSfwkO_w_Ku-n2Ou6J7pF--i0C2-a20Ov9wf690T6cYx80ASsw/viewform?usp=sf_link">Anonymous Question</a></li>
+									</ul>
+								</nav>
+
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; <a href = "http://www.ctralie.com">Christopher J. Tralie</a>. All rights reserved.  Contact chris.tralie@gmail.com. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+<!-- End Sidebar !-->
+
+<!-- Scripts -->
+			<script src="../../assets/js/jquery.min.js"></script>
+			<script src="../../assets/js/skel.min.js"></script>
+			<script src="../../assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../assets/js/main.js"></script>
+<!-- End Scripts -->
+	</

@@ -112,7 +112,7 @@
 											You can obtain the starter code for this assignment by using git:
 										</p>
 										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
-											git clone https://github.com/ursinusnetworks/HW3_ProxyServer.git
+											git clone --recursive https://github.com/ursinusnetworks/HW3_ProxyServer.git
 											#
 										</script> 
 
@@ -166,7 +166,7 @@
 										</script> 
 
 										<p>
-											This will make a request to your proxy server to retrieve <code>index.html</code> on <code>http://www.ctralie.com</code>, and it will save the entire HTTP response (including the HTTP header!) that your server sends back to a file called <code>out.html</code>.
+											This will make a request to your proxy server to retrieve <code>index.html</code> on <code>http://www.ctralie.com</code>, and it will save the entire HTTP response (including the HTTP header!) that your server sends back to a file called <code>out.txt</code>.
 										</p>
 
 										<h4>Hints/Tips</h4>
@@ -217,7 +217,7 @@
 												If there are any errors opening sockets or receiving information, send back an Error 500 "Server Error" response
 											</li>
 											<li>
-												If the request includes some action other than <code>GET</code>, send back a 501 "Not Implemented" response
+												If the request includes some action other than <code>GET</code>, send back a 501 "Not Implemented" response.  You can test this one by using the request <code>tests/put.txt</code> provided with the code.
 											</li>
 											<li>
 												If there is an error parsing the HTTP request, send back an error 400 "Bad Request" response

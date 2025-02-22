@@ -59,7 +59,11 @@ Transport Protocols, UDP / Multiplexing
 
 <ul><li><a href = "https://book.systemsapproach.org/e2e/udp.html">Peterson/Davie 5.1</a></li><li><a href = "https://datatracker.ietf.org/doc/html/rfc768">RFC 768 for UDP</a></li></ul>
 LECTURE
-Reliable Transport Algorithms
+Begin Reliable Transport Algorithms
+
+
+LECTURE
+Continue Reliable Transport Algorithms
 
 
 LECTURE
@@ -67,11 +71,7 @@ Reliable Transport: TCP
 
 <ul><li><a href = "https://book.systemsapproach.org/e2e/tcp.html">Peterson/Davie 5.2</a></li></ul>
 LECTURE
-TCP Sliding Window Protocols
-
-
-LECTURE
-Principles of Congestion Control
+Continue TCP, Principles of Congestion Control
 
 <ul><li><a href = "https://www.youtube.com/watch?v=edUN8OabWCQ">Richard Clegg Computerphile: The 1986 Internet Congestion Collapse</a></li><li><a href = "https://dl.acm.org/doi/10.1145/52325.52356">Original Van Jacobson Paper on Congestion Avoidance And Control</a></li></ul>
 LECTURE

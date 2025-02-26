@@ -69,7 +69,7 @@ Continue Reliable Transport Algorithms
 LECTURE
 Reliable Transport: TCP
 
-<ul><li><a href = "https://book.systemsapproach.org/e2e/tcp.html">Peterson/Davie 5.2</a></li></ul>
+<ul><li><a href = "https://book.systemsapproach.org/e2e/tcp.html">Peterson/Davie 5.2</a></li><li><a href = "https://www.ietf.org/rfc/rfc793.txt">RFC 793 for TCP</a></li></ul>
 LECTURE
 Continue TCP, Principles of Congestion Control
 

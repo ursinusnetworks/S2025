@@ -48,20 +48,20 @@ Module 9: Reliable Transport Protocols Due
 2025-02-26
 HW3 Submission 1
 
-2025-02-28
+2025-03-03
 Kurose/Ross 4.2 part 2, 4.3 part 1 Due Before Class
 
 2025-03-07
 <HR>HW3 Submission 2
 
 2025-03-07
-<HR>HW4: TCP Receiver Out
-
-2025-03-07
 Intro To The Network Layer (Kurose/Ross 4.1, 4.2 part 1) Due Before Class
 
 2025-03-05
-Kurose/Ross 4.3 part 2 Due Before Class
+HW4: TCP Receiver Out
+
+2025-03-17
+<HR>Kurose/Ross 4.3 part 2 Due Before Class
 
 2025-03-17
 Kurose/Ross 5.6 (ICMP) Due Before Class

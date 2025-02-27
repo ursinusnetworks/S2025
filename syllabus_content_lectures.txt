@@ -35,9 +35,9 @@ Designing Application Layer Protocols<ul><li>Begin <a href = "ClassExercises/App
 
 
 LECTURE
-Multithreaded Socket Programming<ul><li>Continue <a href = "ClassExercises/ApplicationLayer/chatter.html">Instant Message Program</a></li></li></ul>
+Multithreaded Socket Programming<ul><li>Continue <a href = "ClassExercises/ApplicationLayer/chatter.html">Instant Message Program</a></li></ul>
 
-<ul><li><a href = "https://hpc-tutorials.llnl.gov/posix/">LLNL Notes on POSIX Threads in C</a></li></ul>
+<ul><li><a href = "https://hpc-tutorials.llnl.gov/posix/">LLNL Notes on POSIX Threads in C</a></li><li><a href = "https://www.youtube.com/watch?v=p4ya8fLPmVM">My video on multithreaded socket programming</li></ul>
 LECTURE
 Multiprocess Socket Programming, Web Proxy / CDN Concept<ul><li>Finish <a href = "ClassExercises/ApplicationLayer/chatter.html">Instant Message Program</a></li></li></ul>
 

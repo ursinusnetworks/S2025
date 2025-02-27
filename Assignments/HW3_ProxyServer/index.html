@@ -172,7 +172,9 @@
 										<h4>Hints/Tips</h4>
 										<ul>
 											<li>
-												Have a look at this <a href = "https://github.com/ursinusnetworks/Chatter/blob/main/simpleserver.c">simple but fully functional example</a> of how to create a multithreaded socket server in C.  Feel free to use some of this code as a template for your proxy server (though you will have to modify it quite a bit).
+												Have a look at this <a href = "https://github.com/ursinusnetworks/Chatter/blob/main/simpleserver.c">simple but fully functional example</a> of how to create a multithreaded socket server in C.  Feel free to use some of this code as a template for your proxy server (though you will have to modify it quite a bit).  You might also check out this video I made on multi-threaded servers in C:
+
+												<iframe width="560" height="315" src="https://www.youtube.com/embed/p4ya8fLPmVM?si=VUzshwhH2B1dSV0f" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 											</li>
 											<li>
 												Good encapsulation is key here to keep your code organized and easy to debug, so split your code up into small methods that do specific tasks, and test the heck out of each one individually.  For instance, you can reuse a good chunk of your code from <a href = "../HW2_HTTPWebGet/">homework 2</a> to do the <code>GET</code> requests, but you should probably put that in its own method.

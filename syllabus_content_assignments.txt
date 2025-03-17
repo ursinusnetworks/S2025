@@ -55,37 +55,31 @@ Kurose/Ross 4.2 part 2, 4.3 part 1 Due Before Class
 <HR>HW3 Submission 2
 
 2025-03-07
-Intro To The Network Layer (Kurose/Ross 4.1, 4.2 part 1) Due Before Class
-
-2025-03-05
-HW4: TCP Receiver Out
-
-2025-03-17
-<HR>Kurose/Ross 4.3 part 2 Due Before Class
+HW4: DNS Queries Out
 
 2025-03-17
 Kurose/Ross 5.6 (ICMP) Due Before Class
 
-2025-03-19
+2025-03-31
 HW4 Part 1 Due
 
-2025-03-21
-HW4 Part 2 Due
+2025-03-24
+<HR>HW4 Part 2 Due
 
-2025-03-28
-<HR>HW5: Mini Router Out
+2025-03-31
+<HR>HW5: ICMP And Geographic Mapping Out
 
-2025-03-28
-HW5 Part 1 Due
+2025-03-31
+HW5 Due
 
-2025-04-04
-HW5 Part 2 Due
+2025-04-09
+<HR>HW6: Simple Router Out
+
+2025-04-09
+HW6 Part 1 Due
 
 2025-04-16
-<HR>HW6: Beeps And Boops: The Audio Physical Layer (Python) Out
-
-2025-04-16
-HW6 Due
+HW6 Part 2 Due
 
 2025-04-25
 <HR>HW7: Student Cybersecurity Presentations (NO DROP) Out

@@ -10,3 +10,6 @@
 [submodule "Assignments/HW3_ProxyServer/HW3_ProxyServer"]
 	path = Assignments/HW3_ProxyServer/HW3_ProxyServer
 	url = https://github.com/ursinusnetworks/HW3_ProxyServer.git
+[submodule "Assignments/HW4_DNSQuery/HW4_DNSQuery"]
+	path = Assignments/HW4_DNSQuery/HW4_DNSQuery
+	url = https://github.com/ursinusnetworks/HW4_DNSQuery.git

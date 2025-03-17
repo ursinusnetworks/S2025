@@ -91,17 +91,13 @@ IPv4 Addressing And Subnets
 
 
 LECTURE
-IP with wireshark
+Python Sockets, The IP Header
 
 
 LECTURE
 IP Multiplexing with Network Address Translation (NAT)
 
 
-LECTURE
-Intermezzo: Raw Sockets, ICMP
-
-<ul><li><a href = "https://www.opensourceforu.com/2015/03/a-guide-to-using-raw-sockets/">A guide to using raw sockets</a></li><li><a href = "https://book.systemsapproach.org/internetworking/basic-ip.html#error-reporting-icmp">Peterson/Davie 3.3.8</a></li></ul>
 LECTURE
 IPv6
 
@@ -118,6 +114,10 @@ LECTURE
 Distance Vector Algorithms
 
 
+LECTURE
+Raw Sockets, ICMP
+
+<ul><li><a href = "https://www.opensourceforu.com/2015/03/a-guide-to-using-raw-sockets/">A guide to using raw sockets</a></li><li><a href = "https://book.systemsapproach.org/internetworking/basic-ip.html#error-reporting-icmp">Peterson/Davie 3.3.8</a></li></ul>
 LECTURE
 Routing at Scale: Border Gateway Protocol (BGP)
 

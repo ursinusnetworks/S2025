@@ -55,7 +55,7 @@ Kurose/Ross 4.2 part 2, 4.3 part 1 Due Before Class
 <HR>HW3 Submission 2
 
 2025-03-07
-HW4: DNS Queries Out
+<a href = "Assignments/HW4_DNSQuery">HW4: DNS Queries</a> Out
 
 2025-03-17
 Kurose/Ross 5.6 (ICMP) Due Before Class

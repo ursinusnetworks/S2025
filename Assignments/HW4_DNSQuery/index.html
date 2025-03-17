@@ -1,0 +1,236 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<!-- Header !-->
+	<head>
+		<title>Ursinus CS 475: Computer Networks, Spring 2025</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../assets/css/ie8.css" /><![endif]-->
+        <style>
+        .image_off, #home:hover .image_on{
+           display:none
+        }
+        .image_on, #home:hover .image_off{
+           display:block
+        }
+        </style>
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="../../index.html" class="logo"><strong>Ursinus CS 475: Computer Networks, Spring 2025</strong></a>
+								</header>
+<!-- End Header !-->
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+                                        <h2>Homework 4: DNS Queries in Python</h2>
+										<h3><a href = "https://www.ctralie.com">Chris Tralie</a></h3>
+									</header>
+
+									<div id="page-content">
+
+                                        <p>
+                                            <h3><a name = "objectives">Learning Objectives</a></h3>
+                                            <ul>
+												<li>
+													Implement internet communication using sockets in python
+												</li>
+												<li>
+													Send and receive binary data over UDP sockets according to protocol specifications
+												</li>
+												<li>
+													Implement iterative DNS queries to resolve IP addresses from host strings
+												</li>
+                                            </ul>
+										</p>
+										
+
+										<h3><a name = "overview">Description / Overview</a></h3>
+										<p>
+											Up to this point, we have taken it <a href = "https://man7.org/linux/man-pages/man3/getaddrinfo.3.html"><code>getaddrinfo</code></a> for granted, allowing us to determine IP addresses for hosts such as <a href = "www.ctralie.com">www.ctralie.com</a>.  In this assignment, we will manually implement a Domain Name System (DNS) protocol query and response to determine the IP address of some host, which is what happens under the hood in <code>getaddrinfo</code>.  <b>Students must not use <code>getaddrinfo</code> at any point in this assignment!</b>
+										</p>
+										<p>
+											By default, we'll use the DNS server <code>8.8.8.8</code> <a href = "https://developers.google.com/speed/public-dns">from google</a>, which is capable of doing recursive queries, so it is possible to get the IP address after one query/response.  But, as you'll recall from <a href = "https://www.youtube.com/watch?v=6lRcMh5Yphg">Kurose 2.4</a>, iterative queries are more common, and students will implement these in the second part fo the assignment.
+										</p>
+										<p>
+											<b>NOTE:</b> Now that students have had <a href = "../HW2_HTTPWebGet/">enough</a> <a href = "../HW3_ProxyServer/">experience</a> coding socket programs in C to understand what's really going on, we're ready to start using sockets in python!  This will make things significantly easier to manage, as error handling is much more seamless, and there are some convenience methods (such as <a href = "https://docs.python.org/3/library/socket.html#socket.socket.sendall"><code>sendall</code></a>) automatically handle some of the nitty gritty things we had to do manually in C.  As such, this assignment will serve as a warmup to socket programming in python, which we will use for more advanced topics in the network layer in subsequent assignments.
+										</p>
+										<h4><a name = "gettingstarted">Getting Started / What To Submit</a></h4>
+										<p>
+											You can obtain the starter code for this assignment by using git:
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											git clone https://github.com/ursinusnetworks/HW4_DNSQuery.git
+											#
+										</script> 
+
+										<p>
+											You will be editing the file <code>dns.py</code>.  This is the only file you need to submit to canvas when you're finished.
+										</p>
+
+										<p>
+											As an example of how to run this program, if you type the following in the terminal
+											<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+												python dns.py --host www.ctralie.com --save_path out.html
+												#
+											</script>
+											then your program should print out the IP addresses <code>['185.199.109.153', '185.199.110.153', '185.199.108.153', '185.199.111.153']</code> and save a valid HTML web page to the file <code>out.html</code>
+										</p>
+
+										<p>
+											Note also that for the second part of the assignment, you will do iterative queries, in which case the following command should give the same answer done differently:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											python dns.py --host www.ctralie.com --recursive False --save_path out.html
+											#
+										</script>
+
+
+										<HR>
+
+
+										<h2><a name = "recursive">Part 1: Recursive DNS Queries</a></h2>
+										<p>
+											In this section, you will request an <code>A</code> record associated to a  particular host by writing binary DNS messages and requesting recursive DNS so that you only need to send one message.  You may want to review how to read/write binary data from a socket in python.  I made a video about this here:
+										</p>
+
+										<iframe width="560" height="315" src="https://www.youtube.com/embed/oDRL6jxAhp4?si=inZo5mnzd61zqU_4&amp;start=265" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+										<p></p>
+
+										<h3>Recursive DNS Request (10 Points)</h3>
+										<p>
+											First, you'll set up and send binary request for a recursive DNS request
+										</p>
+
+										<h4>Your Task</h4>
+										<p>
+											Setup code in <code>dns.py</code> to create a binary message for a DNS request, and send it over UDP port 53 (the port associated to DNS).  Have a look at <a href = "https://datatracker.ietf.org/doc/html/rfc1035#section-4">RFC 1035 second 4</a> to see the binary format that is required for this.  Among other things, you will need to set <code>RD</code> ("recursive desired") flag in the header to true so that you only need to make one query to resolve the IP address.  You will also need to ask one "question" for an A record associated to your host name.
+										</p>
+										<p>
+											TODO: Finish writing up about host name format
+										</p>
+
+										<h3>Parsing DNS Response / Answers (10 Points)</h3>
+										<h4>Your Task</h4>
+										<p>
+											Read back the DNS response, and parse it to find the entries in the "answers" section that contains the IP addresses.  Convert the IP addresses from binary to dot-separated strings and print them out to the console
+										</p>
+
+										<h3>Web Request (5 Points)</h3>
+										<h4>Your Task</h4>
+										<p>
+											Once you have your IP addresses ready, initiate a TCP connection with that IP address over port 80, and make an HTTP 1.0 request for the <code>/</code> page on the host.  Then, save the response to the binary file specified in <code>save_path</code>.
+										</p>
+										<p>
+											This video below may help, but again, <b>do not use getaddrinfo</b>, and <b>don't use the host name when connecting</b>; you must only use the IP you got from the above steps
+										</p>
+										<iframe width="560" height="315" src="https://www.youtube.com/embed/g7ZqUXQqFe8?si=SWEcjd4o9ld34k3U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+										
+										<HR>
+										<h2><a name = "iterative">Part 2: Iterative DNS Queries</a></h3>
+										<p>
+											Coming soon...
+										</p>
+                                    
+                                </div>
+						</div>
+					</div>
+
+					<!--LaTeX in Javascript!-->
+					<script src="../../../../jsMath/easy/load.js"></script>
+					<!--Syntax highlighting in Javascript!-->
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shCore.js"></script>
+					<script type="text/javascript" src="../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+                    <script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushXml.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+					<link type="text/css" rel="stylesheet" href="../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+					<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+                                        <li>
+											<span class="opener">General</span>
+											<ul>
+												<li><a href = "../../index.html#overview">Overview</a></li>
+												<li><a href = "../../index.html#logistics">Technology Logistics</a></li>
+												<li><a href = "../../index.html#deliverables">Deliverables</a>
+													<ul>
+														<li><a href = "../../index.html#debugging">Debugging Principles</a></li>
+													</ul>
+												</li>
+												<li><a href = "../../index.html#grading">Grading</a>
+													<ul>
+														<li><a href = "../../index.html#deadlines">Deadlines Policy</a></li>
+													</ul>
+												</li>
+												<li><a href = "../../index.html#environment">Classroom Environment</a></li>
+												<li><a href = "../../index.html#participation">Participation</a></li>
+												<li><a href = "../../index.html#collaboration">Collaboration Policy</a></li>
+												<li><a href = "../../index.html#other">Other Resources / Policies</a></li>
+											</ul>
+										</li>
+										<li><a href = "../../Software/index.html">Software</a></li>
+										<li><a href = "../../index.html#schedule">Schedule</a></li>
+										<li>
+											<span class="opener">Assignments</span>
+											<ul>
+												<li><a href = "../../Assignments/HW0_Software/index.html">HW0: Software Test / Wireshark / Mininet Intro</a></li>
+												<li><a href = "../../Assignments/HW1_BearCrawl/index.html">HW1: "Bear Crawl" Web Crawler</a></li>
+												<li><a href = "../../Assignments/HW2_HTTPWebGet/index.html">HW2: HTTP WebGet</a></li>
+												<li><a href = "../../Assignments/HW3_ProxyServer/index.html">HW3: Proxy Server / Web Cache</a></li>
+												<li><a href = "../../Assignments/HW4_DNSQuery/index.html">HW4: DNS Queries in Python</a></li>
+											</ul>
+										</li>
+										<li><a href = "https://docs.google.com/forms/d/e/1FAIpQLSfwkO_w_Ku-n2Ou6J7pF--i0C2-a20Ov9wf690T6cYx80ASsw/viewform?usp=sf_link">Anonymous Question</a></li>
+									</ul>
+								</nav>
+
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; <a href = "http://www.ctralie.com">Christopher J. Tralie</a>. All rights reserved.  Contact chris.tralie@gmail.com. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+<!-- End Sidebar !-->
+
+<!-- Scripts -->
+			<script src="../../assets/js/jquery.min.js"></script>
+			<script src="../../assets/js/skel.min.js"></script>
+			<script src="../../assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../assets/js/main.js"></script>
+<!-- End Scripts -->
+	</

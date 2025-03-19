@@ -125,9 +125,46 @@
 										<p>
 											Setup code in <code>dns.py</code> to create a binary message for a DNS request, and send it over UDP port 53 (the port associated to DNS).  Have a look at <a href = "https://datatracker.ietf.org/doc/html/rfc1035#section-4">RFC 1035 second 4</a> to see the binary format that is required for this.  Among other things, you will need to set <code>RD</code> ("recursive desired") flag in the header to true so that you only need to make one query to resolve the IP address.  You will also need to ask one "question" for an A record associated to your host name.
 										</p>
-										<p>
-											TODO: Finish writing up about host name format
-										</p>
+
+										<h4>Hints:</h4>
+
+										<ul>
+											<li>
+												<h4>Python struct packing/unpacking</h4>
+												<p>
+													Look at the documentation for python struct at <a href = "https://docs.python.org/3/library/struct.html">this link</a>.
+												</p>
+											</li>
+											<li>
+												<h4>Wireshark</h4>
+												<p>Wireshark is your best friend here when you're working to understand the DNS protocol.  I'd highly recommend sending a dns packet out with nslookup and capturing it:
+
+
+													<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+														nslookup www.ctralie.com 8.8.8.8
+														#
+													</script>
+		
+													<img src = "wireshark.png" width="100%">
+			
+		
+													
+													
+													then look in wireshark to match the binary data with what the RFC says should be in it</p>
+											</li>
+											<li>
+												<p>
+													<h4>URL string encoding</h4> Note that the format of a URL string is very specific with DNS.  It encodes each string separately after splitting on dots.  As an example, "www.ctralie.com" would be split into <code>["www", "ctralie", "com"]</code>.  Then we say the length of each component in one byte, followed by the string of each component.  So we have 3, www, 7, ctralie, 3, com.  And finally, it ends with a 0.
+												</p>
+		
+												<img src = "stringformat.png" width="80%">
+											</li>
+										</ul>
+
+
+										
+
+										
 
 										<h3>Parsing DNS Response / Answers (10 Points)</h3>
 										<h4>Your Task</h4>

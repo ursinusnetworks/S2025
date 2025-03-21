@@ -136,6 +136,21 @@
 												</p>
 											</li>
 											<li>
+												<h4>Sending/receiving chunks</h4>
+												<p>
+													When you send the message, be sure to send it all in one chunk (as opposed to the examples we had in class where we were sending the header and body as separate messages).  
+												</p>
+												<p>
+													When you receive, you can receive in a single chunk.  Asking for 4096 bytes is more than sufficient.
+												</p>
+											</li>
+											<li>
+												<h4>Constants</h4>
+												<p>
+													I already defined the constants that you'll need in the DNSHeader class, but just a note that they are also listed in the RFC in <a href = "https://datatracker.ietf.org/doc/html/rfc1035#section-3.2.2">section 3.2</a>
+												</p>
+											</li>
+											<li>
 												<h4>Wireshark</h4>
 												<p>Wireshark is your best friend here when you're working to understand the DNS protocol.  I'd highly recommend sending a dns packet out with nslookup and capturing it:
 

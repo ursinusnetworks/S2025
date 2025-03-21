@@ -58,30 +58,36 @@ Kurose/Ross 4.2 part 2, 4.3 part 1 Due Before Class
 <a href = "Assignments/HW4_DNSQuery">HW4: DNS Queries</a> Out
 
 2025-03-17
-Kurose/Ross 5.6 (ICMP) Due Before Class
-
-2025-03-31
 HW4 Part 1 Due
 
 2025-03-24
-<HR>HW4 Part 2 Due
+HW4 Part 2 Due
 
 2025-03-31
-<HR>HW5: ICMP And Geographic Mapping Out
+HW5: IP and NAT in Wireshark Out
 
 2025-03-31
 HW5 Due
 
-2025-04-09
-<HR>HW6: Simple Router Out
+2025-04-03
+Kurose/Ross 5.6 (ICMP) Due Before Class
 
-2025-04-09
-HW6 Part 1 Due
+2025-04-02
+<HR>HW6: ICMP And Geographic Mapping Out
 
-2025-04-16
-HW6 Part 2 Due
+2025-04-02
+HW6 Due
 
-2025-04-25
-<HR>HW7: Student Cybersecurity Presentations (NO DROP) Out
+2025-04-11
+<HR>HW7: Simple Router Out
+
+2025-04-11
+HW7 Part 1 Due
+
+2025-04-21
+HW7 Part 2 Due
+
+2025-04-30
+<HR>HW8: Student Cybersecurity Presentations (NO DROP) Out
 
 2025-04-25

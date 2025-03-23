@@ -99,11 +99,11 @@ IPv6
 
 
 LECTURE
-Continue NAT, Session Traversal Utilities for NAT (STUN)
+IP Multiplexing with Network Address Translation (NAT)
 
 
 LECTURE
-IP Multiplexing with Network Address Translation (NAT)
+Continue NAT, Session Traversal Utilities for NAT (STUN)
 
 
 LECTURE

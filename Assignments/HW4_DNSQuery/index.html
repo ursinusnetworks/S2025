@@ -183,7 +183,7 @@
 														#
 													</script>
 		
-													<img src = "wireshark.png" width="80%">
+													<img src = "wireshark.png" width="100%">
 			
 		
 													
@@ -281,7 +281,7 @@
 										<p>
 											As an example, consider this response for an A name record request for <code>images.google.com</code>.  The first answer gives a CNAME <code>images.l.google.com</code>.  This can be compressed, since it ends in <code>google.com</code>, which occurred previously in the response.  The wireshark dump below shows what's going on:
 										</p>
-										<img src = "googleimages.png" width="70%">
+										<img src = "googleimages.png" width="100%">
 										<p>
 											First we have a string <code>google</code> of length <code>6</code>, followed by the string <code>l</code> of length <code>1</code>.  Finally, we have a pointer flag <code>c0</code> to the location <code>0x13</code> (19 decimal).  If we follow this, it will take us to <code>google.com</code> in the questions section (note that it's jumped past the <code>images.</code> part in the question since we already defined that).
 										</p>
@@ -310,9 +310,21 @@
 										<p>
 											Augment your code so that if <code>opt.recursive</code> is False, you perform an iterative DNS query instead of a recursive one.  You can assume that the DNS server provided in the command line is a root level DNS server.  To get such a server, you can call <code>dig</code>, as I show at <a href = "https://youtu.be/sRbFRphQL3Q?feature=shared&t=1250" target="_blank">20:50 in my DNS video</a>
 										</p>
+										<p>
+											As an example, if you say
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											python dns.py --host ctralie.com --no-recursive --dns_server 192.112.36.4
+										</script>
+
+										<p>
+											Then you should get eventually get to 4 A records with the IP addresses <code>['185.199.111.153', '185.199.109.153', '185.199.108.153', '185.199.110.153']</code>, just as you did with the recursive queries.
+										</p>
+
 
 										<h4>Tips</h4>
 										<ul>
+											<li>Make use of the <code>get_name</code> method you made above!</li>
 											<li>Be sure to set <code>RD</code> (recursion desired) to 0 now!</li>
 										</ul>
 

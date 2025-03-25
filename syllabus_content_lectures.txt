@@ -107,11 +107,7 @@ Continue NAT, Session Traversal Utilities for NAT (STUN)
 
 
 LECTURE
-Introduction To Routing, Link State Algorithms
-
-
-LECTURE
-Continue Link State Algorithms
+The Control Plane, Link State Algorithms
 
 
 LECTURE

@@ -60,34 +60,34 @@ Kurose/Ross 4.2 part 2, 4.3 part 1 Due Before Class
 2025-03-17
 HW4 Part 1 Due
 
-2025-03-24
-HW4 Part 2 Due
+2025-03-26
+<a href = "https://ursinus.instructure.com/courses/19314/quizzes/29923">Module 10: Internet Protocol Review</a> Due
 
-2025-03-31
-HW5: IP and NAT in Wireshark Out
-
-2025-03-31
-HW5 Due
-
-2025-04-03
+2025-03-27
 Kurose/Ross 5.6 (ICMP) Due Before Class
 
+2025-03-31
+HW4 Part 2 Due
+
 2025-04-02
+<HR>HW5: IP and NAT in Wireshark Out
+
+2025-04-02
+HW5 Due
+
+2025-04-07
 <HR>HW6: ICMP And Geographic Mapping Out
 
-2025-04-02
+2025-04-07
 HW6 Due
 
-2025-04-11
+2025-04-14
 <HR>HW7: Simple Router Out
 
-2025-04-11
+2025-04-14
 HW7 Part 1 Due
 
 2025-04-21
 HW7 Part 2 Due
 
 2025-04-30
-<HR>HW8: Student Cybersecurity Presentations (NO DROP) Out
-
-2025-04-25

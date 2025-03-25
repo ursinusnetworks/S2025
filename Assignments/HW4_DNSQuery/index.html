@@ -47,6 +47,28 @@
 
 									<div id="page-content">
 
+										<ul>
+											<li><a href = "#objectives">Learning Objectives</a></li>
+											<li><a href = "#overview">Description / Overview</a></li>
+											<li><a href = "#gettingstarted">Getting Started / What To Submit</a></li>
+											<li><a href = "#recursive">Part 1: Recursive DNS Queries</a>
+											<ul>
+												<li><a href = "#recursiverequest">Recursive DNS Request (10 Points)</a></li>
+												<li><a href = "#recursiveparsing">Parsing DNS Response / Answers (10 Points)</a></li>
+												<li><a href = "#webrequest">Web Request (5 Points)</a></li>
+											</ul>
+											</li>
+											
+											<li><a href = "#iterative">Part 2: Iterative DNS Queries</a>
+												<ul>
+													<li><a href = "#compressedstring">Compressed string parsing (5 Points)</a></li>
+											<li><a href = "#iterativerequest">Iterative DNS Request (20 points)</a></li>
+												</ul>
+											</li>
+											
+										</ul>
+
+
                                         <p>
                                             <h3><a name = "objectives">Learning Objectives</a></h3>
                                             <ul>
@@ -110,13 +132,13 @@
 
 										<h2><a name = "recursive">Part 1: Recursive DNS Queries</a></h2>
 										<p>
-											In this section, you will request an <code>A</code> record associated to a  particular host by writing binary DNS messages and requesting recursive DNS so that you only need to send one message.  You may want to review how to read/write binary data from a socket in python.  I made a video about this here:
+											In this section, you will request an <code>A</code> record associated to a  particular host by writing binary DNS messages and requesting recursive DNS so that you only need to send one message.  You may want to review how to read/write binary data from a socket in python.  I made a video about this here (though note that I use TCP sockets in that video and you'll want to use a UDP socket for this assignment):
 										</p>
 
 										<iframe width="560" height="315" src="https://www.youtube.com/embed/oDRL6jxAhp4?si=inZo5mnzd61zqU_4&amp;start=265" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 										<p></p>
 
-										<h3>Recursive DNS Request (10 Points)</h3>
+										<h3><a name = "recursiverequest">Recursive DNS Request (10 Points)</a></h3>
 										<p>
 											First, you'll set up and send binary request for a recursive DNS request
 										</p>
@@ -153,6 +175,7 @@
 											<li>
 												<h4>Wireshark</h4>
 												<p>Wireshark is your best friend here when you're working to understand the DNS protocol.  I'd highly recommend sending a dns packet out with nslookup and capturing it:
+												</p>
 
 
 													<script type="syntaxhighlighter" class="brush: python"><![CDATA[
@@ -160,11 +183,11 @@
 														#
 													</script>
 		
-													<img src = "wireshark.png" width="100%">
+													<img src = "wireshark.png" width="80%">
 			
 		
 													
-													
+													<p>
 													then look in wireshark to match the binary data with what the RFC says should be in it</p>
 											</li>
 											<li>
@@ -181,7 +204,7 @@
 
 										
 
-										<h3>Parsing DNS Response / Answers (10 Points)</h3>
+										<h3><a name = "recursiveparsing">Parsing DNS Response / Answers (10 Points)</a></h3>
 										<h4>Your Task</h4>
 										<p>
 											Read back the DNS response, and parse it to find the entries in the "answers" section that contains the IP addresses.  Convert the IP addresses from binary to dot-separated strings and print them out to the console
@@ -200,7 +223,7 @@
 										</li>
 										</ul>
 
-										<h3>Web Request (5 Points)</h3>
+										<h3><a name = "webrequest">Web Request (5 Points)</a></h3>
 										<h4>Your Task</h4>
 										<p>
 											Once you have your IP addresses ready, initiate a TCP connection with that IP address over port 80, and make an HTTP 1.0 request for the <code>/</code> page on the host.  Then, save the response to the binary file specified in <code>save_path</code>.
@@ -214,8 +237,87 @@
 										<HR>
 										<h2><a name = "iterative">Part 2: Iterative DNS Queries</a></h3>
 										<p>
-											Coming soon...
+											Now that you've gotten a recursive query to work, you'll be implementing your own version of so-called "iterative DNS queries."  The process is as follows for an A record:
+											
+											<ol>
+												<li>
+													Make an A request at a root level DNS server, where you can find the IP address of an appropriate "top level domain" (TLD) server (e.g. .com, .org, .edu, etc)
+												</li>
+												<li>
+													Make the same request at the TLD, which returns an authoritative DNS server
+												</li>
+												<li>
+													Make the same request at the authoritative server.  This will either return an A record that you're looking for, or a CNAME ("canonical name") record.  For instance, the canonical name for <code>www.ursinus.edu</code> is actually <code>ursinus-prod.livewhale.net</code>.  If it's a CNAME record, then go back to step 1 and repeat the process, asking for an A record for this CNAME.
+												</li>
+											</ol> 
 										</p>
+
+										<p>
+											For more info on this process, jump to <a href = "https://youtu.be/sRbFRphQL3Q?si=zWKpUr7IS6kfhKOn&t=1155" target="_blank">19:15</a> in the video below.
+										</p>
+
+										<iframe width="560" height="315" src="https://www.youtube.com/embed/sRbFRphQL3Q?si=uDwwM4RspZ-tt4AG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+										<p>
+											Below are two tasks to walk you through this:
+										</p>
+										<p>
+
+										</p>
+
+										<h3><a name = "compressedstring">Compressed string parsing (5 Points)</a></h3>
+										<p>
+											As discussed in <a href = "https://datatracker.ietf.org/doc/html/rfc1035#section-4.1.4">Section 4.1.4 of RFC 1035</a>, DNS messages employ a form of string compression, reusing previous string definitions where possible.  (I also discuss this at <a href = "https://youtu.be/sRbFRphQL3Q?feature=shared&t=809">13:29 in my DNS video</a>).  Now that you have to look at the <code>Answer</code> section, the <code>Authority</code> section, and the <code>Additional</code> section, this will certainly happen.  So before we go all in on iterative DNS queries, it would be good to solve this problem first.
+										</p>
+
+										<h4>Your Task</h4>
+										<p>
+											Create a method <code>get_name(res, idx_start)</code> where <code>res</code> is a byte string of a DNS response, and <code>idx_start</code> is the index in <code>res</code> where a string definition starts.  Return from this method a tuple <code>(name, idx)</code>, where <code>name</code> is the full name string (including dots), and <code>idx</code> is the index right after the last byte of the name definition.
+										</p>
+
+
+
+										<h4>Worked example</h4>
+										<p>
+											As an example, consider this response for an A name record request for <code>images.google.com</code>.  The first answer gives a CNAME <code>images.l.google.com</code>.  This can be compressed, since it ends in <code>google.com</code>, which occurred previously in the response.  The wireshark dump below shows what's going on:
+										</p>
+										<img src = "googleimages.png" width="70%">
+										<p>
+											First we have a string <code>google</code> of length <code>6</code>, followed by the string <code>l</code> of length <code>1</code>.  Finally, we have a pointer flag <code>c0</code> to the location <code>0x13</code> (19 decimal).  If we follow this, it will take us to <code>google.com</code> in the questions section (note that it's jumped past the <code>images.</code> part in the question since we already defined that).
+										</p>
+										<p>
+											To test this out, below is some code to create a bytes object called <code>res</code> for this response, followed by a call to <code>get_name</code>:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											res = bytes.fromhex(
+												"4b918180000100020000000106696d6167657306676f6f676"
+												"c6503636f6d0000010001c00c0005000100000063000b0669"
+												"6d61676573016cc013c02f000100010000012c00048efa51e"
+												"e0000290200000000000000")
+											(name, idx) = get_name(res, 47)
+										</script>
+										<p>
+											If your code is working properly, <code>name</code> should be <code>images.l.google.com</code>, and <code>idx</code> should be 58, which is the index directly after this string definition.
+										</p>
+										<p></p>
+
+										<h3><a name = "iterativerequest">Iterative DNS Request (20 points)</a></h3>
+										<p>
+											Now we're ready to do an iterative DNS request
+										</p>
+										<h4>Your Task</h4>
+										<p>
+											Augment your code so that if <code>opt.recursive</code> is False, you perform an iterative DNS query instead of a recursive one.  You can assume that the DNS server provided in the command line is a root level DNS server.  To get such a server, you can call <code>dig</code>, as I show at <a href = "https://youtu.be/sRbFRphQL3Q?feature=shared&t=1250" target="_blank">20:50 in my DNS video</a>
+										</p>
+
+										<h4>Tips</h4>
+										<ul>
+											<li>Be sure to set <code>RD</code> (recursion desired) to 0 now!</li>
+										</ul>
+
+
+
                                     
                                 </div>
 						</div>

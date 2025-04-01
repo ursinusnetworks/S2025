@@ -283,7 +283,7 @@
 										</p>
 										<img src = "googleimages.png" width="100%">
 										<p>
-											First we have a string <code>google</code> of length <code>6</code>, followed by the string <code>l</code> of length <code>1</code>.  Finally, we have a pointer flag <code>c0</code> to the location <code>0x13</code> (19 decimal).  If we follow this, it will take us to <code>google.com</code> in the questions section (note that it's jumped past the <code>images.</code> part in the question since we already defined that).
+											First we have a string <code>images</code> of length <code>6</code>, followed by the string <code>l</code> of length <code>1</code>.  Finally, we have a pointer flag <code>c0</code> to the location <code>0x13</code> (19 decimal).  If we follow this, it will take us to <code>google.com</code> in the questions section (note that it's jumped past the <code>images.</code> part in the question since we already defined that).
 										</p>
 										<p>
 											To test this out, below is some code to create a bytes object called <code>res</code> for this response, followed by a call to <code>get_name</code>:

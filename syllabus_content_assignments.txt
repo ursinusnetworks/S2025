@@ -70,7 +70,7 @@ Kurose/Ross 5.6 (ICMP) Due Before Class
 HW4 Part 2 Due
 
 2025-04-02
-<HR>HW5: IP and NAT in Wireshark Out
+<HR><a href = "Assignments/HW5_Wireshark/index.html">HW5: Wireshark And The Network Layer</a> Out
 
 2025-04-02
 HW5 Due

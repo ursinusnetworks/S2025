@@ -1,0 +1,384 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<!-- Header !-->
+	<head>
+		<title>Ursinus CS 475: Computer Networks, Spring 2025</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../assets/css/ie8.css" /><![endif]-->
+        <style>
+        .image_off, #home:hover .image_on{
+           display:none
+        }
+        .image_on, #home:hover .image_off{
+           display:block
+        }
+        </style>
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="../../index.html" class="logo"><strong>Ursinus CS 475: Computer Networks, Spring 2025</strong></a>
+								</header>
+<!-- End Header !-->
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+                                        <h2>Homework 5: Wireshark And The Network Layer (26 Points)</h2>
+										<h3><a href = "https://www.ctralie.com">Chris Tralie</a></h3>
+									</header>
+
+									<div id="page-content">
+
+										
+
+
+                                        <p>
+                                            <h3><a name = "objectives">Learning Objectives</a></h3>
+                                            <ul>
+												<li>Practice wireshark as a network diagnostic tool</li>
+												<li>Identify the role of different components of the IP header</li>
+												<li>Examine the use of the "time to live" paradigm</li>
+                                            </ul>
+										</p>
+										
+
+										<h3><a name = "overview">Description / Overview</a></h3>
+										
+										<p>
+											We're going to take a break from regular coding assignments to practice a bit more with wireshark since it's such a great debugging tool which will help you with subsequent assignments.  This will also be an opportunity to see in action some transport and network layer concepts we've been learning.
+										</p>
+
+										<h4><a name = "gettingstarted">Getting Started / What To Submit</a></h4>
+										
+										<p>
+											At this point, you should have everything you need to get started: python with sockets and wireshark.  You should submit a writeup (.docx, .pdf, etc) with answers to the questions below.  <span style="color:blue">The blue text indicates that you should provide a screenshot with something highlighted to show that you're following along</span>.  For instance, 
+										</p>
+
+										<HR>
+										<h2>Part 1: The IP Header (8 Points)</h2>
+										<p>
+											Use DNS to find the IPv4 address of a web site of your choice, then use the code below to send UDP messages of varying length to that IP address at port 80:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											import socket
+											import struct
+											
+											IP_ADDRESS = "" ## Fill this in with some address of your choice
+											N = 512 ## Length of message (we'll be changing this)
+											
+											sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+											sock.connect((IP_ADDRESS, 80))
+											
+											## The payload counts up in 2-byte unsigned shorts, so: 000100020003...
+											data = struct.pack("!" + "H"*(N//2), *list(range(N//2)))
+											sock.sendall(data)
+										</script> 
+
+										<p>
+											Filter only by the IP address you're sending to: <code>ip.addr == x.x.x.x</code> (where x.x.x.x is the IP address you're sending to).  Then, answer the questions below:
+										</p>
+
+										<h4>1.1 IP Address (1)</h4>
+
+										<p>
+											Find and <span style="color:blue">highlight your IP address in the hex dump of the packet</span>
+										</p>
+
+										<h4>1.2 Ports (1)</h4>
+										<p>
+											In which header does port 80 show up?
+										</p>
+
+										<h4>1.3 Ports (3)</h4>
+										<p>
+											Send the same message twice in a row.  Which fields have changed in the IP header between these two messages?  Why?  Which fields must stay the same?  Why?
+										</p>
+
+										<h4>1.4 Framents (3)</h4>
+										<p>
+											Modify your code to send 4000 UDP bytes and capture the corresponding packets.  As it turns, out this exceeds the "MTU," or the maximum size that the link layer can send out in one go, so the message has to be "fragmented" across multiple packets.  Answer the following:
+										</p>
+										<ul>
+											<li>
+												How do you know by looking at the IP header that this first packet is a fragment?  <span style="color:blue">Highlight the hex byte that tells you this.</span>
+											</li>
+											<li>
+												How many bytes go over the wire on the first packet?  How many of these bytes are actually part of the message you sent from the application layer?</li>
+											<li>
+												What is the fragment offset of the second fragment?  Why?  <span style="color:blue">Highlight this in hex in the IP header</span>.
+											</li>
+										</ul>
+
+										<HR>
+										<h2>Part 2: ICMP / Ping (7 Points)</h2>
+										<p>
+											Now issue the following command in your console:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											ping x.x.x.x
+
+										</script> 
+
+										<p>
+											where <code>x.x.x.x</code> is your chosen IP address from before.  Let it run for a couple of seconds, then hit <code>CTRL+C</code> to kill it
+										</p>
+
+										<h4>2.1 Protocol (1)</h4>
+
+										<p>
+											Look at the first request packet that you send out.  What is the value in the "protocol" field of the IP header?  How does this compare to that of the UDP messages you sent before?
+										</p>
+
+										<h4>2.2 Port (1)</h4>
+										<p>What port is the above message sent out on?  (Hint: this is a trick question)</p>
+
+										<h4>2.3 Time To Live! (1)</h4>
+										<p>
+											What is the TTL in the IP header of the first request you sent out?  What is the TTL in the corresponding response?
+										</p>
+
+										<h4>2.4 Time To Die! (2)</h4>
+
+										<p>
+											Now modify the ping command to set the TTL command to 1:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											ping -t 1 x.x.x.x
+
+										</script> 
+
+										<p>
+											where <code>x.x.x.x</code> is your chosen IP address from before.  You should get a "Time-To-live exceeded" ICMP response.  Where is this error indicated in the ICMP header, and what is it in hex?  What is the source IP address of this response, and what is that IP address?  Why?
+										</p>
+
+										<h4>2.5 traceroute (2)</h4>
+										<p>
+											Now set your wireshark to capture traffic and issue the command 
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											traceroute x.x.x.x
+
+										</script> 
+										<p>
+											where <code>x.x.x.x</code> is your chosen IP address from before.  Let this run for about 20 seconds, then kill it.  As before, filter by the IP address.  You should see an interleaved sequence of UDP messages and ICMP messages. Then, sort the messages in ascending order of time, and then by ascending order of Protocol.  Scroll down to where the UDP messages start.  Wireshark uses a stable sort, so these messages should be in ascending order of time (if they are not, then you may have accidentally clicked something else in the meantime).  <b>What pattern do you notice in the TTL of the UDP packets as you move forward in time?</b>  Be as specific as you can.
+
+										</p>
+										<HR>
+										<h2>Part 3: Network Address Translation (7 Points)</h2>
+										<p>
+											In this part, I'll be adapting <a href = "https://www-net.cs.umass.edu/wireshark-labs/Wireshark_NAT_v8.0.pdf">a lab from Kurose/Ross</a>, since it's difficult to capture NAT traffic from inside and outside of the NAT on your own computer.   <a href = "http://gaia.cs.umass.edu/wireshark-labs/wireshark-traces.zip">Click here</a> to download a .zip file of traces that they captured themselves.  In this part, you'll be looking at the traces <code>NAT_home_side.pcap</code> and <code>NAT_ISP_side.pcap</code>, so open those up in wireshark.  In both cases, we'll hone in on a particular HTTP GET request to a server at IP <code>64.233.169.204</code>, so it will be helpful to apply the following filter:
+										</p>
+										<img src = "NATFilter.png">
+										<p>
+
+										</p>
+
+										<h4>3.1: Paths / NAT Table (3 Points)</h4>
+										<p>
+											Based on what you see of the 14 messages on either side of the NAT, reconstruct the IP:port pairs of the 4 arrows in the picture below:
+										</p>
+										<img src = "NAT.svg" width="60%">
+										<p>
+											Then, fill in the corresponding entry in the  NAT table for this communication stream:
+										</p>
+										<table>
+											<tr>
+												<td>Source Address:Port</td>
+												<td>External Port</td>
+												<td>Destination Address:Port</td>
+											</tr>
+											<tr>
+												<td>A</td>
+												<td>B</td>
+												<td>C</td>
+											</tr>
+										</table>
+
+										<h4>3.2: HTTP GET Request (2)</h4>
+										<p>
+											Consider the packet corresponding to the HTTP GET request on either side of the NAT.  Does anything change about the GET request?  
+										<p>
+											In the IP header of this same packet, which of the following fields are changed: Version, Header Length, Flags, Checksum, Time to Live?  If any of them have changed, explain why
+										</p>
+
+										<h4>3.3 3-Way Handshake (2)</h4>
+										<p>
+											Change your filter so that you can see the 3-way TCP handshake that occurs right before the GET request goes out.  You can do this by filtering only tcp traffic:
+										</p>
+										<img src = "NATFilter2.png">
+										<p>
+											What is the raw sequence number that the client messages start with?  What is the raw sequence number that the server messages start with?  Are these numbers the same on either side of the NAT?  If so, why?  If not, why not?
+										</p>
+
+										<HR>
+										<h2>Part 4: <a href = "https://www.youtube.com/watch?v=jfr1Fzq2kUg">IT'S RAAWWWW!!</a> (4 Points)</h2>
+										<p>
+											In the next assignment, we're going to be using "raw sockets," or sockets where we can actually formulate our own network layer headers!  But to do so, we need to run python administrator privileges (it would be a bad idea to let non-administrators do this...).  Below is some code that sends along a message whose IP header and ICMP chunks I captured in wireshark (<a href = "https://github.com/ursinusnetworks/S2025/blob/main/Assignments/HW5_Wireshark/raw.py">Click here</a> to download this code):
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											import socket
+											import struct
+
+											sock = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_RAW)
+
+											src = "192.168.50.59" 
+											dst = "142.250.65.238"
+											iphdr = bytes.fromhex("45000054962840004001e0b4")
+											iphdr += struct.pack("!BBBB", *[int(x) for x in src.split(".")])
+											iphdr += struct.pack("!BBBB", *[int(x) for x in dst.split(".")])
+											icmp_payload = bytes.fromhex("0800ec4b888c00013d9bec67000000009a500000000000001"
+																		"01112131415161718191a1b1c1d1e1f202122232425262728"
+																		"292a2b2c2d2e2f3031323334353637")
+
+											sock.sendto(iphdr + icmp_payload, (dst, 0))
+
+										</script> 
+										<p></p>
+
+										<h4>4.1 Sending Raw Packets (3)</h4>
+										<p>
+											Assuming the above code is in a file called <code>raw.py</code>, run it with administrator privileges
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											sudo python raw.py
+
+										</script> 
+
+										<p>
+											If it tells you the command "python" isn't found, then your administrator account does not know where to find it.  There are myriad ways to fix this, but a quick hack is to find the absolute path to python on your user account and use that.  To do this, type the following into your shell
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											type -a python
+
+										</script> 
+
+										<p>
+											and take note of the absolute path of the python binary.  For instance, mine is <code>/home/ctralie/miniconda3/envs/py311/bin/python</code>.  Then, run the program with this absolute path in administrator mode; for instance:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											sudo /home/ctralie/miniconda3/envs/py311/bin/python raw.py
+
+										</script> 
+
+										<p>
+											To prove that you're able to do this, run your code and <span style="color:blue">take a screenshot of wireshark showing the message that's sent and the ICMP response that comes back</span>
+										</p>
+
+										<h4>4.2 Modifying the message (1)</h4>
+										<p>
+											Run the code again, but change the src IP on line 6, and leave all other lines intact.  Do you receive an ICMP reply?  Why or why not? (There may be a few reasons)
+										</p>
+
+
+
+
+
+
+                                    
+                                </div>
+						</div>
+					</div>
+
+					<!--LaTeX in Javascript!-->
+					<script src="../../../../jsMath/easy/load.js"></script>
+					<!--Syntax highlighting in Javascript!-->
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shCore.js"></script>
+					<script type="text/javascript" src="../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+                    <script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushXml.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+					<link type="text/css" rel="stylesheet" href="../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+					<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+                                        <li>
+											<span class="opener">General</span>
+											<ul>
+												<li><a href = "../../index.html#overview">Overview</a></li>
+												<li><a href = "../../index.html#logistics">Technology Logistics</a></li>
+												<li><a href = "../../index.html#deliverables">Deliverables</a>
+													<ul>
+														<li><a href = "../../index.html#debugging">Debugging Principles</a></li>
+													</ul>
+												</li>
+												<li><a href = "../../index.html#grading">Grading</a>
+													<ul>
+														<li><a href = "../../index.html#deadlines">Deadlines Policy</a></li>
+													</ul>
+												</li>
+												<li><a href = "../../index.html#environment">Classroom Environment</a></li>
+												<li><a href = "../../index.html#participation">Participation</a></li>
+												<li><a href = "../../index.html#collaboration">Collaboration Policy</a></li>
+												<li><a href = "../../index.html#other">Other Resources / Policies</a></li>
+											</ul>
+										</li>
+										<li><a href = "../../Software/index.html">Software</a></li>
+										<li><a href = "../../index.html#schedule">Schedule</a></li>
+										<li>
+											<span class="opener">Assignments</span>
+											<ul>
+												<li><a href = "../../Assignments/HW0_Software/index.html">HW0: Software Test / Wireshark / Mininet Intro</a></li>
+												<li><a href = "../../Assignments/HW1_BearCrawl/index.html">HW1: "Bear Crawl" Web Crawler</a></li>
+												<li><a href = "../../Assignments/HW2_HTTPWebGet/index.html">HW2: HTTP WebGet</a></li>
+												<li><a href = "../../Assignments/HW3_ProxyServer/index.html">HW3: Proxy Server / Web Cache</a></li>
+												<li><a href = "../../Assignments/HW4_DNSQuery/index.html">HW4: DNS Queries in Python</a></li>
+												<li><a href = "../../Assignments/HW5_Wireshark/index.html">HW5: Wireshark And The Network Layer</a></li>
+											</ul>
+										</li>
+										<li><a href = "https://docs.google.com/forms/d/e/1FAIpQLSfwkO_w_Ku-n2Ou6J7pF--i0C2-a20Ov9wf690T6cYx80ASsw/viewform?usp=sf_link">Anonymous Question</a></li>
+									</ul>
+								</nav>
+
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; <a href = "http://www.ctralie.com">Christopher J. Tralie</a>. All rights reserved.  Contact chris.tralie@gmail.com. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+<!-- End Sidebar !-->
+
+<!-- Scripts -->
+			<script src="../../assets/js/jquery.min.js"></script>
+			<script src="../../assets/js/skel.min.js"></script>
+			<script src="../../assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../assets/js/main.js"></script>
+<!-- End Scripts -->
+	</

@@ -69,25 +69,25 @@ Kurose/Ross 5.6 (ICMP) Due Before Class
 2025-03-31
 HW4 Part 2 Due
 
-2025-04-02
-<HR><a href = "Assignments/HW5_Wireshark/index.html">HW5: Wireshark And The Network Layer</a> Out
+2025-04-04
+<a href = "Assignments/HW5_Wireshark/index.html">HW5: Wireshark And The Network Layer</a> Out
 
 2025-04-02
 HW5 Due
 
-2025-04-07
-<HR>HW6: ICMP And Geographic Mapping Out
+2025-04-08
+HW6: ICMP And Geographic Mapping Out
 
 2025-04-07
 HW6 Due
 
-2025-04-14
+2025-04-16
 <HR>HW7: Simple Router Out
 
-2025-04-14
+2025-04-16
 HW7 Part 1 Due
 
-2025-04-21
+2025-04-25
 HW7 Part 2 Due
 
-2025-04-30
+2025-05-05

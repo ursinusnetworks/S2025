@@ -123,9 +123,9 @@ Classless Inter-Domain Routing (CIDR), Hierarchical Routing
 
 
 LECTURE
-Routing at Scale: Border Gateway Protocol (BGP)
+Routing at Scale: Open Shortest Path First (OSPF), Border Gateway Protocol (BGP)
 
-
+<ul><li><a href = "https://jvns.ca/blog/2021/10/05/tools-to-look-at-bgp-routes/">Julia Evans Experiments with BGP</a></li></ul>
 LECTURE
 Raw Sockets, ICMP
 

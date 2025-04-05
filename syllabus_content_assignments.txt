@@ -70,6 +70,9 @@ Kurose/Ross 5.6 (ICMP) Due Before Class
 HW4 Part 2 Due
 
 2025-04-04
+<a href = "https://ursinus.instructure.com/courses/19314/quizzes/29968">Module 11: OSPF, BGP Due</a>
+
+2025-04-06
 <a href = "Assignments/HW5_Wireshark/index.html">HW5: Wireshark And The Network Layer</a> Out
 
 2025-04-02

@@ -1,0 +1,345 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<!-- Header !-->
+	<head>
+		<title>Ursinus CS 475: Computer Networks, Spring 2025</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../assets/css/ie8.css" /><![endif]-->
+        <style>
+        .image_off, #home:hover .image_on{
+           display:none
+        }
+        .image_on, #home:hover .image_off{
+           display:block
+        }
+        </style>
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="../../index.html" class="logo"><strong>Ursinus CS 475: Computer Networks, Spring 2025</strong></a>
+								</header>
+<!-- End Header !-->
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+                                        <h2>Homework 6: ICMP And Geographic Routing</h2>
+										<h3><a href = "https://www.ctralie.com">Chris Tralie</a></h3>
+									</header>
+
+									<div id="page-content">
+
+										
+
+
+                                        <p>
+                                            <h3><a name = "objectives">Learning Objectives</a></h3>
+                                            <ul>
+												<li>
+													Implement internet communication using sockets in python
+												</li>
+												<li>
+													Send and receive binary data over raw sockets according to protocol specifications
+												</li>
+												<li>
+													Implement ping functionality using ICMP messages
+												</li>
+												<li>
+													Implement traceroute by hacking ping ttls
+												</li>
+                                            </ul>
+										</p>
+										
+
+										<h3><a name = "overview">Description / Overview</a></h3>
+										
+										<p>
+											We're going to implement two popular command line tools for network diagnostics: <code>ping</code> and <code>traceroute</code>, by sending ICMP messages using raw sockets in python.  <code>ping</code> is used to diagnose connectivity to a host, and it returns the round-trip time to the host and back.  <code>traceroute</code> is a hack of ping to figure out an approximate route of traffic to a host.  It works by incrementally increasing the ttl of ping, forcing TTL expired message to come back from routers on the way to the host.
+										</p>
+										<p>
+											As you work through this, you should refer to the following references:
+										</p>
+										<ul>
+											<li>
+												<a href = "https://datatracker.ietf.org/doc/html/rfc792">RFC 792 for ICMP</a>
+											</li>
+											<li>
+												<a href = "
+												https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol">Wikipedia page on ICMP</a>
+											</li>
+											<li>
+												<a href = "https://en.wikipedia.org/wiki/Ping_(networking_utility)">Wikipedia page on Ping</a>
+											</li>
+
+										</ul>
+
+										<h4><a name = "gettingstarted">Getting Started / What To Submit</a></h4>
+										<p>
+											You can obtain the starter code for this assignment by using git:
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											https://github.com/ursinusnetworks/HW6_GeoRouteMap.git
+											#
+										</script> 
+
+										<p>
+											You will be editing the files <code>icmp.py</code> and <code>ping.py</code>, which you'll submit to canvas when you're finished.  The bulk of the functionality is will be in <code>icmp.py</code>.  The code also comes with a file <code>traceroute.py</code> which you don't have to edit.
+										</p>
+
+										<p>
+											Because you'll be sending raw packets, you'll have to run your script in administrator mode however you figured out how to do that in <a href = "../HW5_Wireshark/index.html#runraw">homework 5</a>.  As an example of how to run ping, assuming your path is just <code>python</code>, if you type the following in the terminal
+											<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+												python ping.py --host www.google.com --ttl 16
+												#
+											</script>
+											then your program should output something like this in an infinite loop:
+
+											<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+												Elapsed time 14.78 ms from 142.251.40.164
+												Elapsed time 13.81 ms from 142.251.40.164
+												Elapsed time 14.20 ms from 142.251.40.164
+												Elapsed time 13.56 ms from 142.251.40.164
+												Elapsed time 13.60 ms from 142.251.40.164											</script>
+
+
+										</p>
+
+										<p>
+											For traceroute, supposing you execute something like this
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											traceroute.py --host www.ctralie.com
+											#
+										</script>
+
+										<p>
+											then you should expect an output like this (where routes may vary)
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											Elapsed time 1.94 ms from 192.168.50.1
+											Elapsed time 8.42 ms from 71.175.67.1
+											***
+											***
+											Elapsed time 9.11 ms from 65.217.159.42
+											Elapsed time 13.42 ms from 185.199.111.153
+										</script>
+
+										<p>
+											For this particular output, the map that pops up looks like this (I queried from the Philadelphia area and ended up in California):
+										</p>
+
+										<img src = "ctralieMap.png" width="50%">
+
+
+
+
+										<HR>
+
+
+										<h2><a name = "ping">Part 1: ping (10 Points)</a></h2>
+										<p>
+											First, implement <code>ping</code> functionality by sending an ICMP echo request and reading the response
+										</p>
+										<h4>Your Task</h4>
+										<p>
+											Fill in the method <code>ping</code> in icmp.py.  Create the bytes for an ICMP echo request (including the correct checksum), and send this over the raw socket with <code><a href = "https://docs.python.org/3/library/socket.html#socket.socket.sendto">sock.sendto</a></code> (noting that the port can be anything since it's irrelevant for ICMP).  Then, receive an echo response with <code><a href = "https://docs.python.org/3/library/socket.html#socket.socket.recvfrom">sock.recvfrom(1024)</a></code>, and unpack all of the fields.  You should time the interval between sending the request and receiving the response using <code>time.time()</code>.  For instance
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											tic = time.time() # This is the beginning time
+											## ... Execute some code
+											dt = time.time() - tic # This is the elapsed time in seconds
+										</script>
+										<p>
+											If the socket times out, it will raise an exception.  Catch this exception and return <code>None</code> from the method in this case.
+										</p>
+
+										<p>
+											After completing the <code>ping</code> method, create an infinite loop in <code>ping.py</code> that calls the <code>ping</code> method repeatedly.  Come up with a random <code>id</code> and <code>seq</code> each time.  Validate the result that's returned, splitting into the following cases:
+											<ul>
+												<li>
+													It returned <code>None</code>, in which case you should print that it timed out
+												</li>
+												<li>
+													The sequence, id, or payload of the response do not match those that were sent along, in which case you should indicate that they don't match
+												</li>
+												<li>
+													Everything is cool, in which case you should print out the IP address and the number of milliseconds elapsed
+												</li>
+											</ul>
+										</p>
+										
+										<h4>Hints</h4>
+										<ul>
+											<li><code>recvfrom</code> returns the ip header and the ICMP message in one chunk.  You should jump to the beginning of the ICMP message before you unpack anything</li>
+										</ul>
+										<HR>
+										<h2><a name = "traceroute">Part 2: traceroute (8 Points)</a></h2>
+										<p>
+											Now that we have a working ping, we're going to hack it to give us information about the path that traffic gets routed to a particular host.
+										</p>
+										<h4>Your Task</h4>
+										<p>
+											Fill in the method <code>traceroute</code> in <code>icmp.py</code>.  Call <code>ping</code> in a loop, starting with a <code>ttl</code> of 1 and incrementing until the type of the returned ICMP message is <code>ICMP_ECHO_REPLY</code>.  In iterations before that, there should be two possibilities:
+											<ol>
+												<li>
+													You get an ICMP message with a ttl exceeded, which means it didn't make it to the router yet.  Print the IP address and time elapsed, add the IP address to a list, increment the ttl, and try again
+												</li>
+												<li>
+													The socket times out.  This means that a router blocked outgoing ICMP error messages to conceal its identity.  In this case, print out three asterixes, append <code>None</code> to the list of IPs, increment the ttl, and try again
+												</li>
+											</ol> 
+										</p>
+
+										<HR>
+										<h2><a name = "mapping">Part 3: Mapping (6 Points)</a></h2>
+										<p>
+											Now we're going to add a fun embellishment to plot the routes we get on a map.  First, install the <a href = "https://scitools.org.uk/cartopy/docs/latest/">cartopy</a> library in your root's python environment, which can be used in concert with matplotlib to plot longitude/latitude locations on a map.  It's probably either <code>pip install cartopy</code> or <code>pip3 install cartopy</code>.
+										</p>
+										<p>
+											Then, make queries to the URL <a href = "http://ip-api.com/json">http://ip-api.com/json</a>, which is a service that returns the geographic location of an IP address.  For instance, the URL <a href = "http://ip-api.com/json/185.199.111.153">http://ip-api.com/json/185.199.111.153</a> will return the page 
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											{
+												status	"success"
+												country	"United States"
+												countryCode	"US"
+												region	"CA"
+												regionName	"California"
+												city	"San Francisco"
+												zip	"94107"
+												lat	37.7823
+												lon	-122.391
+												timezone	"America/Los_Angeles"
+												isp	"Fastly, Inc."
+												org	"GitHub, Inc"
+												as	"AS54113 Fastly, Inc."
+												query	"185.199.111.153"
+											}
+										</script>
+
+
+											
+
+
+										<h4>Your Task</h4>
+										<p>
+											Fill in the method <code>plot_ips</code> in <code>icmp.py</code> to plot the longitude/latitude of a list of IP addresses that's passed along (which was returned from a previous call to <code>traceroute</code>).  You'll do this by making a call to <a href = "http://ip-api.com/json">http://ip-api.com/json</a> with each IP.  Skip IPs that are <code>None</code> or which do not return a latitude/longitude from that site.  Plot each location with <code>ax.scatter(longitude, latitude)</code>, and connect adjacent locations with a line using <code>ax.plot([lon1, lon2], [lat1, lat2])</code>
+										</p>
+
+										<h4>Hints</h4>
+										<p>
+											Since we're already done lots of assignments on HTTP requests and responses, feel free to use <code>urllib.request</code> like you did in <a href = "../HW1_BearCrawl/index.html">homework 1</a>.  You can use the method <code>json.loads</code> to parse the string into a python dictionary.
+										</p>
+
+										<h4>Fun Fact</h4>
+
+										<p>
+											If one of these geographic location databases doesn't have precise enough information about a particular IP, then it returns a "default address" for the most specific location it can find.  For a while, the company MaxMind set the default location of the US to 38°N, 97°W. This caused many unknown IPs in the US to be supposed at a <a href = "https://theweek.com/articles/624040/how-internet-mapping-glitch-turned-kansas-farm-into-digital-hell">small farm in Kansas</a>, leading to hell for its owners. This is but one of many examples of how our decisions as CS people can affect everyone, and not always in a positive way (Map picture courtesy of the Washington Post) 
+										</p>
+										<img src = "../../OverviewPictures/DefaultUS.png" width="60%">
+
+                                    
+                                </div>
+						</div>
+					</div>
+
+					<!--LaTeX in Javascript!-->
+					<script src="../../../../jsMath/easy/load.js"></script>
+					<!--Syntax highlighting in Javascript!-->
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shCore.js"></script>
+					<script type="text/javascript" src="../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+                    <script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushXml.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+					<link type="text/css" rel="stylesheet" href="../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+					<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+                                        <li>
+											<span class="opener">General</span>
+											<ul>
+												<li><a href = "../../index.html#overview">Overview</a></li>
+												<li><a href = "../../index.html#logistics">Technology Logistics</a></li>
+												<li><a href = "../../index.html#deliverables">Deliverables</a>
+													<ul>
+														<li><a href = "../../index.html#debugging">Debugging Principles</a></li>
+													</ul>
+												</li>
+												<li><a href = "../../index.html#grading">Grading</a>
+													<ul>
+														<li><a href = "../../index.html#deadlines">Deadlines Policy</a></li>
+													</ul>
+												</li>
+												<li><a href = "../../index.html#environment">Classroom Environment</a></li>
+												<li><a href = "../../index.html#participation">Participation</a></li>
+												<li><a href = "../../index.html#collaboration">Collaboration Policy</a></li>
+												<li><a href = "../../index.html#other">Other Resources / Policies</a></li>
+											</ul>
+										</li>
+										<li><a href = "../../Software/index.html">Software</a></li>
+										<li><a href = "../../index.html#schedule">Schedule</a></li>
+										<li>
+											<span class="opener">Assignments</span>
+											<ul>
+												<li><a href = "../../Assignments/HW0_Software/index.html">HW0: Software Test / Wireshark / Mininet Intro</a></li>
+												<li><a href = "../../Assignments/HW1_BearCrawl/index.html">HW1: "Bear Crawl" Web Crawler</a></li>
+												<li><a href = "../../Assignments/HW2_HTTPWebGet/index.html">HW2: HTTP WebGet</a></li>
+												<li><a href = "../../Assignments/HW3_ProxyServer/index.html">HW3: Proxy Server / Web Cache</a></li>
+												<li><a href = "../../Assignments/HW4_DNSQuery/index.html">HW4: DNS Queries in Python</a></li>
+												<li><a href = "../../Assignments/HW5_Wireshark/index.html">HW5: Wireshark And The Network Layer</a></li>
+												<li><a href = "../../Assignments/HW6_GeoRouteMap/index.html">HW6: ICMP And Geographic Mapping</a></li>
+											</ul>
+										</li>
+										<li><a href = "https://docs.google.com/forms/d/e/1FAIpQLSfwkO_w_Ku-n2Ou6J7pF--i0C2-a20Ov9wf690T6cYx80ASsw/viewform?usp=sf_link">Anonymous Question</a></li>
+									</ul>
+								</nav>
+
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; <a href = "http://www.ctralie.com">Christopher J. Tralie</a>. All rights reserved.  Contact chris.tralie@gmail.com. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+<!-- End Sidebar !-->
+
+<!-- Scripts -->
+			<script src="../../assets/js/jquery.min.js"></script>
+			<script src="../../assets/js/skel.min.js"></script>
+			<script src="../../assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../assets/js/main.js"></script>
+<!-- End Scripts -->

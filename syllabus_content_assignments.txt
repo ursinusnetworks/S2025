@@ -79,18 +79,18 @@ HW4 Part 2 Due
 HW5 Due
 
 2025-04-08
-HW6: ICMP And Geographic Mapping Out
+<a href = "Assignments/HW6_GeoRouteMap">HW6: ICMP And Geographic Mapping</a> Out
 
-2025-04-07
+2025-04-11
 HW6 Due
 
-2025-04-16
+2025-04-21
 <HR>HW7: Simple Router Out
 
-2025-04-16
+2025-04-21
 HW7 Part 1 Due
 
-2025-04-25
+2025-04-28
 HW7 Part 2 Due
 
 2025-05-05

@@ -41,7 +41,7 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-                                        <h2>Homework 6: ICMP And Geographic Routing</h2>
+                                        <h2>Homework 6: ICMP And Geographic Routing (24 Points)</h2>
 										<h3><a href = "https://www.ctralie.com">Chris Tralie</a></h3>
 									</header>
 
@@ -174,7 +174,7 @@
 										</p>
 
 										<p>
-											After completing the <code>ping</code> method, create an infinite loop in <code>ping.py</code> that calls the <code>ping</code> method repeatedly.  Come up with a random <code>id</code> and <code>seq</code> each time.  Validate the result that's returned, splitting into the following cases:
+											After completing the <code>ping</code> method, create an infinite loop in <code>ping.py</code> that calls the <code>ping</code> method repeatedly.  <b>Be sure to wait one second (<code>time.sleep(1)</code>) in between iterations to avoid spamming the host</b>!  Come up with a random <code>id</code> and <code>seq</code> each time.  Validate the result that's returned, splitting into the following cases:
 											<ul>
 												<li>
 													It returned <code>None</code>, in which case you should print that it timed out
@@ -199,7 +199,7 @@
 										</p>
 										<h4>Your Task</h4>
 										<p>
-											Fill in the method <code>traceroute</code> in <code>icmp.py</code>.  Call <code>ping</code> in a loop, starting with a <code>ttl</code> of 1 and incrementing until the type of the returned ICMP message is <code>ICMP_ECHO_REPLY</code>.  In iterations before that, there should be two possibilities:
+											Fill in the method <code>traceroute</code> in <code>icmp.py</code>.  Call <code>ping</code> in a loop, starting with a <code>ttl</code> of 1 and incrementing until the type of the returned ICMP message is <code>ICMP_ECHO_REPLY</code>.  As with ping, sleep 1 second in between adjacent queries.  In iterations before that, there should be two possibilities:
 											<ol>
 												<li>
 													You get an ICMP message with a ttl exceeded, which means it didn't make it to the router yet.  Print the IP address and time elapsed, add the IP address to a list, increment the ttl, and try again

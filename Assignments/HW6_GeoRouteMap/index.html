@@ -244,13 +244,27 @@
 
 										<h4>Your Task</h4>
 										<p>
-											Fill in the method <code>plot_ips</code> in <code>icmp.py</code> to plot the longitude/latitude of a list of IP addresses that's passed along (which was returned from a previous call to <code>traceroute</code>).  You'll do this by making a call to <a href = "http://ip-api.com/json">http://ip-api.com/json</a> with each IP.  Skip IPs that are <code>None</code> or which do not return a latitude/longitude from that site.  Plot each location with <code>ax.scatter(longitude, latitude)</code>, and connect adjacent locations with a line using <code>ax.plot([lon1, lon2], [lat1, lat2])</code>
+											Fill in the method <code>plot_ips</code> in <code>icmp.py</code> to plot the longitude/latitude of a list of IP addresses that's passed along (which was returned from a previous call to <code>traceroute</code>).  You'll do this by making a call to <a href = "http://ip-api.com/json">http://ip-api.com/json</a> with each IP.  Skip IPs that are <code>None</code> or which do not return a latitude/longitude from that site.  Then, print out the latitude and and longitude locations as a list of <code>[[lon1, lat1], [lon2, lat2], [lon3, lat3], ...]</code>.  You can copy this into the viewer below:
 										</p>
+
+										<label for="latlon">Latitude/Longitude <button onclick="plotMap()">Update</button></label>
+
+<textarea id="latlon" name="latlon" rows="2" cols="50">
+[[-122.265640, 37.342520], [-73.935242, 40.730610], [-0.1276, 51.5072], [30.5245, 50.4504]]
+</textarea> 
+
+										<div id="mapArea"></div>
+
+										<script src="plotly.min.js"></script>
+										<script src="globe.js"></script>
 
 										<h4>Hints</h4>
 										<p>
 											Since we're already done lots of assignments on HTTP requests and responses, feel free to use <code>urllib.request</code> like you did in <a href = "../HW1_BearCrawl/index.html">homework 1</a>.  You can use the method <code>json.loads</code> to parse the string into a python dictionary.
 										</p>
+
+										<h4></h4>
+
 
 										<h4>Fun Fact</h4>
 

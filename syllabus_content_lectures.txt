@@ -137,7 +137,7 @@ The Link Layer
 LECTURE
 Introduction To The Link Layer
 
-
+<ul><li><a href = "https://standards-oui.ieee.org/">IEEE Database of Organizationally Unique Identifiers (OUI) for MAC addresses</a></li></ul>
 LECTURE
 Checksums, Cyclic Redundancy Checks (CRC)
 
@@ -151,7 +151,7 @@ Address Resolution Protocol (ARP), And Security Vulnerabilities Therein
 
 
 LECTURE
-Neighbor Discovery Protocol (NDP)
+Switches
 
 
 SECTION

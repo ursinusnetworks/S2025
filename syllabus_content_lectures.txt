@@ -159,11 +159,11 @@ The Physical Layer
 
 
 LECTURE
-Time Division Multiple Access (TDMA)
+Pulse Width Modulation
 
 
 LECTURE
-Aloha Protocol
+Time Division Multiple Access (TDMA), Aloha Protocol
 
 
 LECTURE
@@ -188,17 +188,5 @@ Practical points with RSA
 
 LECTURE
 VPNs And Tunneling
-
-
-LECTURE
-Student Presentations: <ul><li>Group 1: DDOS Attacks</li><li>Group 2: ARP Poisoning, Man-in-the-middle (MITM) Attacks</li></ul>
-
-
-LECTURE
-Student Presentations: <ul><li>Group 3: Phishing attacks (including whale/spear)</li><li>Group 4: Password Attacks</li></ul>
-
-
-LECTURE
-Student Presentations: <ul><li>Group 5: DNS Cache Poisoning / MAC Address Spoofing</li><li>Group 6: Web Attacks (XSS, CSRF, SQL Injection)</li></ul>
 
 

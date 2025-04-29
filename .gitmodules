@@ -16,3 +16,6 @@
 [submodule "Assignments/HW6_GeoRouteMap/HW6_GeoRouteMap"]
 	path = Assignments/HW6_GeoRouteMap/HW6_GeoRouteMap
 	url = https://github.com/ursinusnetworks/HW6_GeoRouteMap.git
+[submodule "ClassExercises/PhysicalLayer/BeepsNBoops"]
+	path = ClassExercises/PhysicalLayer/BeepsNBoops
+	url = https://github.com/ursinusnetworks/BeepsNBoops.git

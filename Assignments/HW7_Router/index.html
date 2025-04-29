@@ -1,0 +1,278 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<!-- Header !-->
+	<head>
+		<title>Ursinus CS 475: Computer Networks, Spring 2025</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../assets/css/ie8.css" /><![endif]-->
+        <style>
+        .image_off, #home:hover .image_on{
+           display:none
+        }
+        .image_on, #home:hover .image_off{
+           display:block
+        }
+        </style>
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="../../index.html" class="logo"><strong>Ursinus CS 475: Computer Networks, Spring 2025</strong></a>
+								</header>
+<!-- End Header !-->
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+                                        <h2>Homework 7: Build Your Own Router (BYOR)</h2>
+										<h3><a href = "https://www.ctralie.com">Chris Tralie</a></h3>
+									</header>
+
+									<div id="page-content">
+
+										
+
+
+                                        <p>
+                                            <h3><a name = "objectives">Learning Objectives</a></h3>
+                                            <ul>
+												<li>
+													Understand how a router and switch can work together
+												</li>
+												<li>
+													Handle raw packets, manipulating the link layer, network layer, and up at the byte level
+												</li>
+												<li>
+													Handle ARP messages and manage ARP caches
+												</li>
+												<li>
+													Forward packets at the network layer
+												</li>
+                                            </ul>
+										</p>
+										
+
+										<h3><a name = "overview">Description / Overview</a></h3>
+										
+										
+
+										<h4><a name = "gettingstarted">Getting Started</a></h4>
+										<p>
+											We'll be using mininet and wireshark together in this assignment, so you might want to go <a href = "../HW0_Software/index.html#mininet">back to homework 0</a> and review how you got them to run together before.
+										</p>
+										<p>
+											You can obtain the starter code for this assignment by using git:
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											git clone --recursive https://github.com/ursinusnetworks/HW7_Router.git
+											#
+										</script> 
+										<p>
+											Note that if you're on a virtual machine in VirtualBox, that's where you should clone this repository and run the code
+										</p>
+										<p>
+											Generally, you will have three terminals running at a time, which you should start in this order:
+											<ol>
+												<li>
+													<p>
+														One running a <a href = "https://github.com/noxrepo/pox">pox</a> network controller.  This is what we will use to program the switches to turn them into routers.  If you say the following from within the HW7 directory:
+													</p>
+
+
+													<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+														sudo ./pox/pox.py cs475.router --filename=routers.json log.level --DEBUG
+													</script>
+
+													<p>
+														Then you should get an output like this:
+													</p>
+
+													<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+														POX 0.7.0 (gar) / Copyright 2011-2020 James McCauley, et al.
+														DEBUG:core:POX 0.7.0 (gar) going up...
+														DEBUG:core:Running on CPython (3.12.3/Feb 4 2025 14:48:35)
+														DEBUG:core:Platform is Linux-6.11.0-24-generic-x86_64-with-glibc2.39
+														WARNING:version:POX requires one of the following versions of Python: 3.6 3.7 3.8 3.9
+														WARNING:version:You're running Python 3.12.
+														WARNING:version:If you run into problems, try using a supported version.
+														INFO:core:POX 0.7.0 (gar) is up.
+														DEBUG:openflow.of_01:Listening on 0.0.0.0:6633
+													</script>
+													
+												</li>
+												<li>One running <a href = "https://mininet.org/">mininet</a>:
+													<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+														sudo python3 network.py --filename routers.json
+
+													</script> 
+													<p>
+														This creates the virtual switches and hosts according to the specification in <code>routers.json</code>.  This is a lot cheaper than buying physical programmable switches for everyone in the class 🤣
+													</p>
+													<p>
+														Assuming you're running pox, you should see the following:
+													</p>
+													<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+														Linking 192.168.0.1/24 , 192.168.50.1/24
+														Linking 192.168.50.1/24 , 10.0.1.1/24
+														*** Configuring hosts
+														h1 h2 h3 h4 h5 
+														*** Starting CLI:
+														mininet> 
+													</script>
+													<p>
+														Back in the pox terminal, you should see something like this:
+													</p>
+													<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+														INFO:core:POX 0.7.0 (gar) is up.
+														DEBUG:openflow.of_01:Listening on 0.0.0.0:6633
+														INFO:openflow.of_01:[00-00-00-00-00-01 2] connected
+														DEBUG:cs475.router:New router with ip 192.168.0.1, subnet mask 255.255.255.0, mac 00:00:00:00:00:01
+														INFO:openflow.of_01:[00-00-00-00-00-02 3] connected
+														DEBUG:cs475.router:New router with ip 192.168.50.1, subnet mask 255.255.255.0, mac 00:00:00:00:00:02
+														INFO:openflow.of_01:[00-00-00-00-00-03 4] connected
+														DEBUG:cs475.router:New router with ip 10.0.1.1, subnet mask 255.255.255.0, mac 00:00:00:00:00:03
+
+													</script>
+
+													<p>
+														You may also get a lot of errors about not being able to unpack DNS packets, but you can ignore those for this assignment.
+													</p>
+
+												</li>
+												<li>
+													<p>
+														A terminal running wireshark.  If you're on a virtual machine, be mindful that you may have to run X11 forwarding to see wireshark running on that machine (<a href = "../../Software/index.html#putty">review the directions here</a>).  
+													</p>
+													<p>
+														As an example, if you're running the above two terminals with mininet and pox on the starter code, you run wireshark on <code>s1-eth1</code>, and then you type
+													</p>
+													<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+														h1 ping h2
+													</script>
+													<p>
+														in the mininet terminal, you should see the following in wireshark:
+													</p>
+													<img src = "initialARP.png" width="80%">
+													<p>
+														Eventually you should also see ARP response messages and ICMP messages back and forth, but right now the switch send any traffic out so the ARP request gets dropped.
+													</p>
+
+												</li>
+											</ol>
+										</p>
+
+
+										<h4><a name = "submit">What To Submit</a></h4>
+										<p>
+											You should submit the file <code>router.py</code> in <code>pox/pox/cs475</code>
+										</p>
+										<HR>
+
+
+										<h2><a name = "arp">Part 1: Switch And ARP Tables (15 Points)</a></h2>
+										
+										<h4>Your Task</h4>
+										
+
+                                    
+                                </div>
+						</div>
+					</div>
+
+					<!--LaTeX in Javascript!-->
+					<script src="../../../../jsMath/easy/load.js"></script>
+					<!--Syntax highlighting in Javascript!-->
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shCore.js"></script>
+					<script type="text/javascript" src="../../../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+                    <script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushXml.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushMatlabSimple.js"></script>
+					<script type="text/javascript" src="../../../../syntaxhighlighter/scripts/shBrushPython.js"></script>
+					<link type="text/css" rel="stylesheet" href="../../../../syntaxhighlighter/styles/shCoreDefault.css"/>
+					<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+                                        <li>
+											<span class="opener">General</span>
+											<ul>
+												<li><a href = "../../index.html#overview">Overview</a></li>
+												<li><a href = "../../index.html#logistics">Technology Logistics</a></li>
+												<li><a href = "../../index.html#deliverables">Deliverables</a>
+													<ul>
+														<li><a href = "../../index.html#debugging">Debugging Principles</a></li>
+													</ul>
+												</li>
+												<li><a href = "../../index.html#grading">Grading</a>
+													<ul>
+														<li><a href = "../../index.html#deadlines">Deadlines Policy</a></li>
+													</ul>
+												</li>
+												<li><a href = "../../index.html#environment">Classroom Environment</a></li>
+												<li><a href = "../../index.html#participation">Participation</a></li>
+												<li><a href = "../../index.html#collaboration">Collaboration Policy</a></li>
+												<li><a href = "../../index.html#other">Other Resources / Policies</a></li>
+											</ul>
+										</li>
+										<li><a href = "../../Software/index.html">Software</a></li>
+										<li><a href = "../../index.html#schedule">Schedule</a></li>
+										<li>
+											<span class="opener">Assignments</span>
+											<ul>
+												<li><a href = "../../Assignments/HW0_Software/index.html">HW0: Software Test / Wireshark / Mininet Intro</a></li>
+												<li><a href = "../../Assignments/HW1_BearCrawl/index.html">HW1: "Bear Crawl" Web Crawler</a></li>
+												<li><a href = "../../Assignments/HW2_HTTPWebGet/index.html">HW2: HTTP WebGet</a></li>
+												<li><a href = "../../Assignments/HW3_ProxyServer/index.html">HW3: Proxy Server / Web Cache</a></li>
+												<li><a href = "../../Assignments/HW4_DNSQuery/index.html">HW4: DNS Queries in Python</a></li>
+												<li><a href = "../../Assignments/HW5_Wireshark/index.html">HW5: Wireshark And The Network Layer</a></li>
+												<li><a href = "../../Assignments/HW6_GeoRouteMap/index.html">HW6: ICMP And Geographic Mapping</a></li>
+											</ul>
+										</li>
+										<li><a href = "../../final.html">Final Cybersecurity Video</a></li>
+										<li><a href = "https://docs.google.com/forms/d/e/1FAIpQLSfwkO_w_Ku-n2Ou6J7pF--i0C2-a20Ov9wf690T6cYx80ASsw/viewform?usp=sf_link">Anonymous Question</a></li>
+									</ul>
+								</nav>
+
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; <a href = "http://www.ctralie.com">Christopher J. Tralie</a>. All rights reserved.  Contact chris.tralie@gmail.com. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+<!-- End Sidebar !-->
+
+<!-- Scripts -->
+			<script src="../../assets/js/jquery.min.js"></script>
+			<script src="../../assets/js/skel.min.js"></script>
+			<script src="../../assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../assets/js/main.js"></script>
+<!-- End Scripts -->

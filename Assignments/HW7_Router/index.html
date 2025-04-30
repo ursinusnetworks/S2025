@@ -71,7 +71,7 @@
 
 										<h3><a name = "overview">Description / Overview</a></h3>
 										<p>
-											We have reached the finale of the course!  You will now create the software to control a router from scratch.  We'll be using a framework called <a href = "https://mininet.org/">mininet</a> to simulate a network of switches connected to each other and hosts connected to them, and we'll be using and a software defined network controller called <a href = "https://github.com/noxrepo/pox">pox</a> to program the switches.  Since a switch can only send data between devices at the link layer that are directly connected to it, you'll be upgrading the switches so that they into a proper <b>router</b>, which is capable directing traffic at the IP layer to hop through many switches on its way to a final destination.
+											We have reached the finale of the course!  You will now create the software to control a router from scratch.  We'll be using a framework called <a href = "https://mininet.org/">mininet</a> to simulate a network of switches connected to each other and hosts connected to them, and we'll be using a software defined network controller called <a href = "https://github.com/noxrepo/pox">pox</a> to program the switches.  Since a switch can only send data between devices at the link layer that are directly connected to it, you'll be upgrading the switches so that they into a proper <b>router</b>, which is capable directing traffic at the IP layer to hop through many switches on its way to a final destination.
 										</p>
 										
 										
@@ -240,7 +240,7 @@
 
 										<h4><a name = "defaultnetwork">Default Network</a></h4>
 										<p>
-											The default network, as defined in <code><a href = "HW7_Router/routers.json">routers.json</a></code>, looks like this:
+											The default network, as defined in <code><a href = "HW7_Router/routers.json">routers.json</a></code>, looks like this (note that the switch port connections are arbitrary and do not necessarily reflect what mininet has setup):
 										</p>
 
 										<img src = "DefaultTopology.svg" width="100%">
@@ -416,7 +416,7 @@
 										</p>
 										<ul>
 											<li>
-												Add a thread that purges the ARP cache of a router every minute so that 
+												Add a thread that purges the ARP cache of a router every minute
 											</li>
 											<li>
 												Implement features of a NAT, including modifying IP addresses at the network layer and ports at the transport layer

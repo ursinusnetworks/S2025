@@ -71,7 +71,7 @@
 
 										<h3><a name = "overview">Description / Overview</a></h3>
 										<p>
-											But a switch can only send data between devices that are directly connected to it.  In this assignment, you'll be upgrading a switch so that it turns into a <b>router</b>, or a device capable of directing traffic to hop through many switches on its way to a final destination.
+											We have reached the finale of the course!  You will now create the software to control a router from scratch.  We'll be using a framework called <a href = "https://mininet.org/">mininet</a> to simulate a network of switches connected to each other and hosts connected to them, and we'll be using and a software defined network controller called <a href = "https://github.com/noxrepo/pox">pox</a> to program the switches.  Since a switch can only send data between devices at the link layer that are directly connected to it, you'll be upgrading the switches so that they into a proper <b>router</b>, which is capable directing traffic at the IP layer to hop through many switches on its way to a final destination.
 										</p>
 										
 										
@@ -393,9 +393,9 @@
 										</p>
 
 										<HR>
-										<h3><a name = "traceroute">Task 5: Dropping Packets / ICMP Error Messages</a></h3>
+										<h3><a name = "traceroute">Task 5: Dropping Packets / ICMP Error Messages (8 Points)</a></h3>
 										<p>
-											Coming soon...
+											Do some validation at your router by examining the IP checksum, and drop packets with an incorrect checksum.  Send back an ICMP error message for that, and also send back an ICMP error message when the TTL gets to 0 (more details coming soon...)
 										</p>
 
 										<h4>Testing</h4>
@@ -416,7 +416,19 @@
 										</p>
 										<ul>
 											<li>
-												Do some validation at your router by examining the IP checksum, and drop packets that 
+												Add a thread that purges the ARP cache of a router every minute so that 
+											</li>
+											<li>
+												Implement features of a NAT, including modifying IP addresses at the network layer and ports at the transport layer
+											</li>
+											<li>
+												Implement support for dynamic IP addresses by programming a DHCP server on your router, using the real DHCP protocol
+											</li>
+											<li>
+												Use a trie data structure to match longest common prefixes
+											</li>
+											<li>
+												Use a better distance vector routing protocol like <a href = "https://datatracker.ietf.org/doc/html/rfc8966">babel</a>
 											</li>
 										</ul>
 

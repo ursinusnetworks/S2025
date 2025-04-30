@@ -54,7 +54,7 @@
                                             <h3><a name = "objectives">Learning Objectives</a></h3>
                                             <ul>
 												<li>
-													Understand how a router and switch can work together
+													Manage communication at the boundary of the link layer and network layer, and understand how a router and switch can work together across that layer
 												</li>
 												<li>
 													Handle raw packets, manipulating the link layer, network layer, and up at the byte level
@@ -70,6 +70,9 @@
 										
 
 										<h3><a name = "overview">Description / Overview</a></h3>
+										<p>
+											But a switch can only send data between devices that are directly connected to it.  In this assignment, you'll be upgrading a switch so that it turns into a <b>router</b>, or a device capable of directing traffic to hop through many switches on its way to a final destination.
+										</p>
 										
 										
 
@@ -85,7 +88,10 @@
 											#
 										</script> 
 										<p>
-											Note that if you're on a virtual machine in VirtualBox, that's where you should clone this repository and run the code
+											You will be editing the file <code>pox/pox/cs475/router.py</code>
+										</p>
+										<p>
+											Note that if you're on a virtual machine in VirtualBox, that's where you should clone this repository and run the code.  You can also ssh into that virtual machine with VSCode and code there.
 										</p>
 										<p>
 											Generally, you will have three terminals running at a time, which you should start in this order:
@@ -185,11 +191,234 @@
 										</p>
 										<HR>
 
+										<h2><a name = "programming">Programming Tasks</a></h2>
+										<p>
+											You'll be writing most of your code in the <code>RouterSwitch</code> class in <code><a href = "https://github.com/ursinusnetworks/pox/blob/gar-experimental/pox/cs475/router.py">pox/pox/cs475/router.py</a></code>.  Each switch in your network will be a different object of this class type, and you'll be implementing functionality to promote these switches to routers.  
+										</p>
+										<p>
+											Each <code>RouterSwitch</code> comes with instance variable for its mac address, its IP address, and its subnet mask.  It also starts out with a routing table with entries to its neighboring switches.
+										</p>
+										
+										<h4><a name = "packetbytes">Packet Bytes</a></h4>
+										<p>
+											When a packet is received, the callback instance method <code>_handle_PacketIn</code> is fired.  The variable <code>src_port</code> in that method stores the switch port where that packet entered the device, and the variable <code>packet</code> contains byte array of a raw packet from the link layer up.  For instance, for an ARP broadcast (mac destination <code>ff:ff:ff:ff:ff:ff</code>) packet from a mac address <code>54:14:f3:00:00:01</code> at IP address <code>192.168.0.5</code> asking for IP address <code>192.168.0.20</code> would have the following bytes in <code>packet</code>:
+										</p>
 
-										<h2><a name = "arp">Part 1: Switch And ARP Tables (15 Points)</a></h2>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											ffffffffffff5414f3000001080600010800060400015414f3000001c0a80005000000000000c0a80014
+										</script>
+										<p>
+											Below shows wireshark parsing this:
+										</p>
+										<img src = "RawARPPacket.png" width="100%">
+										<p>
+											Eventually, you'll construct your own byte arrays as packets to send out to other devices
+										</p>
+
+										<h4><a name = "simplifying">Simplifying Assumptions</a></h4>
+
+										<p>
+											As explained in the tasks below, you will slowly promote a switch to a router, which includes tasks like handling ARP packets and ICMP messages.  We'll make the following simplifying assumptions to get a minimum viable product without an undue headache:
+										</p>
+										<ul>
+											<li>
+												The devices plugged into a switch don't change, so we have a constant mapping from switch ports to mac addresses
+											</li>
+											<li>
+												Every host has a static IP address, so no DHCP is involved
+											</li>
+											<li>
+												The routers have static IP addresses.  Given this and the above two assumptions, this means we don't need to purge our ARP cache periodically like we would in real world applications.
+											</li>
+											<li>
+												All of the ports on the router share the same network interface controller, so that there is just one mac address / ip address per router
+											</li>
+											<li>
+												Our router will only be capable of processing IPv4 packets
+											</li>
+										</ul>
+
+										<h4><a name = "defaultnetwork">Default Network</a></h4>
+										<p>
+											The default network, as defined in <code><a href = "HW7_Router/routers.json">routers.json</a></code>, looks like this:
+										</p>
+
+										<img src = "DefaultTopology.svg" width="100%">
+										<p></p>
 										
+
+										
+
+										<HR>
+										<h3><a name = "learningswitch">Task 1: Learning Switch (8 Points)</a></h3>
+										
+										<p>We're going to start off by implementing some functionality in the link layer.  The <code>RouterSwitch</code> class in <code>router.py</code> actually encapsulates a simpler device than a router: a <b>switch</b> (<a href = "https://www.fs.com/blog/whats-the-difference-hub-vs-switch-vs-router-3290.html">Click here</a> to review the differences between a switch and a router).  In our context, a switch is simply responsible for sending out network traffic to a particular "port" (think like the ports you plug ethernet cables into, <i>not a UDP/TCP port</i>).  The picture below depicts this:
+										</p>
+
+										<img src = "Switch.svg" width="40%">
+
+										<p>
+											In mininet, switches can be connected to hosts and other switches, as shown in the <a href = "#defaultnetwork">default network</a> above.  Each of these devices has a mac address, but this switch doesn't initially know what mac address is connected to which port (and in fact, this can change when we plug new things in).  So you'll need to learn this mapping yourself
+										</p>
+
 										<h4>Your Task</h4>
+										<p>
+											Learn a mapping from mac addresses to switch ports by observing traffic that comes into your switch; that is, every time a packet comes into your switch, create a dictionary entry in <code>mac2port</code> based on <code>src_port</code> and the <b>source mac address</b> of an incoming packet.  Then, use this information to send traffic out of the correct port on the switch based on the <b>destination mac address</b>.  To send the bytes in a packet called <code>packet</code> out to a particular port <code>dst_port</code> using a pox network controller in one of your instance methods, write the following code:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											msg = of.ofp_packet_out()
+											msg.actions.append(of.ofp_action_output(port = dst_port))
+											msg.data = packet
+											msg.idle_timeout = 10
+											msg.hard_timeout = 30
+											self.connection.send(msg)
+										</script>
+
+										<p>
+											If you don't know what the destination port is, simply "flood" the network segment with this packet; that is, send it out of all ports on the switch.  To do this, use a destination port of <code>of.OFPP_FLOOD</code>.  Also, when you construct the message in this case, be sure to pass along the source port:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											msg = of.ofp_packet_out(in_port=src_port) # Prevent flooding back to self
+											#
+										</script>
+
+										<p>
+											This prevents the packet from being sent back into the same port, which would lead to an infinite loop
+										</p>
 										
+										<h4>Testing</h4>
+										<p>
+											If this is working, you should be able to ping between any two hosts that are directly connected to the same router; for instance, <code>h2</code> from <code>h1</code>.  In the mininet console, type:
+										</p>
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											h1 ping h2
+										</script>
+
+										or, more specifically:
+
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											h1 ping 192.168.0.20
+										</script>
+
+
+
+
+
+
+										<h4>Tips</h4>
+										<p>
+											Be sure to use the mutex lock <code>mac2port_lock</code> when reading from/writing to <code>mac2port</code> to prevent race conditions (<a href = "https://youtu.be/oDRL6jxAhp4?si=6hab1XiBHy9TQemb&t=990">click here</a> to review how this works)
+										</p>
+
+
+										<HR>
+										<h3><a name = "arptask">Task 2: Managing An ARP Caches (9 Points)</a></h3>
+
+										<p>
+											Now we're going to start building the glue between the link layer and the network layer by parsing ARP replies and sending out ARP replies to requests addressed to our router.
+										</p>
+
+										<h4>Your Task</h4>
+										<p>
+											There are two things you need to do in this task:
+											<ul>
+												<li>
+													When you receive an ARP reply, update your ARP table with a mapping from the provided mac address to the IP indicated by the packet.  Do this regardless of who the packet is addressed to at the link layer, but be sure to send this packet out to whoever on the switch it was intended for if it wasn't directed to our router's mac address directly.
+												</li>
+												<li>
+													If you receive an ARP request addressed to your router's IP address, respond with an ARP reply that has the mac address of the router.
+												</li>
+											</ul>
+										</p>
+
+										<h4>Tips</h4>
+										<p>
+											You'll have to do this by looking at the raw bytes of the packet for replies coming in, and you'll have to construct your own bytes for the ARP packet for replies going out.  Have a look at the packet structure at <a href = "https://en.wikipedia.org/wiki/Address_Resolution_Protocol">the wikipedia page on ARP</a>.
+										</p>
+
+										<h4>Testing</h4>
+										<p>
+											The best way to test this would be to have hosts connected on the same router ping each other, and then make sure that the ARP table in the router gets updated with their IP->mac mappings.  You can also ping one of the routers from an attached host (e.g. <code>h1 ping 192.168.0.1</code>).  You won't see a reply from the router yet, but if look in wireshark at that host (e.g. <code>s1-eth1</code>), you should be able to see the ARP reply from your router.
+										</p>
+
+
+										<HR>
+										<h3><a name = "icmpreply">Task 3: ICMP Reply (8 Points)</a></h3>
+										<p>
+											Now we're going to make it so that a host can ping the router it's attached to.
+										</p>
+
+										<h4>Your Task</h4>
+										<p>
+											If you receive an ICMP ping request, send an ICMP ping reply with the same payload and a ttl of 32.  To do this, you'll have to construct the bytes for an appropriate ICMP payload (similarly to <a href = "../HW6_GeoRouteMap/">homework 6</a>).  Then, you'll have the information you need to construct the bytes in the network layer (<a href = "https://en.wikipedia.org/wiki/IPv4#Header">Click here</a> to review the IPv4 layer).  You can assume that 
+										</p>
+
+										<h4>Testing</h4>
+										<p>
+											You should now finally be able to ping your router from a host connected to it!  For example, you can say:
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											h1 ping 192.168.0.1
+										</script>
+										<p>
+											or
+										</p>
+										<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+											h5 ping 10.0.1.1
+										</script>
+
+										<HR>
+										<h3><a name = "routing">Task 4: One-Hop Routing (15 Points)</a></h3>
+										<p>
+											Now we're finally going to do some work to send packets from hosts to hosts beyond their immediate network segment!
+										</p>
+
+										<h4>Your Task</h4>
+										<p>
+											If you receive a regular IP layer packet that's not an ARP packet, check to see if it's addressed to a host in our router's subnet.  If so, send it directly off to that host as usual.  If not, forward the packet based on the <b>longest common prefix</b> of the destination IP address and a destination router in the routing table at <code>self.route_table</code>, following the prescribed next hop.  Before you forward it, <b>be sure to decrement the <code>ttl</code> by one and update the checksum</b>.  If you don't do this, the packet will be dropped at the next hop.  Also, you should drop the packet yourself if the ttl has gotten to 0.  
+										</p>
+										<p>
+											Note that if you don't know the mac address of the next hop router for a packet, you'll have to send out an arp request for that router's IP address and queue this packet.  When you get an arp response with this mac address, immediately send all of the packets that were queued up.  Be sure to lock <code>self.route_table</code>, <code>self.arp</code>, and <code>self.arp_queue</code> as appropriate
+										</p>
+
+										<h4>Testing</h4>
+										<p>
+											By default, the routing tables only start with the direct neighboring router connections.  But this already unlocks hosts that are one hop away.  So, for instance, you should be able to finally ping <code>h3</code> from <code>h1</code>:
+										</p>
+										<p>
+											Or <code>h5</code> from <code>h4</code>
+										</p>
+
+										<HR>
+										<h3><a name = "traceroute">Task 5: Dropping Packets / ICMP Error Messages</a></h3>
+										<p>
+											Coming soon...
+										</p>
+
+										<h4>Testing</h4>
+										<p>
+											traceroute
+										</p>
+
+										<HR>
+										<h3><a name = "rip">Task 6: Neighbor Discovery And Routing with The Routing Information Protocol (RIP)</a></h3>
+										<p>
+											Coming soon...
+										</p>
+
+										<HR>
+										<h3><a name = "extensions">Extensions (for the bored)</a></h3>
+										<p>
+											We're just getting started here, and there's a lot you can do to extend this (this is exactly how I felt when I put out the <a href = "https://ursinusgraphics.github.io/F2024/Assignments/HW6_RayTracer/">ray tracing assignment in graphics</a>).  Here are a few ideas:
+										</p>
+										<ul>
+											<li>
+												Do some validation at your router by examining the IP checksum, and drop packets that 
+											</li>
+										</ul>
 
                                     
                                 </div>
@@ -250,6 +479,7 @@
 												<li><a href = "../../Assignments/HW4_DNSQuery/index.html">HW4: DNS Queries in Python</a></li>
 												<li><a href = "../../Assignments/HW5_Wireshark/index.html">HW5: Wireshark And The Network Layer</a></li>
 												<li><a href = "../../Assignments/HW6_GeoRouteMap/index.html">HW6: ICMP And Geographic Mapping</a></li>
+												<li><a href = "../../Assignments/HW7_Router/index.html">HW7: Build Your Own Router (BYOR)</a></li>
 											</ul>
 										</li>
 										<li><a href = "../../final.html">Final Cybersecurity Video</a></li>

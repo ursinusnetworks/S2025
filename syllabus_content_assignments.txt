@@ -85,12 +85,12 @@ HW5 Due
 HW6 Due
 
 2025-04-21
-<HR>HW7: Simple Router Out
+Final Project Choice Due
 
-2025-04-21
-HW7 Part 1 Due
+2025-04-25
+<a href = "Assignments/HW7_Router">HW7: Simple Router</a> Out
 
 2025-04-28
-HW7 Part 2 Due
+HW7 Part 1 Due
 
-2025-05-05
+2025-05-07

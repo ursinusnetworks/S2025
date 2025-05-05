@@ -96,6 +96,32 @@
 										<p>
 											Generally, you will have three terminals running at a time, which you should start in this order:
 											<ol>
+												<li>One running <a href = "https://mininet.org/">mininet</a>:
+													<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+														sudo python3 network.py --filename routers.json
+
+													</script> 
+													<p>
+														This creates the virtual switches and hosts according to the specification in <code>routers.json</code>.  This is a lot cheaper than buying physical programmable switches for everyone in the class 🤣
+													</p>
+													
+													<script type="syntaxhighlighter" class="brush: python"><![CDATA[
+														Unable to contact the remote controller at 127.0.0.1:6633
+														Linking 192.168.0.1/24 , 192.168.50.1/24
+														Linking 192.168.50.1/24 , 10.0.1.1/24
+														*** Configuring hosts
+														h1 h2 h3 h4 h5 
+														*** Starting CLI:														
+														mininet> 
+													</script>
+													
+													<p>
+														Don't worry about the remote controller; we'll launch that in a moment with pox
+													</p>
+
+												</li>
+
+
 												<li>
 													<p>
 														One running a <a href = "https://github.com/noxrepo/pox">pox</a> network controller.  This is what we will use to program the switches to turn them into routers.  If you say the following from within the HW7 directory:
@@ -120,48 +146,23 @@
 														WARNING:version:If you run into problems, try using a supported version.
 														INFO:core:POX 0.7.0 (gar) is up.
 														DEBUG:openflow.of_01:Listening on 0.0.0.0:6633
-													</script>
-													
-												</li>
-												<li>One running <a href = "https://mininet.org/">mininet</a>:
-													<script type="syntaxhighlighter" class="brush: python"><![CDATA[
-														sudo python3 network.py --filename routers.json
-
-													</script> 
-													<p>
-														This creates the virtual switches and hosts according to the specification in <code>routers.json</code>.  This is a lot cheaper than buying physical programmable switches for everyone in the class 🤣
-													</p>
-													<p>
-														Assuming you're running pox, you should see the following:
-													</p>
-													<script type="syntaxhighlighter" class="brush: python"><![CDATA[
-														Linking 192.168.0.1/24 , 192.168.50.1/24
-														Linking 192.168.50.1/24 , 10.0.1.1/24
-														*** Configuring hosts
-														h1 h2 h3 h4 h5 
-														*** Starting CLI:
-														mininet> 
-													</script>
-													<p>
-														Back in the pox terminal, you should see something like this:
-													</p>
-													<script type="syntaxhighlighter" class="brush: python"><![CDATA[
-														INFO:core:POX 0.7.0 (gar) is up.
-														DEBUG:openflow.of_01:Listening on 0.0.0.0:6633
-														INFO:openflow.of_01:[00-00-00-00-00-01 2] connected
+														INFO:openflow.of_01:[00-00-00-00-00-01 1] connected
 														DEBUG:cs475.router:New router with ip 192.168.0.1, subnet mask 255.255.255.0, mac 00:00:00:00:00:01
+														INFO:openflow.of_01:[00-00-00-00-00-03 2] connected
+														DEBUG:cs475.router:New router with ip 10.0.1.1, subnet mask 255.255.255.0, mac 00:00:00:00:00:03
 														INFO:openflow.of_01:[00-00-00-00-00-02 3] connected
 														DEBUG:cs475.router:New router with ip 192.168.50.1, subnet mask 255.255.255.0, mac 00:00:00:00:00:02
-														INFO:openflow.of_01:[00-00-00-00-00-03 4] connected
-														DEBUG:cs475.router:New router with ip 10.0.1.1, subnet mask 255.255.255.0, mac 00:00:00:00:00:03
-
 													</script>
 
 													<p>
-														You may also get a lot of errors about not being able to unpack DNS packets, but you can ignore those for this assignment.
+														Note that you will sometimes see some errors with DNS packets; that's okay, we can ignore those in this assignment.
 													</p>
-
+													<p>
+														<b>Debugging:</b> Note that you can kill this with CTRL+C and relaunch this as many times as you want without having to restart mininet
+													</p>
+													
 												</li>
+												
 												<li>
 													<p>
 														A terminal running wireshark.  If you're on a virtual machine, be mindful that you may have to run X11 forwarding to see wireshark running on that machine (<a href = "../../Software/index.html#putty">review the directions here</a>).  

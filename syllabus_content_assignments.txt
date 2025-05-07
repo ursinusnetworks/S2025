@@ -91,6 +91,3 @@ Final Project Choice Due
 <a href = "Assignments/HW7_Router">HW7: Simple Router</a> Out
 
 2025-04-28
-HW7 Part 1 Due
-
-2025-05-07

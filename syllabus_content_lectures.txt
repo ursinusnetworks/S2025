@@ -149,7 +149,7 @@ Switching, Ethernet Protocol
 LECTURE
 Address Resolution Protocol (ARP), And Security Vulnerabilities Therein
 
-<ul><li><a href = "https://www.grc.com/nat/arp.htm">Gibson Research Corporation - ARP Cache Poisoning</a></li></ul>
+<ul><li><a href = "https://www.youtube.com/watch?v=95WqUSLTMuo">My simulation on ARP cache poisoning</a></li><li><a href = "https://www.grc.com/nat/arp.htm">Gibson Research Corporation - ARP Cache Poisoning</a></li></ul>
 LECTURE
 Checksums, Hamming Codes, Cyclic Redundancy Checks (CRC)
 

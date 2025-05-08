@@ -286,8 +286,12 @@
 										</script>
 
 										<p>
-											This prevents the packet from being sent back into the same port, which would lead to an infinite loop
+											This prevents the packet from being sent back into the same port, which would lead to an infinite loop.
 										</p>
+										<p>
+											The block diagram below shows this algorithm:
+										</p>
+										<img src = "LearningSwitch.svg" width="100%">
 										
 										<h4>Testing</h4>
 										<p>
@@ -310,9 +314,14 @@
 
 
 										<h4>Tips</h4>
-										<p>
-											Be sure to use the mutex lock <code>mac2port_lock</code> when reading from/writing to <code>mac2port</code> to prevent race conditions (<a href = "https://youtu.be/oDRL6jxAhp4?si=6hab1XiBHy9TQemb&t=990">click here</a> to review how this works)
-										</p>
+										<ul>
+											<li>
+												Be sure to use the mutex lock <code>mac2port_lock</code> when reading from/writing to <code>mac2port</code> to prevent race conditions (<a href = "https://youtu.be/oDRL6jxAhp4?si=6hab1XiBHy9TQemb&t=990">click here</a> to review how this works)
+											</li>
+											<li>
+												You may want to make a helper method like <code>def send_packet(self, packet, dst_mac, src_port)</code> to encapsulate this task.  It will help you with later tasks.
+											</li>
+										</ul>
 
 
 										<HR>
@@ -379,13 +388,32 @@
 
 										<h4>Your Task</h4>
 										<p>
-											If you receive a regular IP layer packet that's not an ARP packet, check to see if it's addressed to a host in our router's subnet.  If so, send it directly off to that host as usual.  If not, forward the packet based on the <b>longest common prefix</b> of the destination IP address and a destination router in the routing table at <code>self.route_table</code>, following the prescribed next hop.  Before you forward it, <b>be sure to decrement the <code>ttl</code> by one and update the checksum</b>.  If you don't do this, the packet will be dropped at the next hop.  Also, you should drop the packet yourself if the ttl has gotten to 0.  
+											If you receive a regular IP layer packet that's not an ARP packet, check to see if it's addressed to a host in our router's subnet.  If so, send it directly off to that host as usual.  If not, forward the packet based on the <b>longest common prefix</b> of the destination IP address and a destination router in the routing table at <code>self.route_table</code>, following the prescribed next hop.  
+											
+										<p>
+											<b>Packet modifications</b> 
+											
+										</p>
+										<p>
+											If you have to forward the packet, before you forward it, make the following changes:
+											<ul>
+												<li>
+													Decrement the <code>ttl</code> by one and update the checksum.  If you don't do this, the packet will be dropped at the next hop.  Also, you should drop the packet yourself if the ttl has gotten to 0.
+												</li>
+												<li>
+													Update the source mac address to be the mac address of our router.
+												</li>
+											</ul>    
+										</p>
+
+										<p>
+											<b>ARP Requests</b>
 										</p>
 										<p>
 											Note that if you don't know the mac address of the next hop router for a packet, you'll have to send out an arp request for that router's IP address and queue this packet.  When you get an arp response with this mac address, immediately send all of the packets that were queued up.  Be sure to lock <code>self.route_table</code>, <code>self.arp</code>, and <code>self.arp_queue</code> as appropriate
 										</p>
 
-										<h4>Testing</h4>
+										<h4>Testing:</h4>
 										<p>
 											By default, the routing tables only start with the direct neighboring router connections.  But this already unlocks hosts that are one hop away.  So, for instance, you should be able to finally ping <code>h3</code> from <code>h1</code>:
 										</p>
